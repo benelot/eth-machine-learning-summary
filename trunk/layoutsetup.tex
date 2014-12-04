@@ -1,0 +1,51 @@
+%% Memoir layout setup
+
+%% NOTE: You are strongly advised not to change any of them unless you
+%% know what you are doing.  These settings strongly interact in the
+%% final look of the document.
+
+% Dependencies
+\usepackage{ETHlogo}
+
+% Chapter style redefinition
+\makeatletter
+
+%% Titlepage adjustments
+\pretitle{\vspace{0pt plus 0.7fill}\begin{center}\HUGE\sffamily\bfseries}
+\posttitle{\end{center}\par}
+\preauthor{\par\begin{center}\let\and\\\Large\sffamily}
+\postauthor{\end{center}}
+\predate{\par\begin{center}\Large\sffamily}
+\postdate{\end{center}}
+
+\def\@advisors{}
+\newcommand{\advisors}[1]{\def\@advisors{#1}}
+\def\@department{}
+\newcommand{\department}[1]{\def\@department{#1}}
+\def\@thesistype{}
+\newcommand{\thesistype}[1]{\def\@thesistype{#1}}
+
+\renewcommand{\maketitlehooka}{\noindent~~~~~~~~\ETHlogo[2in]}
+
+\renewcommand{\maketitlehookb}{\vspace{1in}%
+  \par\begin{center}\Large\sffamily\@thesistype\end{center}}
+
+\renewcommand{\maketitlehookd}{%
+  \vfill\par
+  \begin{flushright}
+    \sffamily
+    \@advisors\par
+    \@department, UZH
+  \end{flushright}
+}
+
+\makeatother
+
+% This defines how theorems should look. Best leave as is.
+\theoremstyle{plain}
+\setlength\theorempostskipamount{0pt}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "thesis"
+%%% End:

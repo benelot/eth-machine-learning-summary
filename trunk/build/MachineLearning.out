@@ -1,55 +1,16 @@
-\BOOKMARK [1][-]{section.0.1}{Representations}{}% 1
-\BOOKMARK [1][-]{section.0.2}{Measurements and Data}{}% 2
-\BOOKMARK [2][-]{subsection.0.2.1}{Patterns}{section.0.2}% 3
-\BOOKMARK [2][-]{subsection.0.2.2}{Data Types, Transformations, Scale}{section.0.2}% 4
-\BOOKMARK [1][-]{section.0.3}{Regression}{}% 5
-\BOOKMARK [2][-]{subsection.0.3.1}{Linear Regression}{section.0.3}% 6
-\BOOKMARK [2][-]{subsection.0.3.2}{Ridge Regression}{section.0.3}% 7
-\BOOKMARK [2][-]{subsection.0.3.3}{LASSO}{section.0.3}% 8
-\BOOKMARK [2][-]{subsection.0.3.4}{Nonlinear Regression by basis expansion}{section.0.3}% 9
-\BOOKMARK [2][-]{subsection.0.3.5}{Wavelet regression}{section.0.3}% 10
-\BOOKMARK [2][-]{subsection.0.3.6}{Bias variance Tradeoff}{section.0.3}% 11
-\BOOKMARK [2][-]{subsection.0.3.7}{Gaussian Processes}{section.0.3}% 12
-\BOOKMARK [1][-]{section.0.4}{Numerical Estimation Techniques}{}% 13
-\BOOKMARK [2][-]{subsection.0.4.1}{Cross-Validation}{section.0.4}% 14
-\BOOKMARK [2][-]{subsection.0.4.2}{Bootstrap}{section.0.4}% 15
-\BOOKMARK [2][-]{subsection.0.4.3}{Jackknife}{section.0.4}% 16
-\BOOKMARK [2][-]{subsection.0.4.4}{Hypothesis Testing}{section.0.4}% 17
-\BOOKMARK [1][-]{section.0.5}{Classification}{}% 18
-\BOOKMARK [2][-]{subsection.0.5.1}{Problem Setting for Bayesian Inference}{section.0.5}% 19
-\BOOKMARK [2][-]{subsection.0.5.2}{Bayes Rule}{section.0.5}% 20
-\BOOKMARK [2][-]{subsection.0.5.3}{Parametric Models, Bayesian Learning}{section.0.5}% 21
-\BOOKMARK [1][-]{section.0.6}{Parametric Models}{}% 22
-\BOOKMARK [2][-]{subsection.0.6.1}{Maximum Likelihood Method}{section.0.6}% 23
-\BOOKMARK [2][-]{subsection.0.6.2}{Efficient Estimators}{section.0.6}% 24
-\BOOKMARK [2][-]{subsection.0.6.3}{Bayesian Learning \(batch/online\)}{section.0.6}% 25
-\BOOKMARK [1][-]{section.0.7}{Design of Linear Discriminant Functions}{}% 26
-\BOOKMARK [2][-]{subsection.0.7.1}{Perceptrons}{section.0.7}% 27
-\BOOKMARK [2][-]{subsection.0.7.2}{Fisher's linear discriminant analysis}{section.0.7}% 28
-\BOOKMARK [1][-]{section.0.8}{Support Vector Machines}{}% 29
-\BOOKMARK [2][-]{subsection.0.8.1}{Lagrangian optimization theory}{section.0.8}% 30
-\BOOKMARK [2][-]{subsection.0.8.2}{Hard margin SVMs}{section.0.8}% 31
-\BOOKMARK [2][-]{subsection.0.8.3}{Soft margin SVMs}{section.0.8}% 32
-\BOOKMARK [1][-]{section.0.9}{Nonlinear Support Vector Machines}{}% 33
-\BOOKMARK [1][-]{section.0.10}{Ensemble Methods for Classifier Design}{}% 34
-\BOOKMARK [2][-]{subsection.0.10.1}{PAC Learning}{section.0.10}% 35
-\BOOKMARK [2][-]{subsection.0.10.2}{Bagging}{section.0.10}% 36
-\BOOKMARK [2][-]{subsection.0.10.3}{Boosting}{section.0.10}% 37
-\BOOKMARK [2][-]{subsection.0.10.4}{Arcing}{section.0.10}% 38
-\BOOKMARK [2][-]{subsection.0.10.5}{Exponential Loss}{section.0.10}% 39
-\BOOKMARK [1][-]{section.0.11}{Unsupervised Learning}{}% 40
-\BOOKMARK [2][-]{subsection.0.11.1}{Nonparametric Density Estimation}{section.0.11}% 41
-\BOOKMARK [2][-]{subsection.0.11.2}{Histograms}{section.0.11}% 42
-\BOOKMARK [2][-]{subsection.0.11.3}{Parzen Estimators}{section.0.11}% 43
-\BOOKMARK [2][-]{subsection.0.11.4}{k-Nearest Neighbor Estimator}{section.0.11}% 44
-\BOOKMARK [1][-]{section.0.12}{Neural Networks}{}% 45
-\BOOKMARK [2][-]{subsection.0.12.1}{Motivation by Computational Neuroscience}{section.0.12}% 46
-\BOOKMARK [2][-]{subsection.0.12.2}{Multilayer Perceptrons and Backpropagation}{section.0.12}% 47
-\BOOKMARK [2][-]{subsection.0.12.3}{NETtalk and ALVINN}{section.0.12}% 48
-\BOOKMARK [2][-]{subsection.0.12.4}{Boltzmann machines}{section.0.12}% 49
-\BOOKMARK [2][-]{subsection.0.12.5}{Deep Neural Networks}{section.0.12}% 50
-\BOOKMARK [1][-]{section.0.13}{Mixture Models}{}% 51
-\BOOKMARK [2][-]{subsection.0.13.1}{k-Means Algorithm}{section.0.13}% 52
-\BOOKMARK [2][-]{subsection.0.13.2}{Mixture Models}{section.0.13}% 53
-\BOOKMARK [2][-]{subsection.0.13.3}{Expectation Maximization Algorithm}{section.0.13}% 54
-\BOOKMARK [2][-]{subsection.0.13.4}{Convergence Proof of EM Algorithm}{section.0.13}% 55
+\BOOKMARK [0][-]{section*.1}{Contents}{}% 1
+\BOOKMARK [1][-]{section.0.1}{Representations}{section*.1}% 2
+\BOOKMARK [1][-]{section.0.2}{Measurements and Data}{section*.1}% 3
+\BOOKMARK [1][-]{section.0.3}{Regression}{section*.1}% 4
+\BOOKMARK [1][-]{section.0.4}{Numerical Estimation Techniques}{section*.1}% 5
+\BOOKMARK [1][-]{section.0.5}{Classification}{section*.1}% 6
+\BOOKMARK [1][-]{section.0.6}{Parametric Models}{section*.1}% 7
+\BOOKMARK [1][-]{section.0.7}{Design of Linear Discriminant Functions}{section*.1}% 8
+\BOOKMARK [1][-]{section.0.8}{Support Vector Machines}{section*.1}% 9
+\BOOKMARK [1][-]{section.0.9}{Nonlinear Support Vector Machines}{section*.1}% 10
+\BOOKMARK [1][-]{section.0.10}{Ensemble Methods for Classifier Design}{section*.1}% 11
+\BOOKMARK [1][-]{section.0.11}{Unsupervised Learning}{section*.1}% 12
+\BOOKMARK [1][-]{section.0.12}{Neural Networks}{section*.1}% 13
+\BOOKMARK [1][-]{section.0.13}{Mixture Models}{section*.1}% 14
+\BOOKMARK [1][-]{section.0.14}{Cheat sheet}{section*.1}% 15
+\BOOKMARK [1][-]{section.0.15}{TODO}{section*.1}% 16

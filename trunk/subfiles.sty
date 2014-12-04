@@ -1,0 +1,23 @@
+%%
+%% This is file `subfiles.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% subfiles.dtx  (with options: `package')
+%% 
+%% Copyright 2002 Federico Garcia
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{subfiles}[2002/06/08 Federico Garcia]
+\DeclareOption*{\PackageWarning{\CurrentOption ignored}}
+\ProcessOptions
+\RequirePackage{verbatim}
+\newcommand{\skip@preamble}{%
+    \let\document\relax\let\enddocument\relax%
+    \newenvironment{document}{}{}%
+    \renewcommand{\documentclass}[2][subfiles]{}}
+\newcommand\subfile[1]{\begingroup\skip@preamble\input{#1}\endgroup}
+\endinput
+%%
+%% End of file `subfiles.sty'.

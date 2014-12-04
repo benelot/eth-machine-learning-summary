@@ -1,0 +1,122 @@
+\documentclass[a4paper, 11pt]{report}
+
+%input encoding, format and language
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+%math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage[]{units}
+\usepackage{cancel}
+
+%lists
+\usepackage{listings}
+\usepackage{enumerate}
+%different enumerations
+\usepackage{enumitem}
+
+%plain text
+\usepackage{verbatim}
+
+%links
+\usepackage[pdftex,hidelinks]{hyperref}
+
+%common
+\usepackage{comment}
+\usepackage{ifthen}
+
+
+%figures
+\usepackage{graphicx}
+
+% Lengths and indenting
+\setlength{\textwidth}{16.5cm}
+\setlength{\marginparwidth}{1.5cm}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.15cm}
+\setlength{\textheight}{22cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\topmargin}{0cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+
+% lslisting style for python
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Python,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+% lslisting style for matlab
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Matlab,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+%to use subfiles being compilable as well on their own
+\usepackage{subfiles}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Machine Learning 2014: Summary}
+
+\date{\today}
+
+\author{Diana Ponce-Morado,Joachim Ott, Benjamin Ellenberger}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\subfile{01-Representations.tex}
+
+\subfile{02-Regression.tex}
+
+\subfile{03-NumericalEstimationTechniques.tex}
+
+\subfile{04-Classification.tex}
+
+\subfile{05-ParametricModels.tex}
+
+\subfile{06-LinearDiscriminantFunctions.tex}
+
+\subfile{07-SVMs.tex}
+
+\subfile{08-NonlinearSVMs.tex}
+
+\subfile{09-ClassifierEnsembleMethods.tex}
+
+\subfile{10-UnsupervisedLearning.tex}
+
+\subfile{11-NeuralNetworks.tex}
+
+\subfile{12-MixtureModels.tex}
+
+
+
+
+\end{document}

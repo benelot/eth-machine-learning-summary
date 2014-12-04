@@ -1,0 +1,56 @@
+\select@language {english}
+\contentsline {section}{\numberline {0.1}Representations}{2}{section.0.1}
+\contentsline {subsection}{\numberline {0.1.1}Measurements and Data}{2}{subsection.0.1.1}
+\contentsline {subsection}{\numberline {0.1.2}Patterns}{2}{subsection.0.1.2}
+\contentsline {subsection}{\numberline {0.1.3}Data Types, Transformations, Scale}{2}{subsection.0.1.3}
+\contentsline {section}{\numberline {0.2}Regression}{2}{section.0.2}
+\contentsline {subsection}{\numberline {0.2.1}Linear Regression}{2}{subsection.0.2.1}
+\contentsline {subsection}{\numberline {0.2.2}Ridge Regression}{2}{subsection.0.2.2}
+\contentsline {subsection}{\numberline {0.2.3}LASSO}{2}{subsection.0.2.3}
+\contentsline {subsection}{\numberline {0.2.4}Nonlinear Regression by basis expansion}{2}{subsection.0.2.4}
+\contentsline {subsection}{\numberline {0.2.5}Wavelet regression}{2}{subsection.0.2.5}
+\contentsline {subsection}{\numberline {0.2.6}Bias variance Tradeoff}{2}{subsection.0.2.6}
+\contentsline {subsection}{\numberline {0.2.7}Gaussian Processes}{2}{subsection.0.2.7}
+\contentsline {section}{\numberline {0.3}Numerical Estimation Techniques}{2}{section.0.3}
+\contentsline {subsection}{\numberline {0.3.1}Cross-Validation}{2}{subsection.0.3.1}
+\contentsline {subsection}{\numberline {0.3.2}Bootstrap}{2}{subsection.0.3.2}
+\contentsline {subsection}{\numberline {0.3.3}Jackknife}{2}{subsection.0.3.3}
+\contentsline {subsection}{\numberline {0.3.4}Hypothesis Testing}{2}{subsection.0.3.4}
+\contentsline {section}{\numberline {0.4}Classification}{2}{section.0.4}
+\contentsline {subsection}{\numberline {0.4.1}Problem Setting for Bayesian Inference}{3}{subsection.0.4.1}
+\contentsline {subsection}{\numberline {0.4.2}Bayes Rule}{3}{subsection.0.4.2}
+\contentsline {subsection}{\numberline {0.4.3}Parametric Models, Bayesian Learning}{3}{subsection.0.4.3}
+\contentsline {section}{\numberline {0.5}Parametric Models}{3}{section.0.5}
+\contentsline {subsection}{\numberline {0.5.1}Maximum Likelihood Method}{3}{subsection.0.5.1}
+\contentsline {subsection}{\numberline {0.5.2}Efficient Estimators}{3}{subsection.0.5.2}
+\contentsline {subsection}{\numberline {0.5.3}Bayesian Learning (batch/online)}{3}{subsection.0.5.3}
+\contentsline {section}{\numberline {0.6}Design of Linear Discriminant Functions}{3}{section.0.6}
+\contentsline {subsection}{\numberline {0.6.1}Perceptrons}{3}{subsection.0.6.1}
+\contentsline {subsection}{\numberline {0.6.2}Fisher's linear discriminant analysis}{3}{subsection.0.6.2}
+\contentsline {section}{\numberline {0.7}Support Vector Machines}{3}{section.0.7}
+\contentsline {subsection}{\numberline {0.7.1}Lagrangian optimization theory}{3}{subsection.0.7.1}
+\contentsline {subsection}{\numberline {0.7.2}Hard margin SVMs}{3}{subsection.0.7.2}
+\contentsline {subsection}{\numberline {0.7.3}Soft margin SVMs}{3}{subsection.0.7.3}
+\contentsline {section}{\numberline {0.8}Nonlinear Support Vector Machines}{3}{section.0.8}
+\contentsline {section}{\numberline {0.9}Ensemble Methods for Classifier Design}{3}{section.0.9}
+\contentsline {subsection}{\numberline {0.9.1}PAC Learning}{4}{subsection.0.9.1}
+\contentsline {subsection}{\numberline {0.9.2}Bagging}{4}{subsection.0.9.2}
+\contentsline {subsection}{\numberline {0.9.3}Boosting}{4}{subsection.0.9.3}
+\contentsline {subsection}{\numberline {0.9.4}Arcing}{4}{subsection.0.9.4}
+\contentsline {subsection}{\numberline {0.9.5}Exponential Loss}{4}{subsection.0.9.5}
+\contentsline {section}{\numberline {0.10}Unsupervised Learning}{4}{section.0.10}
+\contentsline {subsection}{\numberline {0.10.1}Nonparametric Density Estimation}{4}{subsection.0.10.1}
+\contentsline {subsection}{\numberline {0.10.2}Histograms}{4}{subsection.0.10.2}
+\contentsline {subsection}{\numberline {0.10.3}Parzen Estimators}{4}{subsection.0.10.3}
+\contentsline {subsection}{\numberline {0.10.4}k-Nearest Neighbor Estimator}{4}{subsection.0.10.4}
+\contentsline {section}{\numberline {0.11}Neural Networks}{4}{section.0.11}
+\contentsline {subsection}{\numberline {0.11.1}Motivation by Computational Neuroscience}{4}{subsection.0.11.1}
+\contentsline {subsection}{\numberline {0.11.2}Multilayer Perceptrons and Backpropagation}{4}{subsection.0.11.2}
+\contentsline {subsection}{\numberline {0.11.3}NETtalk and ALVINN}{4}{subsection.0.11.3}
+\contentsline {subsection}{\numberline {0.11.4}Boltzmann machines}{4}{subsection.0.11.4}
+\contentsline {subsection}{\numberline {0.11.5}Deep Neural Networks}{4}{subsection.0.11.5}
+\contentsline {section}{\numberline {0.12}Mixture Models}{4}{section.0.12}
+\contentsline {subsection}{\numberline {0.12.1}k-Means Algorithm}{5}{subsection.0.12.1}
+\contentsline {subsection}{\numberline {0.12.2}Mixture Models}{5}{subsection.0.12.2}
+\contentsline {subsection}{\numberline {0.12.3}Expectation Maximization Algorithm}{5}{subsection.0.12.3}
+\contentsline {subsection}{\numberline {0.12.4}Convergence Proof of EM Algorithm}{5}{subsection.0.12.4}

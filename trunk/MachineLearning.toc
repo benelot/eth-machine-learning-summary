@@ -1,0 +1,9 @@
+\select@language {english}
+\contentsline {section}{\numberline {0.1}Supervised learning}{2}{section.0.1}
+\contentsline {subsection}{\numberline {0.1.1}Model selection}{2}{subsection.0.1.1}
+\contentsline {subsubsection}{Linear Regression}{2}{section*.2}
+\contentsline {subsection}{\numberline {0.1.2}Normalization}{2}{subsection.0.1.2}
+\contentsline {subsection}{\numberline {0.1.3}Feature selection}{2}{subsection.0.1.3}
+\contentsline {subsection}{\numberline {0.1.4}Regularization}{2}{subsection.0.1.4}
+\contentsline {subsection}{\numberline {0.1.5}Error prediction}{2}{subsection.0.1.5}
+\contentsline {subsection}{\numberline {0.1.6}Classification}{2}{subsection.0.1.6}

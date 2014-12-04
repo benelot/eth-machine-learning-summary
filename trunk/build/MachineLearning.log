@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.25)  4 DEC 2014 13:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.25)  4 DEC 2014 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -668,49 +668,95 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (build/MachineLearning.toc
-)
-\tf@toc=\write5
-\openout5 = `MachineLearning.toc'.
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 \newpage
-              [1
+l.30 ...7}Support Vector Machines}{3}{section.0.7}
+                                                   [1
 
-] (./01-Representations.tex) (./02-Regression.tex)
+])
+\tf@toc=\write5
+\openout5 = `MachineLearning.toc'.
+
+ [2]
+(./01-Representations.tex) (./02-Regression.tex)
 (./03-NumericalEstimationTechniques.tex) (./04-Classification.tex)
-(./05-ParametricModels.tex [2]) (./06-LinearDiscriminantFunctions.tex)
+(./05-ParametricModels.tex [3]) (./06-LinearDiscriminantFunctions.tex)
 (./07-SVMs.tex) (./08-NonlinearSVMs.tex) (./09-ClassifierEnsembleMethods.tex)
-(./10-UnsupervisedLearning.tex [3]) (./11-NeuralNetworks.tex)
+(./10-UnsupervisedLearning.tex [4]) (./11-NeuralNetworks.tex)
 (./12-MixtureModels.tex)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
- [4] [5]
+ [5] [6]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
  (build/MachineLearning.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
 Package rerunfilecheck Info: File `MachineLearning.out' has not changed.
-(rerunfilecheck)             Checksum: 2C97AFB8B7D789B5CBBBE731C8C0257C;463.
+(rerunfilecheck)             Checksum: <no file>.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
  ) 
 Here is how much of TeX's memory you used:
- 9087 strings out of 494912
- 131438 string characters out of 6177074
- 257143 words of memory out of 5000000
- 12083 multiletter control sequences out of 15000+600000
- 11492 words of font info for 44 fonts, out of 8000000 for 9000
+ 9165 strings out of 494912
+ 132734 string characters out of 6177074
+ 259143 words of memory out of 5000000
+ 12145 multiletter control sequences out of 15000+600000
+ 12905 words of font info for 50 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 29i,6n,40p,231b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on build/MachineLearning.pdf (6 pages, 54712 bytes).
+ 29i,6n,40p,231b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsection.0.11.5} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.9.5} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.9.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.9.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.9.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.9.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.7.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.2.7} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.2.6} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.2.5} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.2.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.2.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.1.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.1.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.0.1.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
+Output written on build/MachineLearning.pdf (7 pages, 64655 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
- 104 compressed objects within 2 object streams
- 62 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 365 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 441 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,21 +7,49 @@
 
 \rowcolors{1}{lgray}{gray}
 
-\begin{tabular}{|p{0.3\linewidth}|p{0.7\linewidth}}
-\hline
-\textbf{Term} & \textbf{Brief explanation of the term}\\
-\hline
+\begin{longtable}{p{0.3\linewidth} p{0.7\linewidth}}
+\hline \textbf{Term} & \textbf{Brief explanation of the term}\\ \hline
+\endfirsthead
+
+\hline \textbf{Term} & \textbf{Brief explanation of the term}\\ \hline\hline
+\endhead
 A very important term & The much longer explanations breaking over several lines here and more text to see the line breaking again and again and again and again.\\
 Classification &  \\
+
 Regression &  \\
+
 Structured Prediction &  \\
+
 Supervised Learning &  \\
-Unsupervised Learning &  \\
+
+Unsupervised Learning & 'Learning without labels' \newline
+Usual goals:\newline
+\begin{enumerate}
+\item Compact representation of data sets (e.g. via clustering / quantization)
+\item Dimension reduction (e.g.; very useful for visualization)
+\item Anomaly detection of ''unusual'' data points
+\end{enumerate} \\
+
 Clustering & \\
+
 Dimension reduction & \\
+
 Anomaly detection & \\
+
 Feature & \\
+
 Model selection & \\
+
 Model validation & \\
-\end{tabular}
+Nominal or categorical scale & Qualitative, but without quantitative measurements,
+e.g. binary scale \(\mathbb{X} = \{0, 1\}\) (presence or absence of
+properties). Ordering does not matter.\\
+Ordinal scale & Measurement values are meaningful only with respect to other measurements, i.e., the rank order of measurements carries
+the information, not the numerical differences {\color{orange}(\emph{e.g. information on the ranking of different marathon races)}}\\
+Interval scale &  The relation of numerical differences carries
+the information. Invariance w.r.t. translation and scaling {\color{orange}\emph{(Fahrenheit scale of temperature)}}.\\
+Ratio scale & Zero value of the scale carries information but not the measurement unit. {\color{orange}\emph{(Kelvin scale)}}.\\
+Absolute scale & Absolute values are meaningful. {\color{orange}\emph{(grades of final exams)}}\\
+Data Whitening & Normalize the values of a feature vector by the standard deviation (or another scale quantity) in this component. Thereby, differences in dynamic range (e.g., by different measurement units) are eliminated.\\
+\end{longtable}
 \end{document}

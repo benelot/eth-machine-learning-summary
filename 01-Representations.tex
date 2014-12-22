@@ -3,11 +3,53 @@
 
 \section{Representations}
 
-How to represent data is a crucial part to successful learning. The concrete choice of representation ('features') Learning methods expect standardized representations of data (e.g. Points in vector spaces, nodes in a graph, similarity matrices ...)
+% summarizes lecture 1 & 2
+%author: Benjamin Ellenberger
+
 
 \section{Measurements and Data}
+How to represent data is a crucial part to successful learning. The concrete choice of representation ('features') Learning methods expect standardized representations of data (e.g. Points in vector spaces, nodes in a graph, similarity matrices ...)
+\subsection{Taxonomy of data}
+\textbf{Goal:} We like to represent objects/items of interest and
+characterize them according to their typical
+patterns for detection, classification, abstraction (compression), $\ldots$.
+
+\begin{itemize}
+\item Object space: Design/Configuration/ Object space \(\mathcal{O}\)
+\item Measurement: Measurement X maps an object into a domain 
+\(X: \mathcal{O}^{(1)}\ldots\mathcal{O}^{(R)}\rightarrow \K\) and represents an object in a data space.
+\item Data
+\begin{itemize}
+\item \textbf{Monadic data} \(\mathcal{O} \rightarrow \R^{d}\): An indivisible, impenetrable unit of data such as temperature, water depth, pressure, intensity etc..
+\item \textbf{Dyadic data} \(\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R\): Data consisting of two monadic datasets of different object spaces. This can be \(\{users\} \times \{websites\}\) etc..
+\item \textbf{Polyadic data} \(\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R\): Data consisting of multiple monadic datasets of different object spaces. 
+\item \textbf{Pairwise data} \(\mathcal{O} \times \mathcal{O} \rightarrow \R\): Data that comes in pairs of the same object space such as \(\{proteins\} \times \{proteins\}\) comparisons.
+\end{itemize}
+\end{itemize}
+
+The choice of features X is an engineering problem. We must find a tradeoff between underfitting and overfitting the data.
+\begin{enumerate}
+\item Ideally as informative as possible about label Y
+\item Must consider cost of acquiring / computing them
+\item Poor choice of features \(\rightarrow\) no luck with learning!
+\end{enumerate}
 \subsection{Patterns}
 \subsection{Data Types, Transformations, Scale}
+\begin{itemize}
+\item \textbf{Nominal or categorical scale}: Qualitative, but without quantitative measurements, e.g. binary scale \(\mathbb{X} = \{0, 1\}\) (presence or absence of
+properties). Ordering does not matter.
+\item \textbf{Ordinal scale}: Measurement values are meaningful only with respect to other measurements, i.e., the rank order of measurements carries
+the information, not the numerical differences {\color{orange}(\emph{e.g. information
+on the ranking of different marathon races)}}
+\item \textbf{Quantitative scales}
+\begin{itemize}
+\item \textbf{Interval scale}: The relation of numerical differences carries
+the information. Invariance w.r.t. translation and scaling {\color{orange}\emph{(Fahrenheit scale of temperature)}}.
+\item \textbf{Ratio scale}: Zero value of the scale carries information but
+not the measurement unit. {\color{orange}\emph{(Kelvin scale)}}.
+\item \textbf{Absolute scale}: Absolute values are meaningful. {\color{orange}\emph{(grades of final exams)}}
+\end{itemize}
+\end{itemize}
 
 
 \end{document}

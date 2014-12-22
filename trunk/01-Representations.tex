@@ -33,14 +33,13 @@ The choice of features X is an engineering problem. We must find a tradeoff betw
 \item Must consider cost of acquiring / computing them
 \item Poor choice of features \(\rightarrow\) no luck with learning!
 \end{enumerate}
-\subsection{Patterns}
-\subsection{Data Types, Transformations, Scale}
+\subsection{Data Types, Scale, Transformation invariances}
+\subsubsection{Data Types and Scale}
 \begin{itemize}
 \item \textbf{Nominal or categorical scale}: Qualitative, but without quantitative measurements, e.g. binary scale \(\mathbb{X} = \{0, 1\}\) (presence or absence of
 properties). Ordering does not matter.
 \item \textbf{Ordinal scale}: Measurement values are meaningful only with respect to other measurements, i.e., the rank order of measurements carries
-the information, not the numerical differences {\color{orange}(\emph{e.g. information
-on the ranking of different marathon races)}}
+the information, not the numerical differences {\color{orange}(\emph{e.g. information on the ranking of different marathon races)}}
 \item \textbf{Quantitative scales}
 \begin{itemize}
 \item \textbf{Interval scale}: The relation of numerical differences carries
@@ -50,6 +49,22 @@ not the measurement unit. {\color{orange}\emph{(Kelvin scale)}}.
 \item \textbf{Absolute scale}: Absolute values are meaningful. {\color{orange}\emph{(grades of final exams)}}
 \end{itemize}
 \end{itemize}
-
+\subsubsection{Transformation invariances}
+\textbf{Importance of invariances:} if the measurements are invariant under a set of transformation then the mathematical definition of structure should obey the same invariances. Otherwise, our structure search procedure breaks the symmetry in an a priori (not data-dependent) way.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+scale type & transformation invariances \\
+\hline
+nominal & \(T = \{f : \R \rightarrow \R~|~\text{f bijective}\}\)\\
+ordinal & \(T = \{f : \R \rightarrow \R~|~f(x_1 ) < f (x_2 ), \forall x_1 < x_2 \}\)\\
+interval & \(T = \{f : \R \rightarrow \R~|~f(x) = ax + c, a \in \R^+ , c \in \R\}\)\\
+ratio & \(T = \{f : \R \rightarrow \R~|~f(x) = ax, a \in \R^+ \}\)\\
+absolute & \(T = \{f : \R \rightarrow \R~|~\text{f is identity map}\}\)\\
+\hline
+\end{tabular}
+\caption{Formal characterisation of different scale types and their invariance properties.}
+\end{table}
 
 \end{document}

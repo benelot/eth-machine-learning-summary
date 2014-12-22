@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.25)  4 DEC 2014 23:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.25)  22 DEC 2014 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2040,20 +2040,20 @@ LaTeX Warning: Unused global option(s):
 (build/MachineLearning.aux)
 \openout1 = `MachineLearning.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 209.
-LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 208.
+LaTeX Font Info:    ... okay on input line 208.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -2084,211 +2084,211 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count488
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 209
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 208
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
 LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 209.
+(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 208.
 LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 209.
+(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 208.
 Package pdfcprot Info: I didn't find pplxbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdfcprot/pplmnOT1.cpa)
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 209.
+(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 208.
 Package pdfcprot Info: I didn't find pplxbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <9> not available
-(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 209.
+(Font)              Font shape `OT1/pplx/b/n' tried instead on input line 208.
 Package pdfcprot Info: I didn't find pplxbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssbxnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find pplxmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmnOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <9> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 209.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 208.
 
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <12> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 209.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 208.
 
 
 Package pdfcprot Info: I didn't find cmssmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 209.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 208.
 
 
 Package pdfcprot Info: I didn't find cmssmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 209.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 208.
 
 
 Package pdfcprot Info: I didn't find cmssmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmitOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmslOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmslOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmslOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Package pdfcprot Info: I didn't find cmssmslOT1.cpa.
 (pdfcprot)              As a fallback I will try pplmnOT1.cpa. on input line 20
-9.
+8.
 Package pdfcprot Info: File pplmnOT1.cpa{} used for the adjustment
 (pdfcprot)             of the char protruding. It seems that it isn't the one
-(pdfcprot)             you intended to use. on input line 209.
+(pdfcprot)             you intended to use. on input line 208.
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
@@ -2379,7 +2379,7 @@ Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box106
-Package hyperref Info: Link coloring ON on input line 209.
+Package hyperref Info: Link coloring ON on input line 208.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2392,61 +2392,61 @@ LaTeX Info: Redefining \Ref on input line 513.
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 209.
-LaTeX Info: Redefining \ref on input line 209.
-LaTeX Info: Redefining \pageref on input line 209.
-LaTeX Info: Redefining \nameref on input line 209.
+LaTeX Info: Redefining \nameref on input line 208.
+LaTeX Info: Redefining \ref on input line 208.
+LaTeX Info: Redefining \pageref on input line 208.
+LaTeX Info: Redefining \nameref on input line 208.
 (build/MachineLearning.out) (build/MachineLearning.out)
 \@outlinefile=\write6
 \openout6 = `MachineLearning.out'.
 
-LaTeX Info: Redefining \Ref on input line 209.
+LaTeX Info: Redefining \Ref on input line 208.
 
 
-Package layouts Warning: Layout scale set to 0.5 on input line 209.
+Package layouts Warning: Layout scale set to 0.5 on input line 208.
 
 \c__siunitx_mathsf_int=\count490
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 209
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 208
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 209
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 208
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 209
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 208
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 209
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 208
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 209.
+(Font)              scaled to size 11.40997pt on input line 208.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 209.
+(Font)              scaled to size 8.33606pt on input line 208.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 209.
+(Font)              scaled to size 6.25204pt on input line 208.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 209.
+(Font)              scaled to size 11.40997pt on input line 208.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 209.
+(Font)              scaled to size 8.33606pt on input line 208.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 209.
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 209.
+(Font)              scaled to size 6.25204pt on input line 208.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 208.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for U+esvect on input line 209
+LaTeX Font Info:    Try loading font information for U+esvect on input line 208
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/esvect/uesvect.fd
@@ -2457,16 +2457,16 @@ File: uesvect.fd
 <logos.pdf, id=71, 177.66376pt x 83.31125pt>
 File: logos.pdf Graphic file (type pdf)
  <use logos.pdf>
-Package pdftex.def Info: logos.pdf used on input line 218.
+Package pdftex.def Info: logos.pdf used on input line 217.
 (pdftex.def)             Requested size: 177.66331pt x 83.31104pt.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 218.
+(Font)              scaled to size 15.0049pt on input line 217.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 218.
+(Font)              scaled to size 10.42007pt on input line 217.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 218.
+(Font)              scaled to size 15.0049pt on input line 217.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 218.
+(Font)              scaled to size 10.42007pt on input line 217.
 
 Overfull \hbox (9.73334pt too wide) has occurred while \output is active
     []
@@ -2486,7 +2486,7 @@ Overfull \hbox (9.73334pt too wide) has occurred while \output is active
 Class memoir Warning: The material used in the headers is too large
 (13.59999pt) for the given head height (0.0pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 238.
+(in both cases you will find help in the memoir manual). on input line 237.
 
 
 Overfull \hbox (9.73334pt too wide) has occurred while \output is active
@@ -2505,7 +2505,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.238 \clearpage
+l.237 \clearpage
                  [1
 
 
@@ -2570,16 +2570,16 @@ Overfull \hbox (9.73334pt too wide) has occurred while \output is active
 
 [4] (./13-Cheatsheet.tex
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 28.
+(Font)              scaled to size 5.21004pt on input line 32.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 28.
+(Font)              scaled to size 5.21004pt on input line 32.
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--85
+Underfull \hbox (badness 10000) in paragraph at lines 87--89
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--120
+Underfull \hbox (badness 10000) in paragraph at lines 121--124
 
  []
 
@@ -2596,7 +2596,7 @@ Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 Class memoir Warning: The material used in the footer is too large
 (9.51996pt) for the given foot skip (0.0pt), it is recommended to
 either increase the foot skip or redesign the fotoer
-(in both cases you will find help in the memoir manual). on input line 141.
+(in both cases you will find help in the memoir manual). on input line 145.
 
 
 Overfull \hbox (9.73334pt too wide) has occurred while \output is active
@@ -2619,7 +2619,7 @@ Overfull \hbox (9.73334pt too wide) has occurred while \output is active
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 257--260
+Underfull \hbox (badness 10000) in paragraph at lines 261--264
 
  []
 
@@ -2641,7 +2641,7 @@ Overfull \hbox (9.73334pt too wide) has occurred while \output is active
 Class memoir Warning: The material used in the headers is too large
 (13.59999pt) for the given head height (0.0pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 273.
+(in both cases you will find help in the memoir manual). on input line 272.
 
 \tf@thm=\write7
 \openout7 = `MachineLearning.thm'.
@@ -2665,18 +2665,18 @@ Overfull \hbox (9.73334pt too wide) has occurred while \output is active
 \tf@toc=\write8
 \openout8 = `MachineLearning.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 273.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 273.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 272.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 272.
  (build/MachineLearning.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 273.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 273.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 272.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 272.
 Package rerunfilecheck Info: File `MachineLearning.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
  38293 strings out of 494912
  741415 string characters out of 6177074
- 1034868 words of memory out of 5000000
+ 1034900 words of memory out of 5000000
  40647 multiletter control sequences out of 15000+600000
  49301 words of font info for 150 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -2693,7 +2693,7 @@ m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on build/MachineLearning.pdf (10 pages, 201992 bytes).
+Output written on build/MachineLearning.pdf (10 pages, 201976 bytes).
 PDF statistics:
  306 PDF objects out of 1000 (max. 8388607)
  276 compressed objects within 3 object streams

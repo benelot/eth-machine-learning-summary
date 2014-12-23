@@ -77,9 +77,10 @@ The (unbiasedness) condition \(\mathbb{E}(c^T y) = a^T \beta\) implies \(DX = 0\
 \end{proof}
 Gauss-Markov Theorem proves \(\mathbb{V}(a^T\hat{\beta}) \leq \mathbb{V}(c^Ty)\) (The least squares estimator is the best unbiased linear estimator)
 \subsection{Ridge Regression}
-Ridge regression is a normal linear regression with the same closed form but adds a penalty term to it to design the solution. It still has a closed solution, but now depends on the \(\lambda\) parameter. The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
-\[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{\text{penalty}}\Big\}\]
-\(\lambda \leq 0\) controls the amount of shrinkage. (Weight decay in Neuronal Network Literature)
+Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term to it to restrict the solution. It still has a closed solution, but now depends on the \(\lambda\) parameter. The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
+\[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{L_2 \text{ norm penalty}}\Big\}\]
+\(\lambda \leq 0\) controls the amount of shrinkage (Weight decay in Neuronal Network Literature). The penalty term is \(\lambda\) times the \(L_2\) norm (\hyperref[Norms@Glossary]{Norms@Glossary}), which is the Euclidian length of the \(\beta\) vector. \\
+\url{https://en.wikipedia.org/wiki/Tikhonov_regularization}
 \subsubsection{Solution to Ridge Regression}
 Shift the coordinate system into the center of mass of the data distribution:
 \[x_{i,j} = x_{i,j}-\overline{x}_{j},\beta_0 = \sum^n_{i=1} \frac{y_i}{n}\]
@@ -88,7 +89,25 @@ By this, we reduce the system from d+1 to d dimensions (\hyperref[homogeneous-co
 The ridge solution is then:
 \[\hat{\beta}^{ridge} = \underbrace{(X^T X + \lambda I)^{-1}}_{X^T X\text{ is regularized by }\lambda I}X^Ty\]
 This can also be solved via Singular value decomposition (\hyperref[SVD@Glossary]{SVD@Glossary}).
-\subsection{LASSO}
+\subsection{The LASSO}
+An alternative regularized version of least squares is LASSO (Least absolute shrinkage and selection operator). It uses the same unconstrained linear regression with the same closed form but add a penalty term to it to restrict the solution, as it is done in the ridge regression. \[\hat{\beta}^{LASSO} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2\Big\}\] subject to \[\sum^{d}_{j=1}|\beta_j| \leq s\] The lower equation is the penalty term, which is different from the ridge regression and is the \(L_1\) norm penalty, which is the so-called ''Manhattan distance'' (\hyperref[Norms@Glossary]{Norms@Glossary}). The LASSO does not have a closed form anymore and must must be solved numerically by using quadratic programming or more general convex optimization methods.\\
+\url{https://en.wikipedia.org/wiki/Least_squares#Lasso_method}
+\subsubsection{Ridge vs. LASSO Estimation}
+One of the prime differences between LASSO and ridge regression is that in ridge regression, as the penalty is increased, all parameters are reduced while still remaining non-zero, while in LASSO, increasing the penalty will cause more and more of the parameters to be driven to zero. This is an advantage of LASSO over ridge regression, as driving parameters to zero deselects the features from the regression. Thus, Lasso automatically selects more relevant features and discards the others, whereas Ridge regression never fully discards any features.
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{figs/LASSO-vs-Ridge}
+\caption{Estimation picture for the LASSO (left) and Ridge regression (right). Shown are contours of the least squares error function (red) and constraint functions \(|\beta_1 | + |\beta_2 | \leq t\) and \(\beta_1^2 + \beta_2^2 \leq t_2\) (blue). Therefore LASSO estimates are known to zero-out several coefficients and only keep a few non-zero. The reason is that the LSE error surface often hits the corners of the constraint surface(Source: fig 3.12 of Hastie et al. 2001)}
+\end{figure}
+\subsubsection{Generalized Ridge Regression}
+The generalized ridge regression has known closed forms for certain values of \(p\).
+\[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} |\beta|^p}_{L_P \text{ norm penalty}}\Big\}\]
+For \(p = 2\), we get the usual Ridge Regression with the closed form as described above. For \(p = 1\), we get the LASSO Regression as described above and for all other values we get regression with different strengths of shrinkage as shown below.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{figs/different-strengths-of-shrinkage}
+\caption{Contours of constraint functions \(\sum_{j}|\beta_j|^p\) for different values of \(q\) (Source: HTF'01)}
+\end{figure}
+
 \subsection{Nonlinear Regression by basis expansion}
 \subsection{Wavelet regression}
 \subsection{Bias variance Tradeoff}

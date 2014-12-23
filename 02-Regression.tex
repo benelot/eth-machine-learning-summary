@@ -6,10 +6,7 @@
 % author: Benjamin Ellenberger
 
 \section{Regression}
-In statistics, regression analysis is a statistical process for estimating the relationships among variables (one independent variable Y and one or more independent variable (\(X_1,\ldots,X_d\))). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or 'criterion variable') changes when any one of the independent variables is varied, while the other independent variables are held fixed. A
-model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. Various
-tests are then employed to determine if the model is satisfactory.If the model is
-deemed satisfactory, the estimated re- gression equation can be used to predict the value of the dependent variable given values for the independent variables. (Source: Wikipedia and Encyclopedia Britannica on Regression)\\
+In statistics, regression analysis is a statistical process for estimating the relationships among variables (one independent variable Y and one or more independent variable (\(X_1,\ldots,X_d\))). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or 'criterion variable') changes when any one of the independent variables is varied, while the other independent variables are held fixed. A model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. Various tests are then employed to determine if the model is satisfactory.If the model is deemed satisfactory, the estimated regression equation can be used to predict the value of the dependent variable given values for the independent variables. (Source: Wikipedia and Encyclopedia Britannica on Regression)\\
 \begin{itemize}
 \item Object space \(\mathcal{O}\)
 \item Measurement/Feature space \(\mathcal{F} = \R^d \times \R\)
@@ -78,8 +75,19 @@ Alternative unbiased linear estimator (to show the least squares estimator is th
 \end{align}
 The (unbiasedness) condition \(\mathbb{E}(c^T y) = a^T \beta\) implies \(DX = 0\).
 \end{proof}
-Gauss-Markov Theorem proves \(\mathbb{V}(a^T\hat{\beta}) \leq \mathbb{V}(c^Ty)\)
+Gauss-Markov Theorem proves \(\mathbb{V}(a^T\hat{\beta}) \leq \mathbb{V}(c^Ty)\) (The least squares estimator is the best unbiased linear estimator)
 \subsection{Ridge Regression}
+Ridge regression is a normal linear regression with the same closed form but adds a penalty term to it to design the solution. It still has a closed solution, but now depends on the \(\lambda\) parameter. The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
+\[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{\text{penalty}}\Big\}\]
+\(\lambda \leq 0\) controls the amount of shrinkage. (Weight decay in Neuronal Network Literature)
+\subsubsection{Solution to Ridge Regression}
+Shift the coordinate system into the center of mass of the data distribution:
+\[x_{i,j} = x_{i,j}-\overline{x}_{j},\beta_0 = \sum^n_{i=1} \frac{y_i}{n}\]
+By this, we reduce the system from d+1 to d dimensions (\hyperref[homogeneous-coordinates@Glossary]{homogeneous coordinates@Glossary}) and get:\\
+\[RSS(\beta) = (y-X\beta)^T(y-X\beta)+\lambda\beta^T\beta\]
+The ridge solution is then:
+\[\hat{\beta}^{ridge} = \underbrace{(X^T X + \lambda I)^{-1}}_{X^T X\text{ is regularized by }\lambda I}X^Ty\]
+This can also be solved via Singular value decomposition (\hyperref[SVD@Glossary]{SVD@Glossary}).
 \subsection{LASSO}
 \subsection{Nonlinear Regression by basis expansion}
 \subsection{Wavelet regression}

@@ -109,7 +109,15 @@ For \(p = 2\), we get the usual Ridge Regression with the closed form as describ
 \end{figure}
 
 \subsection{Nonlinear Regression by basis expansion}
+Idea: Transform the variables X nonlinearly and fit a linear model into the resulting (feature) space. Transformation: \(h_m(X) : \R^d \rightarrow \R, 1 \leq m \leq M\)
+\[f(X) = \sum^M_{m=1} \beta_m h_m(X)\]
+f is linear in \(\beta\) but non-linear in X! We use a series of piecewise-cubic polynomials to fit the data, of which the smoothness can be controlled by regularization of the the maximal number of knots.
 \subsection{Wavelet regression}
+Regression can also be done with Wavelets. A wavelet is a wave-like oscillation with an amplitude that begins at zero, increases, and then decreases back to zero. It can typically be visualized as a ''brief oscillation'' like one might see recorded by a seismograph or heart monitor. Generally, wavelets are purposefully crafted to have specific properties that make them useful for signal processing. Wavelets can be combined, using a ''reverse, shift, multiply and integrate'' technique called convolution, with portions of a known signal to extract information from the unknown signal. (Source: Wikipedia.org)
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{figs/Wavelet-vs-Spline}
+\caption{Wavelet smoothing compared with smoothing splines on two examples. Each panel compares the SURE-shrunk wavelet fit to the crossvalidated smoothing spline fit. (Source: HTF'01)}
+\end{figure}
 \subsection{Bias variance Tradeoff}
 \subsection{Gaussian Processes}
 \end{document}

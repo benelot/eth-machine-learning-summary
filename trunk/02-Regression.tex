@@ -118,6 +118,19 @@ Regression can also be done with Wavelets. A wavelet is a wave-like oscillation 
 \includegraphics[width=\linewidth]{figs/Wavelet-vs-Spline}
 \caption{Wavelet smoothing compared with smoothing splines on two examples. Each panel compares the SURE-shrunk wavelet fit to the crossvalidated smoothing spline fit. (Source: HTF'01)}
 \end{figure}
-\subsection{Bias variance Tradeoff}
+\subsection{Bias-variance-Tradeoff in Regression}
+We have data \(D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R\) which contains observations of the random variables \((X_i,Y_i)\) which are drawn i.i.d. from the distribution \(P(X,Y)\). We have the objective to find a regression function \(f \in \mathcal{F}\)(\(\mathcal{F}\) is the hypothesis class) such that \(\mathbb{E}(Y - f(X))^2\) is minimal. We can find the optimum at \(f^*(x) = \mathbb{E}(Y|X = x)\). So we construct an estimator \(\hat{f}(X)\) which estimates Y depending on the random variable \(X\) and on the data \(D\).\\\\
+\textbf{Problems resulting in the Tradeoff}
+\begin{enumerate}
+\item Finite training set
+\item Complexity of hypothesis class \(\mathcal{F}\) is unknown
+\end{enumerate}
+So we must find the best balance between a complex \(\mathcal{F}\) (by overfitting which keeps the variance high) and simple \(\mathcal{F}\) (by underfitting which keeps the bias high). This can be done by minimizing the error components:\\
+\begin{align}
+\mathbb{E}_D\mathbb{E}_{X,Y}\left(\hat{f}(X)-Y\right)^2 
+&= \mathbb{E}_D\mathbb{E}_X\left(\hat{f}(X) - \mathbb{E}(Y|X)\right)^2 + \mathbb{E}_{X,Y}\left(Y - \mathbb{E}(Y|X)\right)^2\\
+&= \underbrace{\mathbb{E}_X \mathbb{E}_D\left(\hat{f}(X) - \mathbb{E}_D(\hat{f}(X))\right)^2}_{variance} + \underbrace{\mathbb{E}_X\left(\mathbb{E}_D(\hat{f}(X)) - \mathbb{E}(Y|X)\right)^2}_{\text{bias}^2} + \underbrace{\mathbb{E}_{X,Y}\left(Y - \mathbb{E}(Y|X)\right)^2}_{\text{noise}}
+\end{align}
+
 \subsection{Gaussian Processes}
 \end{document}

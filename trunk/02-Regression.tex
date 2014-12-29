@@ -13,7 +13,7 @@ In statistics, regression analysis is a statistical process for estimating the r
 \item Data \(\mathcal{Z} = \{(x_i,y_i) \in \R^d \times \R : 1 \geq i \geq n\}\)
 \end{itemize}
 \textbf{The problem of regression}: What is the optimal estimate of a function \(f: \R^d \rightarrow \R\) based on noisy data \(y_i = f(x_i) + \epsilon_i\)?\\
-\textbf{Solution:} The regression function: \(y(x) = \mathbb{E}\{y | X=x\} = \int_{\Omega} y p(y|X=x)dy\)\\
+\textbf{Solution:} The regression function: \(y(x) = \E\{y | X=x\} = \int_{\Omega} y p(y|X=x)dy\)\\
 How many data are required to estimate a model or a regression function given a
 hypothesis class (set of possible regression functions)?
 \subsection{Linear Regression}
@@ -42,7 +42,7 @@ which is an orthogonal projection on the space spanned by the columns of X.
 Gaussian noise \(\epsilon\) with \(\mathcal{E}(\epsilon) = 0, \mathcal{V} = \sigma^2\)
 \begin{proof}
 \begin{align}
-Y &= \mathbb{E}(Y|X_1 , \ldots , X_d) + \epsilon\\
+Y &= \E(Y|X_1 , \ldots , X_d) + \epsilon\\
 &= \beta_0 + \sum^d_{j=1} X_j \beta_j + \epsilon\\
 &= X\beta + \epsilon
 \end{align}
@@ -54,28 +54,28 @@ The least squares estimate of the parameter \(\beta\) has the smallest variance 
 We want to predict a. Prediction \(\hat{\theta}\) is a linear function \(c_0^Ty = \overbrace{a^T (X^T X)^{-1} X^T}^{c_0} y\) of the response vector y.
 \begin{proof}
 
-\(a^T \hat{\beta}\) is unbiased since the expectation \(\mathbb{E}\) yields
+\(a^T \hat{\beta}\) is unbiased since the expectation \(\E\) yields
 \begin{align}
-\mathbb{E}(a^T \hat{\beta}) &= \mathbb{E}(a^T (X^T X)^{-1} X^T y)\\
-&= a^T (X^T X)^{-1} X^T \mathbb{E}(X\beta + \epsilon)\\
-&= a^T (X^T X)^{-1} X^T (X\beta + \underbrace{\mathbb{E}(\epsilon)}_{=0} ) = a^T \beta\\
+\E(a^T \hat{\beta}) &= \E(a^T (X^T X)^{-1} X^T y)\\
+&= a^T (X^T X)^{-1} X^T \E(X\beta + \epsilon)\\
+&= a^T (X^T X)^{-1} X^T (X\beta + \underbrace{\E(\epsilon)}_{=0} ) = a^T \beta\\
 \end{align}
 Variance of \(a^T\hat{\beta}\)
 \begin{align}
-\mathbb{V}(a^T \hat{\beta}) &= \mathbb{V}\Big( a^T \underbrace{(X^T X)^{-1} X^T \overbrace{(X\beta + \epsilon)}^{y}}_{\hat{\beta}}\Big)\\
-&= \underbrace{\mathbb{V}(a^T \beta)}_{=0} +\mathbb{V}\left(a^T (X^T X)^{-1} X^T \epsilon\epsilon^T X(X^T X)^{-1} a\right)
+\V(a^T \hat{\beta}) &= \V\Big( a^T \underbrace{(X^T X)^{-1} X^T \overbrace{(X\beta + \epsilon)}^{y}}_{\hat{\beta}}\Big)\\
+&= \underbrace{\V(a^T \beta)}_{=0} +\V\left(a^T (X^T X)^{-1} X^T \epsilon\epsilon^T X(X^T X)^{-1} a\right)
 = \sigma^2 a (X^T X)^{-1} a
 \end{align}
 The cross-correlations are linear in \(\epsilon\) and, therefore, they vanish.\\\\
 Alternative unbiased linear estimator (to show the least squares estimator is the best)
 \begin{align}
 \hat{\theta} &= c^T y = a^T \hat{\beta} + a^T Dy\\
-\mathbb{E}(c^T y) &= \mathbb{E}(a^T \hat{\beta}) + \mathbb{E}(a^T Dy) = a^T \beta + \mathbb{E} a^T D(X\beta + \epsilon)\\
-&= a^T \beta + a^T DX\beta + a^T D \underbrace{\mathbb{E}(\epsilon)}_{=0} = a^T \beta\\
+\E(c^T y) &= \E(a^T \hat{\beta}) + \E(a^T Dy) = a^T \beta + \E a^T D(X\beta + \epsilon)\\
+&= a^T \beta + a^T DX\beta + a^T D \underbrace{\E(\epsilon)}_{=0} = a^T \beta\\
 \end{align}
-The (unbiasedness) condition \(\mathbb{E}(c^T y) = a^T \beta\) implies \(DX = 0\).
+The (unbiasedness) condition \(\E(c^T y) = a^T \beta\) implies \(DX = 0\).
 \end{proof}
-Gauss-Markov Theorem proves \(\mathbb{V}(a^T\hat{\beta}) \leq \mathbb{V}(c^Ty)\) (The least squares estimator is the best unbiased linear estimator)
+Gauss-Markov Theorem proves \(\V(a^T\hat{\beta}) \leq \V(c^Ty)\) (The least squares estimator is the best unbiased linear estimator)
 \subsection{Ridge Regression}
 Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term to it to restrict the solution. It still has a closed solution, but now depends on the \(\lambda\) parameter. The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
 \[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{L_2 \text{ norm penalty}}\Big\}\]
@@ -119,7 +119,7 @@ Regression can also be done with Wavelets. A wavelet is a wave-like oscillation 
 \caption{Wavelet smoothing compared with smoothing splines on two examples. Each panel compares the SURE-shrunk wavelet fit to the crossvalidated smoothing spline fit. (Source: HTF'01)}
 \end{figure}
 \subsection{Bias-variance-Tradeoff in Regression}
-We have data \(D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R\) which contains observations of the random variables \((X_i,Y_i)\) which are drawn i.i.d. from the distribution \(P(X,Y)\). We have the objective to find a regression function \(f \in \mathcal{F}\)(\(\mathcal{F}\) is the hypothesis class) such that \(\mathbb{E}(Y - f(X))^2\) is minimal. We can find the optimum at \(f^*(x) = \mathbb{E}(Y|X = x)\). So we construct an estimator \(\hat{f}(X)\) which estimates Y depending on the random variable \(X\) and on the data \(D\).\\\\
+We have data \(D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R\) which contains observations of the random variables \((X_i,Y_i)\) which are drawn i.i.d. from the distribution \(P(X,Y)\). We have the objective to find a regression function \(f \in \mathcal{F}\)(\(\mathcal{F}\) is the hypothesis class) such that \(\E(Y - f(X))^2\) is minimal. We can find the optimum at \(f^*(x) = \E(Y|X = x)\). So we construct an estimator \(\hat{f}(X)\) which estimates Y depending on the random variable \(X\) and on the data \(D\).\\\\
 \textbf{Problems resulting in the Tradeoff}
 \begin{enumerate}
 \item Finite training set
@@ -127,10 +127,24 @@ We have data \(D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R\) which conta
 \end{enumerate}
 So we must find the best balance between a complex \(\mathcal{F}\) (by overfitting which keeps the variance high) and simple \(\mathcal{F}\) (by underfitting which keeps the bias high). This can be done by minimizing the error components:\\
 \begin{align}
-\mathbb{E}_D\mathbb{E}_{X,Y}\left(\hat{f}(X)-Y\right)^2 
-&= \mathbb{E}_D\mathbb{E}_X\left(\hat{f}(X) - \mathbb{E}(Y|X)\right)^2 + \mathbb{E}_{X,Y}\left(Y - \mathbb{E}(Y|X)\right)^2\\
-&= \underbrace{\mathbb{E}_X \mathbb{E}_D\left(\hat{f}(X) - \mathbb{E}_D(\hat{f}(X))\right)^2}_{variance} + \underbrace{\mathbb{E}_X\left(\mathbb{E}_D(\hat{f}(X)) - \mathbb{E}(Y|X)\right)^2}_{\text{bias}^2} + \underbrace{\mathbb{E}_{X,Y}\left(Y - \mathbb{E}(Y|X)\right)^2}_{\text{noise}}
+\E_D\E_{X,Y}\left(\hat{f}(X)-Y\right)^2 
+&= \E_D\E_X\left(\hat{f}(X) - \E(Y|X)\right)^2 + \E_{X,Y}\left(Y - \E(Y|X)\right)^2\\
+&= \underbrace{\E_X \E_D\left(\hat{f}(X) - \E_D(\hat{f}(X))\right)^2}_{variance} + \underbrace{\E_X\left(\E_D(\hat{f}(X)) - \E(Y|X)\right)^2}_{\text{bias}^2} + \underbrace{\E_{X,Y}\left(Y - \E(Y|X)\right)^2}_{\text{noise}}
 \end{align}
 
-\subsection{Gaussian Processes}
+Usually, it is very complex to minimize them both at the same time. 
+
+\subsubsection{Combining regressors}
+\paragraph{Bias}
+A set of unbiased estimators that is simply averaged remains unbiased after averaging.
+\[bias[f(x)] = \E_D\hat{f}(x) - \E(Y|x) = \frac{1}{B} \sum^B_{i=1}\E_D \hat{f}_i(x) - \E(Y|x) = \frac{1}{B} \sum^B_{i=1} \left(\E_D \hat{f}_i(x) - \E(Y|x)\right) =
+\frac{1}{B} \sum^B_{i=1} bias[f_i (x)]\]
+\paragraph{Variance}
+\begin{align}
+\V\{ \hat{f}(x)\} &= \E_D \hat{f}(X) - \E_D \hat{f}(X)
+= \E_D(\frac{1}{B} \sum^B_{i=1} \hat{f}_i(x) - \frac{1}{B} \sum^B_{i=1} \E_D \hat{f}_i(x))^2\\
+&= \E_D(\frac{1}{B} \sum^B_{i=1} (\hat{f}_i(x) - \E_D \hat{f}_i(x)))^2
+= \frac{1}{B^2} \sum^B_{i=1} \V \{\hat{f}_i(x)\} + \frac{1}{B^2} \sum_{i\neq j}\sum \C ov\{\hat{f}_i(x),\hat{f}_j(x)\}
+\end{align}
+Assuming that covariances are small \(\C ov\{\hat{f}_i\} \approx 0\) and variances small as well \(\V\{\hat{f}(x)\} \approx \sigma^2\) then we can reduce to \(\V\{\hat{f}(x)\} \approx \frac{\sigma^2}{B}\). So the variance reduces by \(\frac{1}{B}\) if bias remains the unchanged.
 \end{document}

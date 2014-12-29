@@ -3,6 +3,15 @@
 %% Big thanks go to Helen Oleynikova who attended Machine Learning	2013	
 %% Tex source of the cheat sheet found at https://www.amiv.ethz.ch/studium/unterlagen/65
 
+%change spacings according to your preferences (readability vs. content)
+% Syntax : \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}
+{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+\titlespacing*{\subsubsection}
+{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+
 
 \setlength{\topmargin}{10mm-1in} %{20mm} %Topmargin
 \setlength{\oddsidemargin}{10mm-1in} %{35mm} %Left margin
@@ -11,6 +20,9 @@
 
 \setlength{\footskip}{0mm} %{15mm}
 \setlength{\textwidth}{185mm} %{212mm}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 
 \begin{landscape}
 \section{Cheat sheet}
@@ -286,7 +298,7 @@ $W$ is orthogonal, $W = (v_1 | ... | v_k)$ and $z_i = w^\top x_i$
 K = \sum_{i=1}^n \lambda_i v_i v_i^\top
 \end{eqnarray}
 
-
 \end{multicols}
 \end{landscape}
+\todo{We could use colors in the cheat sheet to improve searchability}
 \end{document}

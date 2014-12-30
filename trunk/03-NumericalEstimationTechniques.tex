@@ -44,7 +44,7 @@ Adapt feature set by subset selection and control it by minimizing the predictio
 which have not been used in model fitting (training) nor in model selection (testing for parameter adaptation). Therefore you can split your data set again into more subsets for this.
 
 \begin{enumerate}
-\item Run cross-­validation for every value of the hyperparameter \((\lambda,\mathcal{C},...)\)
+\item Run cross-validation for every value of the hyperparameter \((\lambda,\mathcal{C},\ldots)\)
 \item Choose the value corresponding to the lowerst prediction error.
 \item However you can not report this error as the generalization error of your algorithm, as the algorithm has seen all the data for model selection when choosing your hyperparameter.
 \item So you need a separate dataset to evaluate the generalization error.

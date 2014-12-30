@@ -1,4 +1,4 @@
-\documentclass[11pt,article,oneside,a4paper,titlepage]{memoir}
+\documentclass[11pt,article,oneside,a4paper]{memoir}
 
 %% Packages
 %% ========
@@ -169,6 +169,8 @@
 % Lorem ipsum
 %\usepackage[]{blindtext}
 \usepackage{lipsum}% dummy text
+% include pdfs into the latex document
+\usepackage{pdfpages}
 
 
 % Units
@@ -211,7 +213,7 @@
 \mainmatter
 \newpage
 \chapterprecishere{
-As in Cherry-picking, a term taken from revision control, where it denotes moving only some revisions from one branch to another, we take together the most understandable explanations and definitions into one summary to summarize the content of the lecture about Machine Learning of Prof. Joachim Buhmann. Of course we tell you the source of the explanation even if we do not properly cite or properly reference, which separates us from a gang of kanging academics.\\---}
+As in Cherry-picking, a term taken from revision control, where it denotes moving only some revisions from one branch to another, we cherry-pick the most understandable explanations and definitions into one summary to summarize the content of the lecture about Machine Learning of Prof. Joachim Buhmann. Of course we tell you the source of the explanation even if we do not properly cite or properly reference, which separates us from a gang of kanging academics.\\---}
 \newpage
 
 %% This change is needed if the article option for the memoir document class
@@ -225,6 +227,8 @@ As in Cherry-picking, a term taken from revision control, where it denotes movin
 \newpage
 \clearpage
 \pagenumbering{roman}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{2}
 \tableofcontents
 
 
@@ -233,6 +237,26 @@ As in Cherry-picking, a term taken from revision control, where it denotes movin
 \pagenumbering{arabic}
 
 \newpage
+
+\includepdf[pages={3-33,36-47},addtotoc={
+3,section,1,A refresher on Probabilities,sec:probabilityRefresher,
+4,subsection,2,Literature,subsec:literature,
+7,subsection,2,Random Variables,subsec:rv,
+14,subsubsection,3,Joint Probabilities,subsubsec:jp,
+15,subsubsection,3,Conditional Probability,subsubsec:cp,
+17,subsubsection,3,Marginalization,subsubsec:m,
+23,subsection,2,The Chain Rule,subsec:c,
+24,subsection,2,Bayes Rule,subsec:br,
+25,subsection,2,Independence,subsec:i,
+27,subsection,2,Expectation,subsec:ex,
+28,subsection,2,Variance and Covariance,subsec:var,
+34,subsection,2,Gaussian Distribution,subsec:gauss,
+40,subsection,2,Data vs. Distribution,subsec:dvd,
+42,subsection,2,Empirical distribution,subsec:ed,
+44,subsection,2,Types of Convergence,subsec:toc,
+45,subsection,2,Weak Law of Large Numbers,subsec:lln,
+46,subsection,2,Relationships and Transformations,subsec:rnt
+},nup=2x2,landscape=true]{iml_tutorial_01.pdf}
 
 \subfile{01-Representations.tex}
 

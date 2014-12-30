@@ -2,7 +2,7 @@
 \begin{document}
 
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-% summarizes lecture 3
+% summarizes lecture 3 and tutorial 3
 % author: Benjamin Ellenberger
 
 \section{Regression}
@@ -16,8 +16,10 @@ In statistics, regression analysis is a statistical process for estimating the r
 \textbf{Solution:} The regression function: \(y(x) = \E\{y | X=x\} = \int_{\Omega} y p(y|X=x)dy\)\\
 How many data are required to estimate a model or a regression function given a
 hypothesis class (set of possible regression functions)?
+
+
 \subsection{Linear Regression}
-Linear regression comes in a closed form solution.
+Linear regression comes in a closed form solution and delivers an exact solution to the problem.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{figs/Linear_regression}
@@ -26,6 +28,8 @@ Linear regression comes in a closed form solution.
 Given a vector of inputs \(X^T=(X_1,\ldots,X_d)\). The output variable (also called response variable) is predicted via the model\\
 \[Y = \beta_0 + \sum^d_{j=1} X_j\beta_j,~~ Y \in \R\]
 \(\beta_0\) is called bias(Machine Learning) or intercept (Statistics). We extend the X vector with an \(X_0 = 1\) and we can include the bias \(\beta_0\) into the vector of \(\beta\)s and can write Y in matrix form: \(Y = X^T\beta,~~X,\beta \in \R^{d+1}\)
+
+
 \subsubsection{Training of the Linear Regressor: Residual Sum of Squares(RSS)}
 Training of an accurate Predictor = Minimize the residual sum of squares between the actual value \(y\) and the predicted \(\overline{X}\beta\):\\
 \[RSS(\beta) = \sum^{n}_{i=1}(y_i-x_i^T\beta)^2\] or matrix notation \[RSS(\beta) = (y-\overline{X}\beta)^T(y-\overline{X}\beta),~~X\in \R^n \times \R^{d+1}\] \(\text{(Each row of } \overline{X} \text{ is an input vector } X, y \text{ is an n-vector of the outputs in the training set})\)\\\\
@@ -34,10 +38,14 @@ We find the minimum RSS by differentiating w.r.t. \(\beta\)\\
 &\rightarrow X^T(y-X\beta) = 0\\
 &\rightarrow\hat{\beta} = (X^TX))^{-1}X^Ty~~(\text{Solution for nonsingular} X^TX)
 \end{align}
+
+
 \subsubsection{Prediction via the Trained Linear Regressor}
 \[\hat{y} = X \hat{\beta} = X(X^T X)^{-1} X^T y\]
 The matrix \(X(X^T X)^{-1} X^T\) is sometimes called the hat matrix
 which is an orthogonal projection on the space spanned by the columns of X.
+
+
 \subsubsection{Perturbation of Linear Regressor with Gaussian Noise}
 Gaussian noise \(\epsilon\) with \(\mathcal{E}(\epsilon) = 0, \mathcal{V} = \sigma^2\)
 \begin{proof}
@@ -48,6 +56,7 @@ Y &= \E(Y|X_1 , \ldots , X_d) + \epsilon\\
 \end{align}
 Meaning that gaussian noise does not perturb the estimator.
 \end{proof}
+
 
 \subsubsection{Optimality of Least Squares Estimate}
 The least squares estimate of the parameter \(\beta\) has the smallest variance among all linear unbiased estimates.\\
@@ -76,12 +85,17 @@ Alternative unbiased linear estimator (to show the least squares estimator is th
 The (unbiasedness) condition \(\E(c^T y) = a^T \beta\) implies \(DX = 0\).
 \end{proof}
 Gauss-Markov Theorem proves \(\V(a^T\hat{\beta}) \leq \V(c^Ty)\) (The least squares estimator is the best unbiased linear estimator)
+
+
 \subsection{Ridge Regression}
-Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term to it to restrict the solution. It still has a closed solution, but now depends on the \(\lambda\) parameter. The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
+Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term depending on the \(\lambda\) parameter to it to restrict the solution.  The \(\lambda\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
 \[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{L_2 \text{ norm penalty}}\Big\}\]
 \(\lambda \leq 0\) controls the amount of shrinkage (Weight decay in Neuronal Network Literature). The penalty term is \(\lambda\) times the \(L_2\) norm (\hyperref[Norms@Glossary]{Norms@Glossary}), which is the Euclidian length of the \(\beta\) vector. \\
 \url{https://en.wikipedia.org/wiki/Tikhonov_regularization}
+
+
 \subsubsection{Solution to Ridge Regression}
+The method used in Ridge regression is a Gradient descent solution.
 Shift the coordinate system into the center of mass of the data distribution:
 \[x_{i,j} = x_{i,j}-\overline{x}_{j},\beta_0 = \sum^n_{i=1} \frac{y_i}{n}\]
 By this, we reduce the system from d+1 to d dimensions (\hyperref[homogeneous-coordinates@Glossary]{homogeneous coordinates@Glossary}) and get:\\
@@ -89,15 +103,21 @@ By this, we reduce the system from d+1 to d dimensions (\hyperref[homogeneous-co
 The ridge solution is then:
 \[\hat{\beta}^{ridge} = \underbrace{(X^T X + \lambda I)^{-1}}_{X^T X\text{ is regularized by }\lambda I}X^Ty\]
 This can also be solved via Singular value decomposition (\hyperref[SVD@Glossary]{SVD@Glossary}).
+
+
 \subsection{The LASSO}
-An alternative regularized version of least squares is LASSO (Least absolute shrinkage and selection operator). It uses the same unconstrained linear regression with the same closed form but add a penalty term to it to restrict the solution, as it is done in the ridge regression. \[\hat{\beta}^{LASSO} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2\Big\}\] subject to \[\sum^{d}_{j=1}|\beta_j| \leq s\] The lower equation is the penalty term, which is different from the ridge regression and is the \(L_1\) norm penalty, which is the so-called ''Manhattan distance'' (\hyperref[Norms@Glossary]{Norms@Glossary}). The LASSO does not have a closed form anymore and must must be solved numerically by using quadratic programming or more general convex optimization methods.\\
+An alternative regularized version of least squares is LASSO (Least absolute shrinkage and selection operator). It uses the same unconstrained linear regression with the same closed form but adds a penalty term to it to restrict the solution, as it is done in the ridge regression. \[\hat{\beta}^{LASSO} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2\Big\}\] subject to \[\sum^{d}_{j=1}|\beta_j| \leq s\] The lower equation is the penalty term, which is different from the ridge regression and is the \(L_1\) norm penalty, which is the so-called ''Manhattan distance'' (\hyperref[Norms@Glossary]{Norms@Glossary}). The LASSO does not have a closed form anymore and must must be solved numerically by using quadratic programming or more general convex optimization methods.\\
 \url{https://en.wikipedia.org/wiki/Least_squares#Lasso_method}
+
+
 \subsubsection{Ridge vs. LASSO Estimation}
 One of the prime differences between LASSO and ridge regression is that in ridge regression, as the penalty is increased, all parameters are reduced while still remaining non-zero, while in LASSO, increasing the penalty will cause more and more of the parameters to be driven to zero. This is an advantage of LASSO over ridge regression, as driving parameters to zero deselects the features from the regression. Thus, Lasso automatically selects more relevant features and discards the others, whereas Ridge regression never fully discards any features.
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{figs/LASSO-vs-Ridge}
 \caption{Estimation picture for the LASSO (left) and Ridge regression (right). Shown are contours of the least squares error function (red) and constraint functions \(|\beta_1 | + |\beta_2 | \leq t\) and \(\beta_1^2 + \beta_2^2 \leq t_2\) (blue). Therefore LASSO estimates are known to zero-out several coefficients and only keep a few non-zero. The reason is that the LSE error surface often hits the corners of the constraint surface(Source: fig 3.12 of Hastie et al. 2001)}
 \end{figure}
+
+
 \subsubsection{Generalized Ridge Regression}
 The generalized ridge regression has known closed forms for certain values of \(p\).
 \[\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} |\beta|^p}_{L_P \text{ norm penalty}}\Big\}\]
@@ -108,16 +128,21 @@ For \(p = 2\), we get the usual Ridge Regression with the closed form as describ
 \caption{Contours of constraint functions \(\sum_{j}|\beta_j|^p\) for different values of \(q\) (Source: HTF'01)}
 \end{figure}
 
+
 \subsection{Nonlinear Regression by basis expansion}
 Idea: Transform the variables X nonlinearly and fit a linear model into the resulting (feature) space. Transformation: \(h_m(X) : \R^d \rightarrow \R, 1 \leq m \leq M\)
 \[f(X) = \sum^M_{m=1} \beta_m h_m(X)\]
 f is linear in \(\beta\) but non-linear in X! We use a series of piecewise-cubic polynomials to fit the data, of which the smoothness can be controlled by regularization of the the maximal number of knots.
+
+
 \subsection{Wavelet regression}
 Regression can also be done with Wavelets. A wavelet is a wave-like oscillation with an amplitude that begins at zero, increases, and then decreases back to zero. It can typically be visualized as a ''brief oscillation'' like one might see recorded by a seismograph or heart monitor. Generally, wavelets are purposefully crafted to have specific properties that make them useful for signal processing. Wavelets can be combined, using a ''reverse, shift, multiply and integrate'' technique called convolution, with portions of a known signal to extract information from the unknown signal. (Source: Wikipedia.org)
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{figs/Wavelet-vs-Spline}
 \caption{Wavelet smoothing compared with smoothing splines on two examples. Each panel compares the SURE-shrunk wavelet fit to the crossvalidated smoothing spline fit. (Source: HTF'01)}
 \end{figure}
+
+
 \subsection{Bias-variance-Tradeoff in Regression}
 We have data \(D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R\) which contains observations of the random variables \((X_i,Y_i)\) which are drawn i.i.d. from the distribution \(P(X,Y)\). We have the objective to find a regression function \(f \in \mathcal{F}\)(\(\mathcal{F}\) is the hypothesis class) such that \(\E(Y - f(X))^2\) is minimal. We can find the optimum at \(f^*(x) = \E(Y|X = x)\). So we construct an estimator \(\hat{f}(X)\) which estimates Y depending on the random variable \(X\) and on the data \(D\).\\\\
 \textbf{Problems resulting in the Tradeoff}
@@ -133,6 +158,7 @@ So we must find the best balance between a complex \(\mathcal{F}\) (by overfitti
 \end{align}
 
 Usually, it is very complex to minimize them both at the same time. 
+
 
 \subsubsection{Combining regressors}
 \paragraph{Bias}

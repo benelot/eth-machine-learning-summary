@@ -2,11 +2,21 @@
 \begin{document}
 
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-% summarizes lecture 
-% author:
+% summarizes lecture 5
+% author: Benjamin Ellenberger
 
 \section{Classification}
-This is the chapter on Classification.
+Classification in general is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known. An example would be assigning a given email into "spam" or "non-spam" classes or assigning a diagnosis to a given patient as described by observed characteristics of the patient (gender, blood pressure, presence or absence of certain symptoms, etc.).
+\\\\
+Classification is considered an instance of supervised learning, i.e. learning where a training set of correctly identified observations is available. The corresponding unsupervised procedure is known as clustering, and involves grouping data into categories based on some measure of inherent similarity or distance.
+\subsection{The problem of statistical decisions}
+n objects should be grouped in the classes \(1,\ldots,k,\mathcal{D},\mathcal{O}\).
+\begin{itemize}
+\item $\mathcal{D}$: doubt class (more measurements required)
+\item $\mathcal{O}$: outlier class (definitely none of the classes \(1,\ldots,k\))
+\end{itemize}
+\textbf{Objects:} are characterized by feature vectors \(X \in \mathcal{X}\)(feature space).\\
+\textbf{Feature space:} \(\mathcal{X} (= \mathcal{X}_1 \times \mathcal{X}_2 \times \ldots \times \mathcal{X}_d\text{ with }\mathcal{X}_i \subseteq \R) \subset \R^d\)
 \subsection{Problem Setting for Bayesian Inference}
 \subsection{Bayes Rule}
 \subsection{Parametric Models, Bayesian Learning}

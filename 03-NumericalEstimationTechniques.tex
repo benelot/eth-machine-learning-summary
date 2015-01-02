@@ -6,7 +6,7 @@
 % author: Benjamin Ellenberger
 
 \section{Numerical Estimation Techniques}
-The main problem of estimators is that we would like to be able to compute the expectation of some statistic such as the prediction error: \[ \predR(c) = \E[\I_{\{c(x) \neq y\}}] =  \sum^k_{y=1}\int\I_{c(x_i)\neq y_i}P(x,y)dx\] But we can only estimate the empirical mean \[\hat{\predR}(c) = \frac{1}{n} \sum_{i\leq n}\I_{c(x_i)\neq y_i}\] from the data we have.\\
+The main problem of estimators is that we would like to be able to compute the expectation of some statistic such as the prediction error: \[ \predR(c) = \E[\overbrace{\I_{\{c(x) \neq y\}}}^{\hidewidth\text{Indicator function counts errors}\hidewidth}] =  \sum^k_{y=1}\int\I_{c(x_i)\neq y_i}P(x,y)dx\] But we can only estimate the empirical mean \[\hat{\predR}(c) = \frac{1}{n} \sum_{i\leq n}\I_{c(x_i)\neq y_i}\] from the data we have.\\
 The question is how far is \(\predR(c)\) from \(\hat\predR(c)\) and how different are the prediction functions \(c^{opt} \in \argmin_{c(x)} \predR(c)\) and \(\hat c(x) \in \argmin_{c(x)} \hat\predR(c)\)?
 
 

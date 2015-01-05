@@ -63,6 +63,22 @@
 %% Helpful macros.
 \input{macrosetup}
 
+\usepackage{amssymb}
+\input{glyphtounicode}
+  \pdfgentounicode=1
+\usepackage{cmap}
+
+\usepackage{accsupp}
+
+% surrounding every content with the math environment does make the content copyable from the pdf document back into latex form.
+\newcommand*{\printlatex}[1]{%
+  \BeginAccSupp{%
+    ActualText=\detokenize{#1},%
+    method=escape,
+  }%
+  #1%
+  \EndAccSupp{}%
+}
 
 
 %% Make document internal hyperlinks wherever possible. (TOC, references)

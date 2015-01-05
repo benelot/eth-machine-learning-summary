@@ -15,15 +15,15 @@ How to represent data is a crucial part to successful learning. The concrete cho
 characterize them according to their typical patterns for detection, classification, abstraction (compression), $\ldots$.
 
 \begin{itemize}
-\item Object space: Design/Configuration/ Object space \(\mathcal{O}\)
+\item Object space: Design/Configuration/ Object space \(\printlatex{\mathcal{O}}\)
 \item Measurement/Feature: Measurement X maps an object into a domain 
-\(X: \mathcal{O}^{(1)}\ldots\mathcal{O}^{(R)}\rightarrow \K\) and represents an object in a data space.
+\(\printlatex{X: \mathcal{O}^{(1)}\ldots\mathcal{O}^{(R)}\rightarrow \K}\) and represents an object in a data space.
 \item Data
 \begin{itemize}
-\item \textbf{Monadic data} \(\mathcal{O} \rightarrow \R^{d}\): An indivisible, impenetrable unit of data such as temperature, water depth, pressure, intensity etc..
-\item \textbf{Dyadic data} \(\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R\): Data consisting of two monadic datasets of different object spaces. This can be \(\{users\} \times \{websites\}\) etc..
-\item \textbf{Polyadic data} \(\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R\): Data consisting of multiple monadic datasets of different object spaces. 
-\item \textbf{Pairwise data} \(\mathcal{O} \times \mathcal{O} \rightarrow \R\): Data that comes in pairs of the same object space such as \(\{proteins\} \times \{proteins\}\) comparisons.
+\item \textbf{Monadic data} \(\printlatex{\mathcal{O} \rightarrow \R^{d}}\): An indivisible, impenetrable unit of data such as temperature, water depth, pressure, intensity etc..
+\item \textbf{Dyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R}\): Data consisting of two monadic datasets of different object spaces. This can be \(\printlatex{\{users\} \times \{websites\}}\) etc..
+\item \textbf{Polyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R}\): Data consisting of multiple monadic datasets of different object spaces. 
+\item \textbf{Pairwise data} \(\printlatex{\mathcal{O} \times \mathcal{O} \rightarrow \R}\): Data that comes in pairs of the same object space such as \(\printlatex{\{proteins\} \times \{proteins\}}\) comparisons.
 \end{itemize}
 \end{itemize}
 
@@ -31,12 +31,12 @@ The choice of features X is an engineering problem. We must find a tradeoff betw
 \begin{enumerate}
 \item Ideally as informative as possible about label Y
 \item Must consider cost of acquiring / computing them
-\item Poor choice of features \(\rightarrow\) no luck with learning!
+\item Poor choice of features \(\printlatex{\rightarrow}\) no luck with learning!
 \end{enumerate}
 \subsection{Data Types, Scale, Transformation invariances}
 \subsubsection{Data Types and Scale}
 \begin{itemize}
-\item \textbf{Nominal or categorical scale}: Qualitative, but without quantitative measurements, e.g. binary scale \(\mathbb{X} = \{0, 1\}\) (presence or absence of
+\item \textbf{Nominal or categorical scale}: Qualitative, but without quantitative measurements, e.g. binary scale \(\printlatex{\mathbb{X} = \{0, 1\}}\) (presence or absence of
 properties). Ordering does not matter.
 \item \textbf{Ordinal scale}: Measurement values are meaningful only with respect to other measurements, i.e., the rank order of measurements carries
 the information, not the numerical differences {\color{orange}(\emph{e.g. information on the ranking of different marathon races)}}
@@ -57,11 +57,11 @@ not the measurement unit. {\color{orange}\emph{(Kelvin scale)}}.
 \hline
 scale type & transformation invariances \\
 \hline
-nominal & \(T = \{f : \R \rightarrow \R~|~\text{f bijective}\}\)\\
-ordinal & \(T = \{f : \R \rightarrow \R~|~f(x_1 ) < f (x_2 ), \forall x_1 < x_2 \}\)\\
-interval & \(T = \{f : \R \rightarrow \R~|~f(x) = ax + c, a \in \R^+ , c \in \R\}\)\\
-ratio & \(T = \{f : \R \rightarrow \R~|~f(x) = ax, a \in \R^+ \}\)\\
-absolute & \(T = \{f : \R \rightarrow \R~|~\text{f is identity map}\}\)\\
+nominal & \(\printlatex{T = \{f : \R \rightarrow \R~|~\text{f bijective}\}}\)\\
+ordinal & \(\printlatex{T = \{f : \R \rightarrow \R~|~f(x_1 ) < f (x_2 ), \forall x_1 < x_2 \}}\)\\
+interval & \(\printlatex{T = \{f : \R \rightarrow \R~|~f(x) = ax + c, a \in \R^+ , c \in \R\}}\)\\
+ratio & \(\printlatex{T = \{f : \R \rightarrow \R~|~f(x) = ax, a \in \R^+ \}}\)\\
+absolute & \(\printlatex{T = \{f : \R \rightarrow \R~|~\text{f is identity map}\}}\)\\
 \hline
 \end{tabular}
 \caption{Formal characterisation of different scale types and their invariance properties.}

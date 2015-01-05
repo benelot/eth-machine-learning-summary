@@ -71,7 +71,7 @@
 \usepackage{accsupp}
 
 % surrounding every content with the math environment does make the content copyable from the pdf document back into latex form. In some cases for example in captions or section titles, you will need to add \protect before the printlatex command, otherwise you get a strange error about a } too many.
-%Usage:: \(\printlatex{2^i}\)
+%Usage:: \(\printlatex{2^i}\) or \(\pl{2^i}\) as shorthand
 \newcommand*{\printlatex}[1]{%
   \BeginAccSupp{%
     ActualText=\detokenize{#1},%
@@ -80,6 +80,7 @@
   #1%
   \EndAccSupp{}%
 }
+\newcommand{\pl}[1]{\printlatex{#1}}
 
 
 %% Make document internal hyperlinks wherever possible. (TOC, references)

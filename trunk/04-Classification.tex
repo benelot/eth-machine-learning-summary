@@ -105,13 +105,18 @@ D & else .
 The outlier concept causes conceptual problems and it does not fit to the statistical decision theory since outliers indicate an erroneous or incomplete specification of the statistical model! But for completeness:
 \[\printlatex{\pi_\mathcal{O} p_\mathcal{O} (x) \geq \max\left\{(1 - d)p(x), \max\limits_z \pi_z p_z (x)\right\}}\]
 \subsection{Discriminant functions}
-Discriminant functions take the feature vector as an input and decide if the object belongs to their class. The highest output of a discriminant function \(\printlatex{g_c}\) makes the object belong to class c: \(\printlatex{\forall z\neq y:~g_c(x) > g_z(x) \Rightarrow \text{class c} }\)
+Discriminant functions take the feature vector as an input and decide if the object belongs to their class. The highest output of a discriminant function \(\printlatex{g_c}\) makes the object belong to class c: \(\printlatex{\forall z\neq y:~g_c(x) > g_z(x) \Rightarrow \text{class c} }\). The classifier is said
+to assign a feature vector \(x\) to class \(\printlatex{\omega_i}\) if
+\[\printlatex{g_i (x) > g_j (x)}~\text{for all } j=i\]
+
+Thus, the classifier is viewed as a network or machine that computes c discriminant
+functions and selects the category corresponding to the largest discriminant.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.47\linewidth]{figs/Adaptive-Discriminant-functions.png}
 \includegraphics[width=0.47\linewidth]{figs/DF-decision-boundaries.png}
 \caption{The red connections (weights) are adapted in such a way that the
-teacher signal is imitated by the discriminant function.}
+teacher signal is imitated by the discriminant function. Source: Duda}
 \end{figure}
 \subsubsection{Linear classifiers}
 We use normal distributions to describe the likelihood of class y:
@@ -135,4 +140,8 @@ w &= \Sigma^{-1}(\mu_{y1}-\mu_{y2})\\
 x_0 &= \frac{1}{2}(\mu_{y1}+\mu_{y2}) - \frac{\mu_{y1}-\mu_{y2}}{\underbrace{(\mu_{y1}-\mu_{y2})^T w}_{\text{Mahalanobis distance}}} \log\frac{\pi_{y1}}{\pi_{y2}}
 \end{align}
 \todo{How much detail is important here?}
+
+\subsection{Readings}
+Duda 2ed., Chapter 2,Bayesian Decision Theory (2.1,2.2,2.3.2,2.4,2.5,2.6)
+\todo{Write readings separately for all topics of classification.}
 \end{document}

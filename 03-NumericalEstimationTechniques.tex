@@ -72,7 +72,7 @@ estimator, i.e. \(\printlatex{\predR^{str}_n ( \hat F, \hat F^* ) - \predR^{str}
 \item Bias: \(\printlatex{\predR^{bias}_n (F,\hat F) = \E_F[S(\hat F)] - S(F)}\)
 \item Standard error: \(\printlatex{\predR^{std}_n (F,\hat F) = \sqrt{\E_F[(S(\hat F) - S(F))^2]}}\)
 \end{itemize}
-\todo{ Describe the \(e_0\) bootstrap estimator if that is needed.}
+\todo[inline]{ Describe the \(e_0\) bootstrap estimator if that is needed.}
 
 
 \subsection{The "Jackknife" Method}
@@ -99,7 +99,7 @@ An estimate of the variance of an estimator can be calculated using the jackknif
 
 \[\printlatex{\V(\theta) = \V(\frac{\sum_{i=1}^n (X_i)}{n}) = \frac{\sigma^2}{n} =\frac{n-1}{n} \sum_{i=1}^n (\bar{\theta}_i - \bar{\theta}_\mathrm{Jack})^2}\]
 where \(\printlatex{\bar{\theta}_i}\) is the parameter estimate based on leaving out the ith observation, and \(\printlatex{\bar{\theta}_\mathrm{Jack}}\) is the jackknife estimator based on all of the samples.
-\todo{Improve the text on the jackknife to fit the quality of the content of the lecture (Expansion not understood by Benjamin)}
+\todo[inline]{Improve the text on the jackknife to fit the quality of the content of the lecture (Expansion not understood by Benjamin)}
 
 
 \subsection{Hypothesis Testing}
@@ -117,9 +117,12 @@ where \(\printlatex{\bar{\theta}_i}\) is the parameter estimate based on leaving
 
 \subsubsection{Neyman-Pearson Test}
 Selects a decision rules which minimizes the Type I error and fixes the Type II error.
-\todo{Describe the Neyman-Pearson Test. Not understood by Benjamin}
+\todo[inline]{Describe the Neyman-Pearson Test. Not understood by Benjamin}
 
 \subsection{Readings}
-\todo{Write down readings from the books covering the topics of the Numerical Estimation Techniques section.}
+\begin{enumerate}
+\item Duda 2ed
+\end{enumerate}
+\todo[inline]{Write down readings from the books covering the topics of the Numerical Estimation Techniques section.}
 
 \end{document}

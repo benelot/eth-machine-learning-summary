@@ -6,8 +6,113 @@
 % author:
 
 \section{Design of Linear Discriminant Functions}
-This is the chapter on Linear Discriminant Functions.
+Linear discriminant analysis (LDA) as in  the related Fisher's linear discriminant are methods used in statistics, pattern recognition and machine learning to find a linear combination of features which characterizes or separates two or more classes of objects or events. The resulting combination may be used as a linear classifier, or, more commonly, for dimensionality reduction before later classification. (Wikipedia, Linear Discriminant Analysis \url{https://en.wikipedia.org/wiki/Linear_discriminant_analysis}.
+
+\subsection{Generalized Linear Discriminant Functions}
+\[\pl{g(x) = w_0 + \sum\limits_{i \leq d} w_ix_i  = \overbrace{(w_0,w)}^{\hidewidth\text{generalized coords a}\hidewidth}\underbrace{(1,x)^T}_{\hidewidth\text{generalized coords }\tilde x\hidewidth} = a^T\tilde x}\]
+Quadratic Discriminant Functions:
+\[\pl{g(x) = w_0 + \sum\limits_{i \leq d} w_ix_i + \sum\limits_{i \leq d}\sum\limits_{j \leq d} w_{ij}x_ix_j}\]
+\subsubsection{How to learn nonlinear discriminant functions?}
+Transform the features non-linearly and use the linear classifier in a high dimensional feature space as usual.
+\begin{figure}[H]
+\centering
+\includegraphics[trim=2cm 2cm 1.5cm 2cm, clip=true, width=0.8\linewidth]{figs/non-linear-classification-.pdf}
+\end{figure}
+\subsubsection{Advantage of Homogeneous Coordinates}
+\[\pl{\tilde{x} = (1,x)^T ~~ a = (w_0,w)^T}\]
+Easy transform, but makes analysis much easier.
+\begin{enumerate}
+\item Class 1 if \(\pl{a^T\tilde{x_i} > 0}\)
+\item Class 2 if \(\pl{a^T\tilde{x_i} < 0}\)
+\end{enumerate}
+\paragraph{Normalization} transform \(\pl{\tilde{x_i} \rightarrow - \tilde{x_i}}\) iff the object belongs to class 2.
+
+\todo[inline]{Why would you do that?Maybe to let data from class 2 get properties of class 1...}
+
+\subsubsection{Linearly separable two class case}
+Linear separability
+\[\pl{\exists a \text{ with } 
+\begin{cases}
+a^T\tilde{x_i} > 0 & \mbox{for } y_i = 1\\
+a^T\tilde{x_i} < 0 & \mbox{for } y_i = 2\\
+\end{cases}}\]
+\begin{itemize}
+\item Problem: The solution vector is not unique.
+\item Idea: Introduce a margin \(b\) to classify data with a "safe" distance from the decision boundary, i.e. \(\pl{a^T\tilde{x_i} \geq b > 0} ~ \rightarrow\) regularization of the classifier!
+\end{itemize}
+
+\todo[inline]{Why is the solution vector not unique? Because it is more of a region?Then the idea does not make sense.}
+
+\subsubsection{Gradient descent}
+\(J(a(k))\) is a general cost function for weight vector \(a\). It measures how
+well a hyperplane orthogonal to \(a\) classifies the data.
+\(\pl{\eta(k)}\) denotes the step size or learning rate at iteration \(k\).
+
+\begin{enumerate}
+\item init \(a,\epsilon,\eta(\cdot),k=0\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{a = a + \eta(k)\nabla J(a)}\)
+\item \hspace{0.5em} \(\pl{k = k + 1}\)
+\item \textbf{until} \(\pl{|\eta(k)\nabla J(a)| < \epsilon}\)
+\end{enumerate}
+Best learning rate is \(\eta^{opt} = \frac{||\nabla J||^2}{\nabla J^T\frac{\partial^2J}{\partial a_i\partial a_j}\nabla J}\)\\
+(2nd order taylor expansion of \(J(a)\) at \(a(k)\) then insert gradient descent rule \(\pl{a(k + 1) - a(k) = -\eta(k)\nabla J(a(k))}\))
+\subsubsection{Newton's Algorithm}
+Optimality Condition: Choose \(a(k + 1)\) to minimize the \(2^{nd}\) order Taylor expansion of \(J(a(k + 1))\), i.e.
+\begin{align}
+\pl{
+\frac{\partial}{\partial a(k+1)}J(a(k+1)) &= 0\\
+\nabla J + \frac{\partial^2J}{\partial a_i\partial a_j}(\underbrace{a(k+1)-a(k)}_{-\eta\nabla J}) &= 0\\
+\eta\nabla J &= H^{-1}\nabla J\\
+}
+\end{align}
+Newton's Descent Rule: \(\pl{a(k+1) = a(k)-H^{-1}\nabla J}\)
+\begin{enumerate}
+\item init \(a,\epsilon,\eta(\cdot),k=0\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{a = a - \underline{H^{-1}\nabla J}}\)
+\item \hspace{0.5em} \(\pl{k = k + 1}\)
+\item \textbf{until} \(\pl{|\eta(k)\nabla J(a)| < \epsilon}\)
+\end{enumerate}
+\begin{figure}[H]
+\centering
+\includegraphics[trim=1.5cm 1.5cm 1.5cm 1cm, clip=true,width=0.6\linewidth]{figs/newton-naive-gd}
+\caption{The sequence of weight vectors given by a simple gradient descent (red) and by Newton’s (second order) gradient algorithm (black). Newton’s rule leads to greater improvement per step, even when using optimal learning methods. However added computational burden of inverting the Hessian matrix.}
+\end{figure}
 
 \subsection{Perceptrons}
+We need a cost function \(\pl{J(a,\tilde{x_1},\ldots,\tilde{x_n}}\), that qualifies as a good cost function to update the weights and to solve the inequalities \(\pl{a^T\tilde{x_i} > 0,~\forall i}\).
+\begin{enumerate}
+\item Number of misclassified samples is not a good choice as it is piecewise constant and without gradient.
+\item Sum of violating projections
+\[\pl{
+J_p(a) = \sum\limits_{\tilde{x} \in \underbrace{\tilde{\mathcal{X}}}_{\hidewidth\text{set of missclassified samples}\hidewidth}}(-a^T\tilde{x})}\]
+Perceptron Rule: \(\pl{a(k+1) = a(k) + \eta(k)\sum\limits_{\tilde{x}\in\tilde{\mathcal{X}}} \tilde{x}}\)
+\end{enumerate}
+Batch version with variable learning rate:
+\begin{enumerate}
+\item init \(a,\epsilon,\eta(\cdot),k=0\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{a = a + \underline{\sum\limits_{\tilde{x}\in \tilde{\mathcal{X}}}\eta (k)\tilde{x}}}\)
+\item \hspace{0.5em} \(\pl{k = k + 1}\)
+\item \textbf{until} \(\pl{|\eta(k)\sum\limits_{\tilde{x}\in \tilde{\mathcal{X}}}| < \epsilon}\)
+\end{enumerate}
+Fixed-Increment Single Sample Perceptron:
+\begin{enumerate}
+\item init \(a,\eta(\cdot),k=0\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{k = k + 1 \mod n}\)
+\item \hspace{0.5em} \textbf{if} \(\pl{\tilde{x}^k}\) is misclassified by \(a\) \textbf{then}
+\item \hspace{1em} \(\pl{a = a + \underline{\tilde{x}^k}}\)
+\item \hspace{0.5em} \textbf{end if}
+\item \textbf{until} all patterns are correctly classified
+\end{enumerate}
 \subsection{Fisher's linear discriminant analysis}
+
+\subsection{Readings}
+\begin{enumerate}
+\item Perceptrons: chp 5
+\item Fisher's Linear Discriminant Analysis: 4.10
+\item Both: chp 5.8.2
+\end{enumerate} 
 \end{document}

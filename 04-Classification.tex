@@ -20,7 +20,7 @@ n objects should be grouped in the classes \(\printlatex{1,\ldots,k,\mathcal{D},
 \textbf{Feature vector X:} \(\printlatex{\mathcal{O} \rightarrow \R^d \times \underbrace{[1,\ldots,k]}_{classes}}\)\\
 \(\printlatex{\textit{o} \rightarrow (X_0,Y_0)}\)\\
 Data \(\printlatex{\mathcal{Z}}\): \(\printlatex{\{(x_i,y_i) : 1 \leq i \leq n\}}\)
-\todo{Use consistent notation: \(\mathcal{O}\) stands for outlier class and for the object space at the same time.}
+\todo[inline]{Use consistent notation: \(\mathcal{O}\) stands for outlier class and for the object space at the same time.}
 \subsection{Bayesian Decision Theory}
 The methods of statistical inference previously described are often referred to as classical methods. Bayesian methods (so called after the English mathematician Thomas Bayes) provide alternatives that allow one to combine prior information about a population parameter with information contained in a sample to guide the statistical inference process. A prior probability distribution for a parameter of interest is specified first. Sample information is then obtained and combined through an application of Bayes’s theorem to provide a posterior probability distribution for the parameter. The posterior distribution provides the basis for statistical inferences concerning the parameter. A key, and somewhat controversial, feature of Bayesian methods is the notion of a probability distribution for a population parameter. According to classical statistics, parameters are constants and cannot be represented as random variables. Bayesian proponents argue that, if a parameter value is unknown, then it makes sense to specify a probability distribution that describes the possible values for the parameter as well as their likelihood. The Bayesian approach permits the use of objective data or subjective opinion in specifying a prior distribution. With the Bayesian approach, different individuals might specify different prior distributions. Classical statisticians argue that for this reason Bayesian methods suffer from a lack of objectivity. Bayesian proponents argue that the classical methods of statistical inference have built-in subjectivity (through the choice of a sampling plan) and that the advantage of the Bayesian approach is that the subjectivity is made explicit.\\\\
 Bayesian methods have been used extensively in statistical decision theory (see below Decision analysis). In this context, Bayes’s theorem provides a mechanism for combining a prior probability distribution for the states of nature with sample information to provide a revised (posterior) probability distribution about the states of nature. These posterior probabilities are then used to make better decisions.\\\\
@@ -139,9 +139,11 @@ w^T (x - x_0) &= 0\\
 w &= \Sigma^{-1}(\mu_{y1}-\mu_{y2})\\
 x_0 &= \frac{1}{2}(\mu_{y1}+\mu_{y2}) - \frac{\mu_{y1}-\mu_{y2}}{\underbrace{(\mu_{y1}-\mu_{y2})^T w}_{\text{Mahalanobis distance}}} \log\frac{\pi_{y1}}{\pi_{y2}}
 \end{align}
-\todo{How much detail is important here?}
+\todo[inline]{How much detail is important here?}
 
 \subsection{Readings}
-Duda 2ed., Chapter 2,Bayesian Decision Theory (2.1,2.2,2.3.2,2.4,2.5,2.6)
-\todo{Write readings separately for all topics of classification.}
+\begin{enumerate}
+\item Duda 2ed., Chapter 2,Bayesian Decision Theory (2.1,2.2,2.3.2,2.4,2.5,2.6)
+\end{enumerate}
+\todo[inline]{Write readings separately for all topics of classification.}
 \end{document}

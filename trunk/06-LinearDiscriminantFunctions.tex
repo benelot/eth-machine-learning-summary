@@ -97,7 +97,7 @@ Batch version with variable learning rate:
 \item \hspace{0.5em} \(\pl{k = k + 1}\)
 \item \textbf{until} \(\pl{|\eta(k)\sum\limits_{\tilde{x}\in \tilde{\mathcal{X}}}| < \epsilon}\)
 \end{enumerate}
-Fixed-Increment Single Sample Perceptron:
+Fixed-Increment Single Sample Perceptron (moves the solution vector hyperplane towards the misclassified samples to make them switch sides):
 \begin{enumerate}
 \item init \(a,\eta(\cdot),k=0\)
 \item \textbf{repeat}
@@ -106,6 +106,55 @@ Fixed-Increment Single Sample Perceptron:
 \item \hspace{1em} \(\pl{a = a + \underline{\tilde{x}^k}}\)
 \item \hspace{0.5em} \textbf{end if}
 \item \textbf{until} all patterns are correctly classified
+\end{enumerate}
+\subsubsection{Convergence of the perceptron rule}
+If the training samples are linearly separable, then the
+sequence of weight vectors \(\pl{a = a + \tilde{x^k}}\) will terminate at a
+solution vector.
+\todo[inline]{Make proof easy to understand.}
+\subsubsection{Limitations of Single-Layer Perceptron}
+A single-layer perceptron can not solve the XOR problem.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{figs/XOR-problem.pdf}
+\caption{The XOR data set as shown here can not be separated in a 2 dimensional setting. Therefore, the single-layer perceptron can not achieve a proper separation. With a multilayer perceptron, we can get this data set into higher dimensions to make it properly separable.}
+\end{figure}
+Variable-Increment Perceptron with Margin
+\begin{enumerate}
+\item init \(a,\epsilon,\eta(\cdot),k=0\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{k = k + 1}\)
+\item \hspace{0.5em} \textbf{if} \(\pl{a^T\tilde{x^k} \leq b}\) \textbf{then}
+\item \hspace{1em} \(\pl{a = a + \underline{\eta(k) \tilde{x}^k}}\)
+\item \hspace{0.5em} \textbf{end if}
+\item \textbf{until} \(\pl{a^T\tilde{x^k}>b, \forall k}\)
+\end{enumerate}
+\todo[inline]{We do not need the threshold\(\epsilon\) here!}
+We can formulate all perceptron algorithms as batch (all-data-at-once) or online (sequential data processing) algorithms. Online variance have a dependency on the sequence but tend to be more robust.
+\todo[inline]{Why are they more robust?}
+\subsection{WINNOW algorithm}
+Idea: Exponential update of weights\\
+
+Balanced WINNOW
+\begin{enumerate}
+\item init \(a^+,a^-,\epsilon,\eta(\cdot),k=0,\alpha > 1\)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{k = k + 1 \mod n}\)
+\item \hspace{0.5em} \textbf{if} \(\pl{\sgn[a^{+T},a^{-T}\tilde{x_k}] \neq z_k}\) \textbf{then} (pattern misclassified)
+\item \hspace{1em} \textbf{if} \(\pl{z_k = +1}\) \textbf{then} (class 1 error)
+\item \hspace{1.5em} \textbf{for all } \(i \leq d\) \textbf{do}
+\item \hspace{2em} \(\pl{a^+_i = a^+_i \cdot \alpha^{+\tilde{x_{ki}}}} \) (exponentiated update)
+\item \hspace{2em} \(\pl{a^-_i = a^-_i \cdot \alpha^{-\tilde{x_{ki}}}} \)
+\item \hspace{1.5em} \textbf{end for}
+\item \hspace{1em} \textbf{end if}
+\item \hspace{1em} \textbf{if} \(\pl{z_k = -1}\) \textbf{then} (class 2 error)
+\item \hspace{1.5em} \textbf{for all } \(i \leq d\) \textbf{do}
+\item \hspace{2em} \(\pl{a^+_i = a^+_i \cdot \alpha^{-\tilde{x_{ki}}}} \) (exponentiated update)
+\item \hspace{2em} \(\pl{a^-_i = a^-_i \cdot \alpha^{+\tilde{x_{ki}}}} \)
+\item \hspace{1.5em} \textbf{end for}
+\item \hspace{1em} \textbf{end if}
+\item \hspace{0.5em} \textbf{end if}
+\item \textbf{until} convergence
 \end{enumerate}
 \subsection{Fisher's linear discriminant analysis}
 

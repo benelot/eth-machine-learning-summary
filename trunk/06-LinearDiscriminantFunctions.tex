@@ -134,6 +134,18 @@ We can formulate all perceptron algorithms as batch (all-data-at-once) or online
 \todo[inline]{Why are they more robust?}
 \subsection{WINNOW algorithm}
 Idea: Exponential update of weights\\
+Consider a two class learning problem with many irrelevant
+dimensions (normalization is not performed).
+\begin{enumerate}
+\item \(a^+ , a^-\) are weight vectors associated with either class and are corrected iff samples of their class are misclassfied.
+\item \(\alpha\) is the scaling factor for exponential update.
+\item \(z_k =
+\begin{cases}
+1 & \mbox{if } \tilde{x_k} \text{ belongs to class 1}\\
+-1 & \mbox{if } \tilde{x_k} \text{ belongs to class 2}\\
+\end{cases}
+\)
+\end{enumerate}
 
 Balanced WINNOW
 \begin{enumerate}

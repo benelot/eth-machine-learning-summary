@@ -168,6 +168,22 @@ Balanced WINNOW
 \item \hspace{0.5em} \textbf{end if}
 \item \textbf{until} convergence
 \end{enumerate}
+\subsubsection{Minimum squared error procedures}
+\paragraph{Closed form solution}
+LSE learning is learning with all \(\pl{\tilde{x_i}}\) in \(\pl{a^T\tilde{x_i}  = b_i > 0}\) instead of training it with \(\pl{\tilde{x_i} \in \tilde{\mathcal{X}}}\) in \(\pl{a^T\tilde{x_i} > 0~\forall i}\)
+As we have the learning condition as \(\pl{\tilde{X}a = b}\), we can get the error criterion as \(e = \tilde{X}a - b\). The squared error is then 
+\[\pl{J_s(a) = ||\tilde{X}a-b||^2 = \sum\limits_{i\leq n}(a^T\tilde{x_i}-b_i)^2}\]
+from this we can calculate the gradient by deriving it:
+\[\pl{\nabla J_s = 2 \tilde{X}^T(\tilde{X}a-b) = 0 \rightarrow a = (\tilde{X}^T\tilde{X})^{-1}\tilde{X}^Tb = \underbrace{\tilde{X}^\dagger}_{\hidewidth\text{pseudo inverse of }\tilde{X}\hidewidth} b}\]
+\paragraph{Iterative solution}
+
+\begin{enumerate}
+\item init a(1)
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{a(k+1) = a(k) - \frac{\eta(k)}{2} \nabla J_s}\)\(~~~~(\pl{= a(k) - \eta(k)\tilde{X}^T(\tilde{X}a(k)-b)})\)
+\item \hspace{0.5em}\(\pl{\eta(k) = \frac{\eta(1)}{k}}\)
+\item \textbf{until} convergence
+\end{enumerate}
 \subsection{Fisher's linear discriminant analysis}
 
 \subsection{Readings}

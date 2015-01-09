@@ -48,7 +48,7 @@ a^T\tilde{x_i} < 0 & \mbox{for } y_i = 2\\
 well a hyperplane orthogonal to \(a\) classifies the data.
 \(\pl{\eta(k)}\) denotes the step size or learning rate at iteration \(k\).
 
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a,\epsilon,\eta(\cdot),k=0\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{a = a + \eta(k)\nabla J(a)}\)
@@ -67,7 +67,7 @@ Optimality Condition: Choose \(a(k + 1)\) to minimize the \(2^{nd}\) order Taylo
 }
 \end{align}
 Newton's Descent Rule: \(\pl{a(k+1) = a(k)-H^{-1}\nabla J}\)
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a,\epsilon,\eta(\cdot),k=0\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{a = a - \underline{H^{-1}\nabla J}}\)
@@ -90,7 +90,7 @@ J_p(a) = \sum\limits_{\tilde{x} \in \underbrace{\tilde{\mathcal{X}}}_{\hidewidth
 Perceptron Rule: \(\pl{a(k+1) = a(k) + \eta(k)\sum\limits_{\tilde{x}\in\tilde{\mathcal{X}}} \tilde{x}}\)
 \end{enumerate}
 Batch version with variable learning rate:
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a,\epsilon,\eta(\cdot),k=0\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{a = a + \underline{\sum\limits_{\tilde{x}\in \tilde{\mathcal{X}}}\eta (k)\tilde{x}}}\)
@@ -98,7 +98,7 @@ Batch version with variable learning rate:
 \item \textbf{until} \(\pl{|\eta(k)\sum\limits_{\tilde{x}\in \tilde{\mathcal{X}}}| < \epsilon}\)
 \end{enumerate}
 Fixed-Increment Single Sample Perceptron (moves the solution vector hyperplane towards the misclassified samples to make them switch sides):
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a,\eta(\cdot),k=0\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{k = k + 1 \mod n}\)
@@ -120,7 +120,7 @@ A single-layer perceptron can not solve the XOR problem.
 \caption{The XOR data set as shown here can not be separated in a 2 dimensional setting. Therefore, the single-layer perceptron can not achieve a proper separation. With a multilayer perceptron, we can get this data set into higher dimensions to make it properly separable.}
 \end{figure}
 Variable-Increment Perceptron with Margin
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a,\epsilon,\eta(\cdot),k=0\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{k = k + 1}\)
@@ -148,7 +148,7 @@ dimensions (normalization is not performed).
 \end{enumerate}
 
 Balanced WINNOW
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init \(a^+,a^-,\epsilon,\eta(\cdot),k=0,\alpha > 1\)
 \item \textbf{repeat}
 \item \hspace{0.5em} \(\pl{k = k + 1 \mod n}\)
@@ -177,15 +177,98 @@ from this we can calculate the gradient by deriving it:
 \[\pl{\nabla J_s = 2 \tilde{X}^T(\tilde{X}a-b) = 0 \rightarrow a = (\tilde{X}^T\tilde{X})^{-1}\tilde{X}^Tb = \underbrace{\tilde{X}^\dagger}_{\hidewidth\text{pseudo inverse of }\tilde{X}\hidewidth} b}\]
 \paragraph{Iterative solution}
 
-\begin{enumerate}
+\begin{enumerate}[itemsep=-0.5ex]
 \item init a(1)
 \item \textbf{repeat}
-\item \hspace{0.5em} \(\pl{a(k+1) = a(k) - \frac{\eta(k)}{2} \nabla J_s}\)\(~~~~(\pl{= a(k) - \eta(k)\tilde{X}^T(\tilde{X}a(k)-b)})\)
 \item \hspace{0.5em}\(\pl{\eta(k) = \frac{\eta(1)}{k}}\)
+\item \hspace{0.5em} \(\pl{a(k+1) = a(k) - \frac{\eta(k)}{2} \nabla J_s}\)\(~~~~(\pl{= a(k) - \eta(k)\tilde{X}^T(\tilde{X}a(k)-b)})\)
 \item \textbf{until} convergence
 \end{enumerate}
+\subsubsection{LMS Rule}
+\begin{enumerate}[itemsep=-0.5ex]
+\item init \(\pl{a, b, \theta, \eta(\cdot)}\)
+\item k = 0
+\item \textbf{repeat}
+\item \hspace{0.5em} \(\pl{k = k + 1 \mod n}\)
+\item \hspace{0.5em}\(\pl{\eta(k) = \frac{\eta(1)}{k}}\)
+\item \hspace{0.5em} \(\pl{a = a + \underline{\eta(k) (b_k a^T\tilde{x}^k)\tilde{x}}^k}\)
+\item \textbf{until} \(\pl{|\eta(k)(b_k - a^T \tilde{x}^k ) \tilde{x}^k | < \theta }\)
+\end{enumerate}
 \subsection{Fisher's linear discriminant analysis}
+\textbf{Idea:} Project high-dimensional data of two classes to a one-dimensional linear subspace such that the classes are optimally separated.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/fishers-linear-discriminant-analysis.pdf}
+\caption{Projection on the left is suboptimal as it does not separate the classes properly, whereas the projection on the right gives rise to proper class separations.}
+\end{figure}
+
+We have samples \(\pl{\mathcal{Z} = \{(x_1,y_1),\ldots,(x_n,y_n)\} =: \mathcal{X} \times \mathcal{Y}}\) that we want to partition into k class specific subsets \(\pl{\mathcal{Z}_{y_i} = \mathcal{X}_{y_i} \times \mathcal{Y}_{y_i},~1 \leq y_i \leq k,~\forall x_i \in \mathcal{X}_{y_i} }\) by a projection \(\pl{x'_i = w^Tx_i,~1 \leq i \leq n}\).\\
+\subsubsection{How to we measure the discrimination of the projected points?}
+\paragraph{Sample averages (class centroids):} 
+\[\pl{m_{y_i} = \frac{1}{\underbrace{n_{y_i}}_{|\mathcal{X}_{y_i}|}} \sum\limits_{x\in\mathcal{X}_{y_i}}x}\]
+
+\paragraph{Averages of projected points:}
+\[\pl{m_{y_i} = \frac{1}{\underbrace{n_{y_i}}_{|\mathcal{X}_{y_i}|}} \sum\limits_{x\in\mathcal{X}_{y_i}}w^Tx=w^Tm_{y_i}}\]
+ 
+\paragraph{Distance of the sample averages in the two class case:}
+\[w^T(m_1-m_2)\]
+
+\paragraph{Scatter of class \(y_i\):}
+\[\pl{\Sigma_{y_i} = \sum\limits_{x\in\mathcal{X}_{y_i}}(x-m_{y_i})(x-m_{y_i})^T}\]
+
+\paragraph{"Within" scatter:}
+\[\pl{\Sigma_{w} = \Sigma_1 + \Sigma_2}\]
+
+\paragraph{Scatter of projected data(average of class specific variance)}
+\begin{align}
+\pl{
+\tilde{\Sigma}_{y_i} &= \sum\limits_{x\in\mathcal{X}_{y_i}}(w^Tx-\tilde{m}_{y_i})(w^Tx-\tilde{m}_{y_i})^T\\
+&= \sum\limits_{x\in\mathcal{X}_{y_i}}w^T(x-m_{y_i})(x-m_{y_i})^Tw\\
+&=w^T\Sigma_{y_i}w\\
+\text{Two classes: }\rightarrow \tilde{\Sigma}_1 + \tilde{\Sigma}_1 &= w^T\Sigma_ww
+}
+\end{align}
+\textbf{Remark:} To separate the data of different classes as good as possible, the class centroids in the projected space should be as far away as possible and, simultaneously, the variance in the projection space of the class specific data should be as small as possible.
+\subsubsection{Separation Criterion}
+\textbf{Idea:} Separate classes as good as possible relative to their variances (maximal J(w) = optimal w)
+\[\pl{J(w) = \frac{\sigma^2_{between}}{\sigma^2_{within}} = \frac{||\tilde{m}_1-\tilde{m}_2||^2}{\tilde{\Sigma}_1 + \tilde{\Sigma}_2} = \frac{w^T\overbrace{(m_1-m_2)(m_1-m_2)^T}{=\Sigma_B}w}{w^T\Sigma_Ww}}\]
+So we differentiate \(J(w)\):
+\begin{align}
+\pl{
+\frac{d}{dw} J(w) &= \frac{d}{dw} ((w^T\Sigma_Ww)^{-1}w^T\Sigma_Bw)\\
+&= -2\Sigma_Ww (w^T\Sigma_Ww)^{-2}w^T\Sigma_Bw + 2(w^T\Sigma_Ww)^{-1}\Sigma_Bw = 0\\
+\rightarrow \Sigma_Bw &= \Sigma_w w \frac{w^T\Sigma_Bw}{w^T\Sigma_Ww}
+}
+\end{align}
+\paragraph{Solution via eigenvalue problem for weight vector}
+\[\pl{\Sigma^{-1}_W \underbrace{\Sigma_Bw}_{\hidewidth\text{ an unscaled projector making any vector parallel to} (m_1-m_2)\hidewidth} = \lambda w,~\lambda = \frac{w^T\Sigma_Bw}{w^T\Sigma_Ww}}\]
+\paragraph{Unscaled solution} \((\mathcal{O}(d^2n)\):
+\[\tilde{w} = \Sigma^{-1}_W(m_1-m_2)\]
+\subsubsection{Multiple Discriminant Analysis}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/multiple-discriminant-analysis.pdf}
+\caption{Informally, multiple discriminant methods seek the optimum such subspace, that is, the one with the greatest separation of the projected distributions for a given total within-scatter matrix.}
+\end{figure}
+\paragraph{k-Class Problem:} Find a \(k - 1\) dimensional linear subspace, which
+separates the classes in an optimal fashion \((d \geq k)\).\\
+\textbf{Within-class scatter:}
+\[\pl{\Sigma_W = \sum\limits_{y_i\leq k}\Sigma_{y_i} = \underline{\sum\limits_{y_i\leq k}}\sum\limits_{x\in\mathcal{X}_{y_i}}(x-m_{y_i})(x-m_{y_i})^T}\]
+with class centroids:
+\[\pl{m_{y_i} = \frac{1}{\underbrace{n_{y_i}}_{|\mathcal{X}_{y_i}|}} \sum\limits_{x\in\mathcal{X}_{y_i}}x}\]
+\paragraph{Total mean Vector:}
+\[\pl{m = \frac{1}{n}\Sigma_xx = \frac{1}{n} \Sigma_{y_i}n_{y_i}m_{y_i}}\]
+\todo[inline]{What is n here?Number of objects in class?}
+\paragraph{Total Scatter Matrix:}
+\begin{align}
+\pl{
+\Sigma_T &= \frac{1}{n}\Sigma_x(x-m)(x-m)^T\\
+&=\sum\limits_{y_i}\sum\limits_{x\in\mathcal{X_{y_i}}}(x-m_{y_i}+m_{y_i}-m)(x-m_{y_i}+m_{y_i}-m)^T\\
+&=\sum\limits_{y_i}\sum\limits_{x\in\mathcal{X_{y_i}}}(x-m_{y_i})(x-m_{y_i})^T + \sum\limits_{y_i}\sum\limits_{x\in\mathcal{X_{y_i}}}(m_{y_i}-m)(m_{y_i}-m)^T\\
+&=\Sigma_W + \sum\limits_{y_i}n_{y_i}(m_{y_i}-m)(m_{y_i}-m)^T = \Sigma_W + \Sigma_B\\
+}
+\end{align}
 \subsection{Readings}
 \begin{enumerate}
 \item Perceptrons: chp 5

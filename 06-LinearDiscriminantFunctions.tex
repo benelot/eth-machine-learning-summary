@@ -269,6 +269,20 @@ with class centroids:
 &=\Sigma_W + \sum\limits_{y_i}n_{y_i}(m_{y_i}-m)(m_{y_i}-m)^T = \Sigma_W + \Sigma_B\\
 }
 \end{align}
+Projection from a d-dimensional feature space to a (k - 1)-dimensional subspace is achieved by (k - 1) discriminant functions \(y_i = w^T_ix,~1\leq i \leq k-1\)
+\paragraph{Fisher's Criterion}
+\[J(W) = \frac{|W^T\Sigma_BW|}{|W^T\Sigma_WW|}\]
+\begin{enumerate}
+\item Solve the generalized eigenvalue problem \(\Sigma_B w_i = \lambda_i \Sigma_W w_i\) for the \((k - 1)\) largest eigenvalues by Gram-Schmidt orthonormalization.
+\item \(\Sigma_B\) is a sum of k rank one (or less) matrices; at most 
+\((k - 1)\) matrices are independent (center of mass constraint)
+\(\rightarrow |\Sigma_B| \leq (k-1)\).
+\item Isotropic case: space is spanned by the \((k - 1)\) vectors \(m_i - m\).
+\end{enumerate}
+\subsubsection{Remarks on Multicategory Linear Discriminants}
+It is often preferable to reformulate the multiclass problem as
+\((k - 1)\) "class \(y_i\) - not class \(y_i\)" dichotomies or \(k(k - 1)/2\) "class \(\alpha\) or \(\beta\)" dichotomies.\\
+\textbf{Problem:} Some areas in feature space will be ambiguously classified.
 \subsection{Readings}
 \begin{enumerate}
 \item Perceptrons: chp 5

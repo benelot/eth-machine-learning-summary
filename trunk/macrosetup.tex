@@ -10,6 +10,20 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\X}{\mathbb{X}}
 
+% surrounding every content with the math environment does make the content copyable from the pdf document back into latex form. In some cases for example in captions or section titles, you will need to add \protect before the printlatex command, otherwise you get a strange error about a } too many.
+%Usage:: \(\printlatex{2^i}\) or \(\pl{2^i}\) as shorthand
+\newcommand*{\printlatex}[1]{%
+  \BeginAccSupp{%
+    ActualText=\detokenize{#1},%
+    method=escape,
+  }%
+  #1%
+  \EndAccSupp{}%
+}
+\newcommand{\pl}[1]{\printlatex{#1}}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+
 %% Special characters for Expected value |E , Variance \V, \I, Prediction error \predR
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\V}{\mathbb{V}}

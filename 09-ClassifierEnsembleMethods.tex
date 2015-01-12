@@ -2,14 +2,39 @@
 \begin{document}
 
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-% summarizes lecture 
-% author:
+% summarizes lecture 10
+% author: Benjamin Ellenberger
 
 \section{Ensemble Methods for Classifier Design}
-This is the chapter on Regression.
+Ensemble methods use multiple learning algorithms to obtain better predictive performance than could be obtained from any of the constituent learning algorithms. A machine learning ensemble refers only to a concrete finite set of alternative models, but typically allows for much more flexible structure to exist between those alternatives.\\
+An ensemble is itself a supervised learning algorithm, because it can be trained and then used to make predictions. The trained ensemble, therefore, represents a single hypothesis. This hypothesis, however, is not necessarily contained within the hypothesis space of the models from which it is built. Thus, ensembles can be shown to have more flexibility in the functions they can represent. This flexibility can, in theory, enable them to over-fit the training data more than a single model would, but in practice, some ensemble techniques (especially bagging) tend to reduce problems related to over-fitting of the training data.\\
+
+Empirically, ensembles tend to yield better results when there is a significant diversity among the models. Many ensemble methods, therefore, seek to promote diversity among the models they combine. Although perhaps non-intuitive, more random algorithms (like random decision trees) can be used to produce a stronger ensemble than very deliberate algorithms (like entropy-reducing decision trees). Using a variety of strong learning algorithms, however, has been shown to be more effective than using techniques that attempt to dumb-down the models in order to promote diversity. (Wikipedia)
+\subsection{Advantages}
+\paragraph{Computational:} They are easy to train.
+\paragraph{Statistical:} Data randomization in the spirit of Bootstrap captures statistical dependencies between alternative hypotheses.
+\(\rightarrow\) The classifier ensemble encodes uncertainty intervals in the hypothesis class (output space).
+\todo[inline]{What does this mean?}
+\subsection{Reminders}
+\paragraph{Bias}Combining a set of estimators \(\pl{\hat f_1(x),\hat f_2(x),\ldots,\hat f_B(x)}\) by a simple average \(\hat f(x) = \frac{1}{B} \sum\limits_{i=1}^B \hat f_i(x)\) lets unbiased estimators remain unbiased.
+\paragraph{Variance} Combining a set of \(B\) estimators by a simple average reduces the variance by a factor of \(\frac{1}{B}\) if bias remains unchanged.
+
+\paragraph{Empirical error}
+\[\pl{\hat{\mathcal{R}}_n (c) = \frac{1}{n} \#\{c(x_i) \neq y_i : 1 \leq i \leq n\}}\]
+\paragraph{Expected error}
+\[\pl{\mathcal{R}(c) = P\{c(x) \neq Y\}}\]
+\paragraph{\((\epsilon,\delta)\) criterion}
+\[\pl{P_{X,Y}\{\mathcal{R}(\hat c_n) \leq \mathcal{R}(c^{Bayes}) + \epsilon\} > 1 - \delta}\]
+\subsection{Empirical Risk Minimization Principle}
+Select classifier \(c \in \mathcal{C}\) with the smallest error on the training data \(\pl{\mc{Z} = \{(x_1,y_1),\ldots,(x_n,y_n)\}}\):
+\[\pl{c^*_n \argmin_{c\in \mc{C}} \hat{\mc{R}}_n (c) = \argmin_{c \in \mc{C}} \frac{1}{n} \#\{c(x_i) \neq y_i:~1 \leq i \leq n\}}\]
+
+Goal: Derive a distribution independent bound for 
+\[\pl{P\{\mathcal{R(\hat c^*_n}-\inf\limits_{c\in\mathcal{C}}\underbrace{\mathcal{R}}_{=P(c(X) \neq Y}(c) > \epsilon\} < \delta}\]
 \subsection{PAC Learning}
 \subsection{Bagging}
 \subsection{Boosting}
+Boosting is an approach to machine learning based on the idea of creating a highly accurate prediction rule by combining many relatively weak and inaccurate rules. (R. Shapire, Explaining AdaBoost. Springer, 2013.)
 \subsection{Arcing}
 \subsection{Exponential Loss}
 \end{document}

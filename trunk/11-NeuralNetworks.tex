@@ -136,6 +136,19 @@ $\delta_i^{\mu}=(S'(\sum_lW_{il}V_l^{\mu})+m)(y_i^{\mu}-O_i^{\mu})$\end{itemize}
 
 \end{itemize}
 
+\subsection{Deep Neural Networks}
+\subsubsection{Training Deep Networks}
+\begin{itemize}
+\item This learning rule minimizes the cost function
+\begin{equation}
+R=\sum_{\textnormal{visible nodes}}^{}Q_{\alpha}log \frac{Q_{\alpha}}{P_{\alpha}}(\{ w_{ik}\}) \textnormal{\space since \space} \Delta w_{ik}=-\eta \frac{\partial R}{\partial w_{ik}}
+\end{equation}
+The target probability and the derived probability of visible units are denoted by $Q_{\alpha}$ and $P_{\alpha}(\{w_{ik} \})$, respectively
+\item Calculation of averages: Monte-Carlo simulation of a network. Disadvantage: training of a Boltzmann machine is rather
+time consuming.
+
+\end{itemize}
+
 
 \subsection{Universal Approximation}
 \textbf{Given:}\\ \begin{itemize}
@@ -156,6 +169,7 @@ with linear output units and logistic $S(x)=\frac{1}{1+e^{-x}}$ hidden units
 \item The notation $i \to j$ denotes the set of all
 indices $i$, where the associated node has an edge to $j$
 \end{itemize}
+
 
 \subsection{Autoassociation}
 XOR
@@ -246,18 +260,7 @@ where $\overline{\mathbb{E}[x_ix_k]}$ denotes an average over all patterns.
 \end{itemize} 
 
 
-\subsection{Deep Neural Networks}
-\subsubsection{Training Deep Networks}
-\begin{itemize}
-\item This learning rule minimizes the cost function
-\begin{equation}
-R=\sum_{\textnormal{visible nodes}}^{}Q_{\alpha}log \frac{Q_{\alpha}}{P_{\alpha}}(\{ w_{ik}\}) \textnormal{\space since \space} \Delta w_{ik}=-\eta \frac{\partial R}{\partial w_{ik}}
-\end{equation}
-The target probability and the derived probability of visible units are denoted by $Q_{\alpha}$ and $P_{\alpha}(\{w_{ik} \})$, respectively
-\item Calculation of averages: Monte-Carlo simulation of a network. Disadvantage: training of a Boltzmann machine is rather
-time consuming.
 
-\end{itemize}
 
 
 \end{document}

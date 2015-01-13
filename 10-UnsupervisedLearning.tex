@@ -6,9 +6,396 @@
 % author: Joachim Ott
 
 \section{Unsupervised Learning}
-This is the chapter on Unsupervised Learning.
 \subsection{Nonparametric Density Estimation}
+\textbf{Difference between parametric and nonparametric density estimation:}
+Parametric approach assumes a parametric model distribution and estimates the parameters from the sample (e.g. maximum likelihood). The nonparametric approach, however, estimates the underlying density from
+a data sample without assuming a parametric
+model distribution.\\
+Common approaches are
+\begin{enumerate}
+\item Histograms
+\item  Window estimates
+\item Nearest neighbor estimates
+\end{enumerate}
+\subsubsection{Dirac’s delta function}
+Not really a function: In mathematical terms, $\delta$ is not a function
+but a generalized function. Nonetheless, it is
+commonly referred to as the ”delta function”\\\\
+\textbf{Definition 1}\\
+ We introduce a mathematical “object” $\delta(x)$ satisfying the condition
+ \begin{equation}
+\int_{\mathbb{R}}\delta(x)f(x)dx=f(0)
+\end{equation}
+for any integrable function $f$ on $\mathbb{R}$ , with the following properties:
+\begin{equation}
+\begin{array}{lll}
+\int_{\mathbb{R}}\delta(x-x_0)f(x)dx &=bf(x_0) &\textnormal{\; shifting}\\
+\int_{\mathbb{R}}\delta(-x)f(x)dx &= f(0)  &\textnormal{\; symmetry}\\
+\int_{\mathbb{R}}\delta(cx)f(x)dx &=\frac{1}{|c|}f(0) &\textnormal{\; scaling}
+
+\end{array}
+\end{equation}
+Normalization: The delta function integrates to 1
+\begin{equation}
+\int_{\mathbb{R}}\delta(x)dx=\int_{\mathbb{R}}\delta(x)\cdot c_1(x)dx=c_1(0)=1
+\end{equation}
+where c1 (x) is the constant function of value 1. Thus, we may regard $\delta(x -x_0)$ as a density with all
+its probability mass centered at a single point $x_0$\\\\
+\textbf{Definition 2}\\
+Let N denote the Gaussian density function.
+\begin{equation}
+\delta(x-x_0)= \lim_{\sigma \to +\infty}\mathcal{N} (x|x_0,\sigma)
+\end{equation}
+\subsubsection{Empirical distribution}
+The empirical distribution is the data sample regarded as a probability distribution. Each sample point is equally probable.
+Discrete case: Let $\mathcal{S} = {x_1, . . . , x_n }$ be a data sample. We call
+\begin{equation}
+\textnormal{P}_{\textnormal{emp}}(x):=\frac{1}{n}\cdot \#\{y \in \mathcal{S}|y=y\}
+\end{equation}
+the empirical distribution defined by the data.\\
+Continuous case: More difficult: We need to combine probability mass centered at a finite set of points with the notion of a density.
+
+\textbf{Empirical density}\\
+Using the delta function we can write the empirical density of a
+sample $x_1, . . . , x_n$ as
+\begin{equation}
+p_{\textnormal{emp}}(x)=\sum_{i=1}^n\frac{1}{n}\cdot\delta(x-x_i)
+\end{equation}
+\textbf{Expectation value with empirical density}
+\begin{align*}
+\mathbb{E}_{p_{emp}(x)}\{f\}&=\int_{\Omega}f(x)p_{\textnormal{emp}}(x)dx\\
+&=\frac{1}{n}\sum_{i=1}^n\int_{\Omega}\delta(x-x_i)f(x)dx=\frac{1}{n}\sum_{i=1}^nf(x_i)
+\end{align*}
+
+
 \subsection{Histograms}
+A histogram represents data by counting the number of data points on each of a set of subintervals.\\
+\subsubsection{Definition}
+Let $\mathcal{S} = x_1, . . . , x_n$ be a data sample on an interval $I$.\\
+Divide the interval into $k$ pairwise disjoint subintervals $I_j$ , called the bins. The corresponding histogram of
+the sample is the tuple $H = (H_1, . . . , H_k )$, with
+$H_j := \#\{x \in \mathcal{S}|x \in I_j \}$
+
+\subsubsection{Bin Size}
+If the number of bins is too large with respect to the sample
+size, the quality of the estimate deteriorates.\\
+For a large sample, choosing a small number of bins results in
+a loss of information.\\
+\textbf{Choosing the bin size:} Common strategies are
+\begin{enumerate}
+\item Equidistant binning\\All bins have identical size $\frac{|I|}{k}$
+\item Adaptive binning\\Use smaller bins in regions with higher data density
+
+\end{enumerate}
+
+\subsubsection{Histogram as non-parametric density estimator}
+ A histogram can be turned into a discrete distribution by normalization
+ \begin{equation}
+\hat{H}:=\frac{1}{n}(h_1, . . .,h_k)
+\end{equation}
+We have an empirical density $p_{\textnormal{emp}} (x)$. This is zero for
+every x that does not exactly coincide with a
+sample point (zero probability event!).\\
+To turn $p_{\textnormal{emp}} (x)$ into a more useful density,
+we have to regularize (smooth) it in some way. The histogram regularizes by binning.
+Choosing the bin size determines the level of
+regularization.\\\\
+\textbf{Alternative approach: }The signal
+can be smoothed by applying a low-pass filter. Low-pass filter density estimators are called
+\textbf{window estimates}.
+
+
+\subsubsection{Multiple dimensions}
+Given a $d$-dimensional sample $x_1,. . . ,x_n$, we have two possible strategies:\\\\
+\textbf{Joint histogram}\\
+ Compute the histogram on the complete
+domain. The bins are $d$-dimensional volume
+elements instead of intervals. A joint histogram
+corresponds to the underlying joint distribution.
+Problem: Requires large sample number.\\\\
+\textbf{Marginal histogram:}\\
+Compute $d$ one-dimensional histograms.
+Histogram i is computed from the i-th component
+of the data vectors $x_j$ . A marginal histogram
+corresponds to a marginal of the underlying
+distribution. Problem: Co-occurrence information
+is lost.\\\\
+\textbf{Engineer rule-of-thumb:}\\
+Reliable estimation requires at least
+ten sample values per parameter to be estimated.
+
+\subsubsection{Curse of dimensionality}
+\textbf{Fundamental problem}\\
+To obtain a reliable estimate at a given
+regularity, the required number of samples grows
+exponentially with the dimension of the sample
+space.\\\\
+\textbf{Example: Joint histogram}\\
+Generalize a 20 bin histogram to
+multiple dimensions. Assumption: Good estimate
+requires ten sample values per bin.
+\begin{itemize}
+\item Number of possible bins (to ensure
+acceptable estimate) grows linearly with
+sample size $(\approx \frac{n}{10})$
+\item Number of required bins (to keep the
+resolution) increases exponentially with
+dimension $(\sim 20^d)$
+
+\end{itemize}
+
+
+
 \subsection{Parzen Estimators}
+The term ”Parzen window estimate” is often used synonymously for ”window density estimate”.
+\subsubsection{Window Function}
+A \textbf{window function} is a function which vanishes or quickly
+decays outside a small interval/volume. Let $V_n$ be the Volume of
+the $d$-dimensional hypercube of edge length $h_n$ .\\\\
+\textbf{Box window}\\
+$\varPhi =\left\{
+  \begin{array}{ll}
+    1 & |x_j|\le \frac{1}{2} \textnormal{, \;}j=1,...,d\\
+    0 & \textnormal{else} 
+  \end{array}
+\right.$\\
+\textbf{\# Samples in a hypercube}\\
+\begin{equation}
+k_n=\sum_{i=1}^n \underbrace{\varPhi \left(\frac{x-x_i}{h_n}\right)}_{\textnormal{Indicator function for }x_i \textnormal{is in the hypercube around } x}
+\end{equation}
+
+ In principle, $\varPhi$ might be any continuous function that vanishes outside a hypercube. To ensure that $p_n$ is a density, we have to require (for $V_n = h^d_n$):
+\begin{equation}
+\varPhi(x)\ge0
+\end{equation}
+\begin{equation}
+\int \varPhi (x)dx=1
+\end{equation}
+
+\textbf{Parzen window density estimate}
+\begin{equation}
+\hat{p}_n(x):=\frac{1}{n}\sum_{i=1}^n\frac{1}{V_n}\varPhi \left(\frac{x-x_i}{h_n}\right)
+\end{equation}
+
+\subsubsection{Convergence}
+\textbf{Mean and variance}\\
+\begin{itemize}
+\item $\hat{p}_n(x)$  depends on sample $x_1, . . . , x_n$ , so $\hat{p}_n (x)$ is a RV
+\item By taking expectations w. r. t. $x_1, . . . , x_n$ , we can compute a mean $\bar{p}_n (x)$ and variance $\bar{\sigma}_n^2(x)$ of the estimate
+\end{itemize}
+\textbf{Convergence result}\\
+For an “acceptable” estimate, we expect:
+\begin{align*}
+\lim_{n \to \infty}\bar{p}_n(x)&=p(x)\\
+\lim_{n \to \infty}\bar{\sigma}_n^2(x)&=0
+\end{align*}
+These limits hold, provided that the window
+function $\varPhi (x)$ and the volume sequence satisfy
+convergence conditions.\\\\
+\textbf{Convergence conditions}\\
+\begin{itemize}
+\item Exclude pathological cases $\varPhi$
+\begin{align*}
+\textnormal{sup}_u\varPhi(u) &< \infty \\
+\lim_{||u||\to \infty} \varPhi (u) \prod_{i\leq d}u_i &=0
+\end{align*}
+\item Ensure convergence of mean and variance
+\begin{align*}
+\lim_{n \to \infty}V_n &=0\\
+\lim_{n \to \infty}nV_n &=\infty
+\end{align*}
+\end{itemize}
+
+These are satisfied e. g. for $V_n = \frac{V_1}{\sqrt{n}}$  but not for $V_n = \frac{V_1}{n}$.
+
+
+\subsubsection{Window estimates as convolutions}
+Convolution of empirical density and window function
+\begin{align*}
+\left(p_{\textnormal{emp}}\* \frac{1}{V_n}\varPhi \right) (x)&=\int \frac{1}{n}\sum_i \delta(y-x_i) \frac{1}{V_n}\varPhi \left(\frac{x-y}{h_n}\right)dy\\
+&=\frac{1}{n}\sum_i \frac{1}{V_n}\int \delta (y-x_i) \varPhi \left( \frac{x-y}{h_n} \right ) dy\\
+&= \hat{p}_n (x)
+\end{align*}
+which is exactly the window estimate of the density.\\\\
+\textbf{Interpretation}\\
+In the case of a Gaussian shaped window
+function, this is standard low-pass filtering.\\\\
+\textbf{Computational importance}\\
+ Convolutions are products in the
+Fourier domain, and can be efficiently evaluated
+by the FFT. We do not actually have to compute
+the integral.\\\\
+\textbf{Terminology}\\
+In applied mathematics, functions applied by
+convolution are often referred to as kernel
+functions. Therefore, window density estimators
+are also called kernel density estimators. This
+estimation technique is not the same type of
+kernel approach as used e. g. with SVMs, where
+the kernel represents a scalar product in a
+high-dimensional implicit feature space.
+
+\subsubsection{Popular kernels}
+\textbf{This estimation technique is not the same type of kernel approach as used e. g. with SVMs!}\\
+The choice of the kernel can be influenced by a number of factors or requirements, e.g.,
+existence of higher order derivatives (Gaussian k.), compactness of the kernel (box k.,
+Epanechnikov k.), smoothness, heavy tails (Cauchy k.)...\\
+Application knowledge often serves as a guidance to make an informed choice.\\\\
+\begin{tabular}{ll}
+\textbf{Uniform (Box) kernel}&  $\varPhi(x)=\mathbb{I}_{\{||x|| \le \frac{1}{2}\}}$ \\
+\textbf{Gaussian kernel}&  $\varPhi(x)=exp \left( - \frac{1}{2}|||x||^2\right)/\sqrt{2\pi}$ \\
+\textbf{Exponential kernel}&  $\varPhi(x)=exp\left( - \lambda ||x|| \right)/ \lambda$ \\
+\textbf{Cauchy kernel}&  $\varPhi(x)=\frac{1}{1+||x||^{d+1}}$ \\
+\textbf{Epanechnikov kernel}&  $\varPhi(x)=(1-||x||^2)\mathbb{I}_{\{||x|| \le 1\}}$ \\
+\end{tabular}
+\subsubsection{Parzen window vs. parametric estimates}
+Observation: A Gaussian window estimate places a Gaussian
+at the location of each sample point and
+normalizes. Each Gaussian is a parametric model.\\\\
+The window estimate is non-parametric: The definition of a
+parametric model requires the number of
+parameters to be constant (w. r. t. the sample
+size). The number of Gaussians (and parameters)
+used in the window estimate is proportional to the
+sample size.
+
+
+\subsubsection{Density estimation and classification}
+\begin{itemize}
+\item Induced classifier\\
+ Any density estimator $\hat{p}(x)$induces a
+classification rule: From the training data, estimate
+the density $\hat{p}_c$ of each class $c$, then assign a test
+value $x$ to the class for which $\hat{p}_c(x)$ is largest
+\item Parzen classifier\\
+The classifier induced by the Parzen window
+estimate is called the Parzen window classifier in
+the literature.
+
+
+\end{itemize}
+
+
 \subsection{k-Nearest Neighbor Estimator}
+\textbf{No training}\\
+Classification results are computed directly from
+the training data for each test value.\\\\
+\textbf{Problems} The complexity of computing a classification result
+increases with ...
+\begin{enumerate}
+\item ... the dimension of the feature space
+(because we have to compute norms)
+\item ... The sample size, because we have to
+compute differences w. r. t. all sample points
+and minimize over them. This is a big
+disadvantage in comparison to other
+classifiers
+\end{enumerate}
+
+\textbf{Why it is interesting anyway}\\
+ $k$-NN rules, especially 3-NN, are
+known to yield excellent results. Comparison with
+3-NN is a good test for newly designed classifiers.
+
+
+
+\subsubsection{k-Nearest Neighbor vs. Parzen}
+Parzen estimates: Different strategies to choose volume
+sequence\\
+$V_n=\\frac{V_1}{\sqrt{n}}$,\; $V_n=\frac{V_1}{log n}$ \;etc.\\\\
+Problems with Parzen window estimates:
+\begin{enumerate}
+\item  If $V_0$ is too small: Insufficient smoothing $\to$ noisy estimate\\
+If $V_0$ is too large: Oversmoothing $\to$ loss of detail.
+\item Different behavior of the data distribution may
+require different strategies in different parts of
+the feature space, but $V_n$ is data independent.
+\end{enumerate}
+
+\subsubsection{$k$ Nearest Neighbor estimation}
+Solution:  Choose volume data dependent, i.e. $V_n$ grows until
+a pre-specified number $k$ of samples is included.
+This strategy yields small cells for large density
+and large cells for low density.\\\\
+\textbf{$k$-NN density estimation}\\
+The $k$ nearest neighbor density estimator is defined as
+\begin{equation}
+\hat{p}(x):=\frac{1}{V_k(x)}
+\end{equation}
+where $V_k (x) =$ minimal volume around $x$
+containing $k$ neighbors.\\\\
+\textbf{How do we choose the volume? Two choices:}\\
+\begin{itemize}
+\item Let volume ”grow” until it contains $k$ neighbors.
+$\to$ This means we have to specify a metric
+and, thereby, we have implicitly selected a
+shape for the volume (hypercube, ball etc)
+\item For each data point $x$, select the cell of points
+for which $x$ is the closest data point. (In 2D,
+this is a Voronoi tesselation.) For $k$-NN,
+average the volumes of the cell around $x$ and
+its $k$ nearest neighbors
+
+\end{itemize}
+
+
+\subsubsection{k-NN classification}
+\textbf{The induced classifier}
+\begin{itemize}
+\item Training data $x_1, . . . , x_n$ , test point $x_{n+1}$
+\item Choose the $k$ training points closest to $x_{n+1}$
+\item Classify $x_{n+1}$ by majority vote
+
+\end{itemize}
+\textbf{Ties}
+Two different types of ties may occur
+\begin{enumerate}
+\item Distance ties: Several training data points
+have exactly the same distance to $x_{n+1}$
+\item Voting ties. (Avoidable in the two-class case
+by choosing $k$ odd.)
+
+\end{enumerate}
+Tie-breaking strategies are necessary in practice,
+but difficult to handle theoretically.\\\\
+\textbf{Terminology}
+\begin{itemize}
+\item $k$-NN rule usually refers to the classifier,
+rather than the density estimator
+\item nearest neighbor rule refers to the 1-NN
+classifier
+
+\end{itemize}
+
+\subsubsection{1-NN}
+\textbf{1-NN error rate}\\
+ Error rate of a classifier = probability of
+misclassification\\
+Theorem: Consider a classification problem with $C$ classes
+and training data $x_1, . . . , x_n . Let P^*$
+denote the error
+rate of the Bayes rule. The expected error rate of
+the nearest neighbor rule
+\begin{enumerate}
+\item converges in $L_1$ for $n \to \infty$ to a value $P_1$
+\item is bounded asymptotically by $P_1 \le P^* \left ( 2- \frac{C}{C-1} P^* \right)$
+
+
+\end{enumerate}
+
+\textbf{Remarks}
+\begin{itemize}
+\item The expectation is taken with respect to the class labels
+\item Note that the result is independent of any distributional
+assumptions. The price we pay for this independence is that the
+result holds only for asymptotically large samples
+\item Convergence in $L_1$ means: The expected error rate is a function
+(of the training data). It converges in $L_1$ against the constant
+function of value $P_1$ , i. e. the $L_1$ norm of their difference
+converges to zero as $n \to \infty$
+\item Since the Bayes error rate $P^*$ is optimal and $P^* \left( 2- \frac{C}{C-1} P^* \right ) = 2P^* - \frac{C}{C-1} (P^*)^2 \le 2P^*$ the 1-NN error rate for any number of classes is always $P^* \le P \le 2P^*$
+
+\end{itemize}
+
+
 \end{document}

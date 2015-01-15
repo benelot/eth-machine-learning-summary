@@ -152,7 +152,7 @@ variables
 \item \hspace{1em}split the node into two daughter nodes
 \item \hspace{0.5em}\textbf{until} node size \(n_min\) is reached
 \item \textbf{end for}
-\item return Output the ensemble of trees \(\{\hat{c_b} (x)\}^B_{b=1}\)
+\item \textbf{return} Output the ensemble of trees \(\{\hat{c_b} (x)\}^B_{b=1}\)
 \end{enumerate}
 
 \subsection{Boosting}
@@ -168,8 +168,27 @@ Output classifier: \[\pl{
 \end{figure}
 
 Weak Learner: \[\pl{\epsilon_b \triangleq \frac{\sum\limits^n_{i=1} w^{(b)}_i \I_{\{\underbrace{c_b(x_i)}_{\hidewidth\text{binary}\hidewidth}\neq y_i\}}}{\sum\limits^n_{i=1}w^{(b)}_i}}\]
-
-
+\subsubsection{Adaboost}
+AdaBoost fits an additive model in base
+learners,optimizing the exponential loss function, i.e.,
+AdaBoost.M1 is equivalent to forward stagewise additive
+modeling using exponential loss.
+\paragraph{AdaBoost.M1}
+Input: data \((x_1 , y_1 ), \ldots, (x_n , y_n )\)
+Output: classifier \(\hat{c}_B (x)\)
+\begin{enumerate}
+\item Initialize observation weights \(w_i = \frac{1}{n}\)
+\item \textbf{for} b = 1 to B \textbf{do}
+\item \hspace{0.5em} Fit a classifier \(c_b (x)\) to the training data using weights 
+\(w_i\)
+\item \hspace{0.5em} Compute \(\epsilon_b = \frac{\sum\limits^n_{i=1} w^{(b)}_i \I_{\{c_b (x_i )\neq y_i \}}}{\sum^n_{i=1} w^{(b)}_i}\)
+\item \hspace{0.5em} Compute \(\alpha_b = \log\frac{1- \epsilon_b}{\epsilon_b}\)
+\item // Data Reweighting
+\item // Apply weights \(w^{(b)}_1,w^{(b)}_2,\ldots,w^{(b)}_n\) to each of the training data \((x_i,y_i),1 \leq i \leq n\) at \(b^{th}\) step.
+\item \hspace{0.5em} Set \(\forall i:~w_i = w_i \exp( \alpha_b \I_{\{y_i \neq c_b (x_i )\}})\)
+\item \textbf{end for}
+\item \textbf{return} \(\hat{c}_B (x) = sgn(\sum\limits^B_{b=1} \alpha_b c_b (x))\)
+\end{enumerate}
 \subsection{Arcing}
 Arcing or adaptive reweighting and combining is an extension of bagging introduced by Breiman (1998)
 \subsection{Exponential Loss}

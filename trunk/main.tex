@@ -44,7 +44,6 @@
 \usepackage{datetime}
 %% To use alternating colors in the glossary
 \usepackage[table]{xcolor}
-
 %% We use subfiles to separate the file into subfiles which are compilable on their own by copying the preamble from this file.
 \usepackage{subfiles}
 
@@ -188,7 +187,17 @@
 \usepackage{multirow}
 \usepackage{longtable}
 
-\usepackage{color}
+%\usepackage{color}
+
+% define colors for different things
+%https://en.wikibooks.org/wiki/LaTeX/Colors#Predefined_colors
+\definecolor{sectionColor}{HTML}{FF7F00}
+\definecolor{subsectionColor}{HTML}{EE0000}
+\definecolor{subsubsectionColor}{HTML}{EE6600}
+%\definecolor{orange}{HTML}{FF7F00}
+%\definecolor{orange}{HTML}{FF7F00}
+%\definecolor{orange}{HTML}{FF7F00}
+%\definecolor{orange}{HTML}{FF7F00}
 
 %for landscape cheat sheet
 \usepackage{lscape}
@@ -293,6 +302,7 @@ As in Cherry-picking, a term taken from revision control, where it denotes movin
 \subfile{14-DimensionReduction.tex}
 
 \pagebreak
+\def\cheatsheet{2014}
 \subfile{15-Cheatsheet2014.tex}
 \pagebreak
 

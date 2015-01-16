@@ -25,7 +25,12 @@
 \setlength{\parsep}{0pt}
 
 \begin{landscape}
-\section{Cheat sheet}
+%this removes the section title if the cheat sheet is compiled separately
+\ifx\cheatsheet\undefined
+\addcontentsline{toc}{section}{Cheat sheet 2014}
+\else
+\color{sectionColor}\section{Cheat sheet 2014} %Killing this gives us more space
+\fi
 %VISUALIZE LAYOUT AND LAYOUTVALUES:
 %\pagevalues
 %\newpage asd\newpage
@@ -38,8 +43,8 @@
 \scriptsize
 %\footnotesize
 %\small
-\subsection{Probability}
-\subsubsection{Probability Rules}
+{\color{subsectionColor}\subsection{Probability}}
+{\color{subsubsectionColor}\subsubsection{Probability Rules}}
 %%%
 \begin{tabular}{p{5em}l}
 Sum Rule& \(P(X=x_i) = \sum_{j=1}^{J} p(X=x_i,Y=y_i)\)\\
@@ -50,7 +55,7 @@ Conditional independence& \(X\bot Y|Z \)\\
  & \(P(X,Y|Z) = P(X|Z)P(Y|Z)\) \\
  & \(P(X|Z,Y) = P(X|Z)\)
 \end{tabular}
-\subsubsection{Expectation}
+{\color{subsubsectionColor}\subsubsection{Expectation}}
 \begin{tabular}{l}
 \(E(X) = \int_{\inf}^{\inf} x p(x) dx\) \\
 \(\sigma^2(X) = E(x^2)-{E(x)}^2\) \\
@@ -58,12 +63,12 @@ Conditional independence& \(X\bot Y|Z \)\\
 \(Cov(X, Y) = \int_x \int_y p(x,y) (x-\mu_x)(y-\mu_y) dx dy\)
 \end{tabular}
 
-\subsubsection{Gaussian}
+{\color{subsubsectionColor}\subsubsection{Gaussian}}
 \begin{equation}
 p(X|\mu,\sigma)=\frac{1}{\sigma \sqrt{2\pi}} \exp(-\frac{(x-\mu)^2}{2\sigma^2})
 \end{equation}
 
-\subsubsection{Kernels}
+{\color{subsubsectionColor}\subsubsection{Kernels}}
 Requirements: Symmetric ($k(x,y)=k(y,x)$) \\ positive semi-definite $K$.
 \begin{tabular}{l}
 \(k(x,y) = a k_1(x,y) + b k_2(x,y)\)\\
@@ -78,7 +83,7 @@ Gaussian RBF & \(k(x,y) = \exp(\frac{-\|x-y\|^2_2}{h^2})\)\\
 Sigmoid & \(k(x,y) = \tanh(k x^\top y - b)\)
 \end{tabular}
 
-\subsection{Regression}
+{\color{subsectionColor}\subsection{Regression}}
 \textbf{Linear Regression:}
 \begin{equation}
 \min_{w} \sum_{i=1}^n (y_i - w^\top x_i)^2
@@ -99,13 +104,13 @@ Closed form solution: $w^* = (x^\top x + \lambda I)^{-1} x^\top y$ \\
 \end{equation}
 Closed form solution: $\alpha = (K-\lambda I)^{-1} y $ \\
 
-\subsection{Classification}
+{\color{subsectionColor}\subsection{Classification}}
 \begin{eqnarray}
 \text{0/1 Loss} & w^* =& \argmin_w \sum_{i=1}^n [y_i \neq sign(w^\top x_i)] \\
 \text{Perceptron} & w^* =& \argmin_w \sum_{i=1}^n [\max(0, y_i w^\top x_i)]
 \end{eqnarray}
 
-\subsubsection{SVM}
+{\color{subsubsectionColor}\subsubsection{SVM}}
 Primal, constrained:
 \begin{equation}
 \min_{w} w^\top w + C \sum_{i=1}^{n} \xi_i, \text{ s.t. } y_i w^\top x_i \geq 1 - \xi_i, \xi_i \geq 0
@@ -120,13 +125,13 @@ Dual:
 \end{equation}
 Dual to primal: $w^* = \sum_{i=1}^{n} \alpha^*_i y_i x_i$, $\alpha_i > 0$: support vector.
 
-\subsubsection{Kernelized SVM}
+{\color{subsubsectionColor}\subsubsection{Kernelized SVM}}
 \begin{equation}
 \max_{\alpha} \sum_{i=1}^{n} \alpha_i - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j y_i y_j k(x_i, x_j), \text{ s.t. } 0 \geq \alpha_i \geq C
 \end{equation}
 Classify: $y = sign(\sum_{i=1}^{n} \alpha_i y_i k(x_i, x))$
 
-\subsection{Misc}
+{\color{subsectionColor}\subsection{Misc}}
 \textbf{Lagrangian:} $f(x,y) s.t. g(x,y) = c$
 \begin{equation}
 \mathcal{L}(x, y, \gamma) = f(x,y) - \gamma ( g(x,y)-c)
@@ -134,8 +139,8 @@ Classify: $y = sign(\sum_{i=1}^{n} \alpha_i y_i k(x_i, x))$
 \textbf{Parametric learning}: model is parameterized with a finite set of parameters, like linear regression, linear SVM, etc. \\ \\
 \textbf{Nonparametric learning}: models grow in complexity with quantity of data: kernel SVM, k-NN, etc.
 
-\subsection{Probabilistic Methods:}
-\subsubsection{MLE}
+{\color{subsectionColor}\subsection{Probabilistic Methods:}}
+{\color{subsubsectionColor}\subsubsection{MLE}}
 Least Squares, Gaussian Noise
 \begin{align}
 L(w) &= -\log(P(y_1 ... y_n | x_1 ... x_n, w)) \\
@@ -146,7 +151,7 @@ L(w) &= -\log(P(y_1 ... y_n | x_1 ... x_n, w)) \\
 &= \argmin_w \sum_{i=1}^{n} (y_i-w^\top x_i)^2
 \end{align}
 
-\subsubsection{MAP}
+{\color{subsubsectionColor}\subsubsection{MAP}}
 Ridge regression, Gaussian prior on weights
 \begin{align}
 &\argmax_w P(w) \prod_{i}^{n} P(y_i|x_i,w)\\
@@ -156,62 +161,12 @@ $P(w)$ or $P(\theta)$ - conjugate prior (beta, Gaussian) (posterior same class a
 $P(y_i|\theta)$ - likelihood function (binomial, multinomial, Gaussian) \\
 \textbf{Beta distribution}: $P(\theta) = Beta(\theta; \alpha_1, \alpha_2) \propto \theta^{\alpha_1 - 1}(1-\theta)^{\alpha_2-1}$
 
-\begin{comment}
- I think we did not have this.
-\subsubsection{Logistic Regression}
-MLE with Bernoulli noise
-\begin{eqnarray}
-\text{MLE:  } \argmin_w L(w) &=& \sum_{i=1}^{n} \log(1+\exp(-y_i w^\top x_i)) \\
-\text{MAP:  } &+& \left\lbrace \lambda \|w\|_2^2, \lambda \|w\|_1 \right\rbrace 
-\end{eqnarray}
-Classification: $P(y|x,\hat{w} = \frac{1}{1+\exp(-y\hat{w}^\top x)}$
-\end{comment}
-
-\subsubsection{Bayesian Decision Theory}
+{\color{subsubsectionColor}\subsubsection{Bayesian Decision Theory}}
 \begin{equation}
 a^* = \argmin_{a \in A} E_y[C(y,a)|x]
 \end{equation}
 
-\begin{comment}
-I think we did not have this
-\subsubsection{Bayesian Model Averaging (BMA)}
-Ridge regression, but with probabilities
-\begin{eqnarray}
-P(y|x,D) &=& \int P(y|x,w)P(w|D)dw \\
-P(w) &=& \mathcal{N}(w; 0, \sigma_w^2) \\
-P(y|w,x) &=& \mathcal{N}(y; wx, \sigma_y^2) \\
-P(w|x,y) &=& \mathcal{N}(w; \mu_{w|y}, \sigma_{w|y}^2)
-\end{eqnarray}
-
-\begin{eqnarray}
-\mu_{w|y} = \frac{x y \sigma_w^2}{x^2 \sigma_w^2 + \sigma_y^2} \\
-\sigma_{w|y}^2 = \frac{\sigma_w^2 \sigma_y^2}{x^2\sigma_w^2 + \sigma_y^2}
-\end{eqnarray}
-
-\begin{eqnarray}
-\text{MAP} P(y'|x',\hat{w}) &=& \mathcal{N}(y';x'\mu_{w|y},\sigma_y^2) \\
-\text{BMA} P(y'|x',x,y) &=&  \mathcal{N}(y';x'\mu_{w|y},\sigma_y^2 + x'^2 \sigma_{w|y}^2)
-\end{eqnarray}
-
-\subsubsection{Bayesian Linear Regression}
-\begin{eqnarray}
-\mathcal{N}(x_i, \mu_V, \Sigma_{VV}) &=& \frac{1}{\sqrt{(2\pi)^d \Sigma_{VV}}} \exp(-\frac{1}{2}(x-\mu_V)^\top \Sigma_{VV}^{-1} (x-\mu_V)) \\
-P(y|x,y_A) &=& \mathcal{N}(y; \mu_{y|A}, \sigma_{y|A}^2) \\
-\mu_{y|A} &=& \sum_{x, A} \Sigma_{AA}^{-1} y_A \\
-\Sigma_{VV} &=& \beta^2 X X^\top + \sigma^2 I \\
-\sigma_{y|A}^2 &=& \Sigma_{xx} - \Sigma_{xA} \Sigma_{AA}^{-1} \Sigma_{Ax}
-\end{eqnarray}
-
-\subsubsection{Gaussian Process (Kernelized BLR)}
-Replace $\Sigma_{VV} = K + \sigma^2 I_n$.
-
-\subsection{Active Learning}
-D-optimality: $x_t = \argmax_{x\in X} \sigma^2_{t-1}(x)$ (pick the most uncertain sample) \\
-A-optimality: $x_t = \argmax_{x\in X} \int[\sigma^2_{t}(x)-\sigma^2_{t-1}(x)]dx$ (pick the sample that'll reduce the variance the most)
-\end{comment}
-\subsection{Ensemble Methods}
-
-%\subsection{Ensemble Methods}
+{\color{subsectionColor}\subsection{Ensemble Methods}}
 Use combination of simple hypotheses (weak learners) to create one strong learner.
 \begin{equation}
 f(x) = \sum_{i=1}^{n} \beta_i h_i(x)
@@ -219,7 +174,7 @@ f(x) = \sum_{i=1}^{n} \beta_i h_i(x)
 \textbf{Bagging}: train weak learners on random subsamples with equal weights. \\
 \textbf{Boosting}: train on all data, but reweigh misclassified samples higher.
 
-\subsubsection{Decision Trees}
+{\color{subsubsectionColor}\subsubsection{Decision Trees}}
 \textbf{Stumps}: partition linearly along 1 axis
 \begin{equation}
 h(x) = sign(a x_i - t)
@@ -227,7 +182,7 @@ h(x) = sign(a x_i - t)
 \textbf{Decision Tree}: recursive tree of stumps, leaves have labels. To train, either label if leaf's data is pure enough, or split data based on score.
 
 
-\subsubsection{Ada Boost}
+{\color{subsubsectionColor}\subsubsection{Ada Boost}}
 Effectively minimize exponential loss.
 \begin{equation}
 f^*(x) = \argmin_{f\in F} \sum_{i=1}^{n} \exp(-y_i f(x_i))
@@ -237,11 +192,11 @@ Train $m$ weak learners, greedily selecting each one
 (\beta_i, h_i) = \argmin_{\beta,h} \sum_{i=1}^{n} \exp(-y_i (f_{i-1} (x_j) + \beta h(x_j)))
 \end{equation}
 
-\subsection{Generative Methods}
+{\color{subsectionColor}\subsection{Generative Methods}}
 \textbf{Discriminative} - estimate $P(y|x)$ - conditional. \\
 \textbf{Generative} - estimate $P(y, x)$ - joint, model data generation.
 
-\subsubsection{Naive Bayes}
+{\color{subsubsectionColor}\subsubsection{Naive Bayes}}
 All features independent.
 \begin{eqnarray}
 P(y|x) = \frac{1}{Z} P(y) P(x|y), Z = \sum_{y} P(y) P(x|y) \\
@@ -252,7 +207,7 @@ y = \argmax_{y'} P(y'|x) = \argmax_{y'} \hat{P}(y') \prod_{i=1}^{d} \hat{P}(x_i|
 f(x) = \log(\frac{P(y=1|x)}{P(y==1|x)}), y=sign(f(x))
 \end{equation}
 
-\subsubsection{Fischer's Linear Discriminant Analysis (LDA)}
+{\color{subsubsectionColor}\subsubsection{Fischer's Linear Discriminant Analysis (LDA)}}
 \begin{eqnarray}
 && c=2, p=0.5, \hat{\Sigma}_- = \hat{\Sigma}_+ = \hat{\Sigma} \\
 y &=& sign(w^\top x + w_0) \\
@@ -261,8 +216,8 @@ w_0 &=& \frac{1}{2}(\hat{\mu}_-^\top \Sigma^{-1} \hat{\mu}_- - \hat{\mu}_+^\top 
 \end{eqnarray}
 
 
-\subsection{Unsupervised Learning}
-\subsubsection{K-means}
+{\color{subsectionColor}\subsection{Unsupervised Learning}}
+{\color{subsubsectionColor}\subsubsection{K-means}}
 (clustering = classification)
 \begin{equation}
 L(\mu) = \sum_{i=1}^{n} \min_{j\in\{1...k\}} \|x_i - \mu_y \|_2^2
@@ -270,13 +225,13 @@ L(\mu) = \sum_{i=1}^{n} \min_{j\in\{1...k\}} \|x_i - \mu_y \|_2^2
 \textbf{Lloyd's Heuristic}: (1) assign each $x_i$ to closest cluster \\
 (2) recalculate means of clusters.
 
-\subsubsection{Gaussian Mixture Modeling}
+{\color{subsubsectionColor}\subsubsection{Gaussian Mixture Modeling}}
 Same as Bayes, but class label $z$ unobserved.
 \begin{equation}
 (\mu^*, \Sigma^*, w^*) = \argmin -\sum_i log \sum_{j=1}^{k} w_j \mathcal{N}(x_i|\mu_i,\Sigma_j)
 \end{equation}
 
-\subsubsection{EM Algorithm}
+{\color{subsubsectionColor}\subsubsection{EM Algorithm}}
 \textbf{E-step}: expectation: pick clusters for points.
 Calculate $\gamma_j^{(t)}(x_i)$ for each $i$ and $j$\\
 \textbf{M-Step}: maximum likelihood: adjust clusters to best fit points.\\
@@ -286,7 +241,7 @@ Calculate $\gamma_j^{(t)}(x_i)$ for each $i$ and $j$\\
 \Sigma^{(t)}_j &\leftarrow& \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i-\mu_j^{(t)})(x_i-\mu_j^{(t)})^\top}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}
 \end{eqnarray}
 
-\subsubsection{PCA}
+{\color{subsubsectionColor}\subsubsection{PCA}}
 (dimensional reduction = regression)
 \begin{eqnarray}
 \Sigma = \frac{1}{n}\sum_{i=1}^n x_i x_j^\top, \;\;
@@ -298,7 +253,7 @@ $W$ is orthogonal, $W = (v_1 | ... | v_k)$ and $z_i = w^\top x_i$
 \Sigma = \sum_{i=1}^{d} \lambda_i v_i v_i^\top \;\; \lambda_1 \geq ... \geq \lambda_d \geq 0
 \end{equation}
 
-\subsubsection{Kernel PCA}
+{\color{subsubsectionColor}\subsubsection{Kernel PCA}}
 \begin{eqnarray}
 \alpha_i^* = \argmax_{\alpha^\top K \alpha = 1} = \alpha^\top K^\top K \alpha \\
 \alpha^{(i)} = \frac{1}{\sqrt{\lambda_i}}\frac{v_i}{\|v_i\|_2}, \;\;

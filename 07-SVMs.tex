@@ -8,6 +8,95 @@
 \section{Support Vector Machines}
 This is the chapter on Support Vector Machines.
 \subsection{Lagrangian optimization theory}
+<<<<<<< .mine
+\paragraph{Overview}
+An Optimization Problem is given by a function which we want to minimize and some constraints:
+\begin{align}
+minimize \ f(w) \\
+subject \ to \ g_i(w) \leq 0, \forall_i \\
+and \ h_j(w) = 0, \forall_j
+\end{align}
+\paragraph{Equality constraints}
+Equality constraints define sub-manifolds in the solution space on which the minimal solution has to be located, which is the same as saying that an equation $h(w)=0$ is a (D-1)-dimensional surface in the solution space of w.
+At any point on the constraint surface, $\nabla h(w)$ will be orthogonal to the $h(w)=0$ surface. 
+\newline
+Proof: Consider a point w on the constraint surface and a nearby point $w+\epsilon$ also on the surface. Making a Taylor Expansion around w, we get
+\begin{align}
+h(w+\epsilon) \simeq h(w)+\epsilon^T \nabla h(w)
+\end{align}
+Because both points are on the constraint surface, we have $h(w)=h(w+\epsilon) \Rightarrow \epsilon^T \nabla h(w) \simeq 0$. In the limit $\parallel \epsilon \parallel \rightarrow 0$ we have $\epsilon^T \nabla h(w) = 0$ and because $\epsilon$ is parallel to the surface $h(w)$, $\nabla h(w)$ is normal to the surface. \newline
+Next we seek a point $w^*$ so that $f(w)$ is minimized. Such a point must have the property that $\nabla f(w)$ is also orthogonal to the constraint surface, because otherwise we would increase the value of $f(w)$ by moving a short distance along along the surface. Thus $\nabla f$ and $\nabla h$ are parallel (or antiparallel) vectors and there's a solution for $\nabla f + \beta \nabla h = 0$ where $\beta$ is a lagrange multiplier. 
+\newline
+For equality constraints $\beta$ may be positive as well as negative. We now introduce Lagrange functions, first for the simple case with one equality constraint:
+\begin{align}
+L(w,\beta)=f(w)+\beta h(w)
+\end{align}
+The constrained stationary condition is obtained by setting $\nabla_w L=0$. Furthermore, the condition $\frac{\partial L}{\partial \beta} = 0$ leads to the constrained equation $h(w)=0$:
+\begin{align}
+\frac{\partial L}{\partial \beta}=h(w)=0
+\end{align}
+Thus, to find the minimum of $f(w)$ subject to $g(w)=0$ we take $L(w,\beta)$ and find a stationary point of it with respect to $w$ and $\beta$.
+\newline
+With a 2-D $w$ we get three equations with three variables:
+\begin{align}
+\frac{\partial L}{\partial w_1}=0 \\
+\frac{\partial L}{\partial w_2}=0 \\
+\frac{\partial L}{\partial \beta}=0
+\end{align}
+Solve equations to find $w^*$ and $\beta$. If only interested in $w^*$ we can eliminate $\beta$ from the equations and solve for $w^*$ directly. In this case the lagrange multipliers are also called undetermined multipliers.
+\paragraph{Inequality Constraints}
+Now we extend the concept with inequality constraints in the form $g(w) \geq 0$. There are two kinds of solutions possible:
+\begin{itemize}
+	\item With an inactive constraint $g(w) > 0$
+	\item With an active constraint $g(w) = 0$
+\end{itemize}
+The inactive case corresponds to a solution which ignores the constraint:
+\begin{align}
+L(w,\alpha)=f(w)+\alpha g(w) \ with \ \alpha=0 \Rightarrow \nabla f(w)=0
+\end{align}
+The active case corresponds to the case of the equality constraint with $\alpha \neq 0$. Now however the sign of the lagrange multiplier (i.e. $\alpha$) matters because $f(w)$ will only be at its maximum if the gradient $\nabla f(w)$ is oriented away from the region $g(w)>0$. We therefore have:
+\begin{align}
+\nabla f(w)=-\alpha \nabla g(w) \ for \ \alpha > 0
+\end{align}
+In both cases, the active and inactive, the following holds: $\alpha g(w)=0$ \newline
+Thus, by optimizing 
+\begin{align}
+L(w,\alpha)=f(w)+\alpha g(w) \\
+subject \ to \ g(w) \geq 0 \\
+\alpha \geq 0 \\
+\alpha g(w) = 0
+\end{align}
+we find our solution. The three constraints given here are known as the \textbf{Karush-Kuhn-Tucker (KKT) conditions}.
+\paragraph{Dual Problem}
+Finally we can come up with an equation containing several constraints of both types:
+\begin{align}
+L(w,\alpha,\beta)=f(w)+\sum_i \alpha_i g_i(w)+\sum_j \beta_j h_j(w) \\
+subject \ to \ \alpha_i \geq 0 \ \forall_i \\
+\alpha_i g_i(w)=0 \ \forall_i
+\end{align}
+
+Steps: 
+\begin{enumerate}
+	\item Find $w^*$ of $L(w, \alpha, \beta)$ by $\frac{\partial L}{\partial w}\rvert_{w=w^*}=0$
+	\item Insert $w^*$ into $L$ and find $\beta^*$ by $\frac{\partial L}{\partial \beta}\rvert_{\beta=\beta^*}=0$
+	\item Calculate $\alpha$ by solving the above optimization problem with $w^*$ and $\beta^*$
+\end{enumerate}
+
+The \textbf{Dual Problem} given by
+\begin{align}
+max \theta(\alpha, \beta) \\
+subject \ to \ \alpha_i \geq 0 \ \forall_i \\
+where \ \theta(\alpha, \beta)=inf_w L(w, \alpha, \beta)
+\end{align}
+has an upper bound:
+\begin{align}
+\theta(\alpha, \beta)=inf_u L(u, \alpha, \beta) \leq L(w, \alpha, \beta)=f(w)+\sum_i \alpha_i g_i(w) + \sum_j \beta_j h_j(w) \leq f(w)
+\end{align}
+Feasibility of w implies $g_i(w)\leq 0$ and $h_j(w)=0$. \newline
+Feasibility of $\alpha$ and $\beta$ implies $\alpha_i \geq 0$. \newline
+Therefore the first sum is negative or zero and the second one is zero.\newline
+The optimal solution of the Dual Problem is also called the \textbf{value of the problem}.
+=======
 \todo[inline]{Write Lagrangian optimization theory}
 
 \subsection{Introduction to Support Vector Machines}
@@ -48,6 +137,7 @@ where vectors \(y_i\) with \(z_i g(y i ) = m\) are the support vectors.
 is maximized.\\
 Maximize m\\
 subject to \(\forall y_i \in Y : z_i (w^T y_i + w_0 ) \geq m\)
+>>>>>>> .r51
 \subsection{Hard margin SVMs}
 \subsection{Soft margin SVMs}
 \end{document}

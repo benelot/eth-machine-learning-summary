@@ -94,6 +94,7 @@ has an upper bound:
 Feasibility of w implies $g_i(w)\leq 0$ and $h_j(w)=0$. \newline
 Feasibility of $\alpha$ and $\beta$ implies $\alpha_i \geq 0$. \newline
 Therefore the first sum is negative or zero and the second one is zero.\newline
+\paragraph{Duality Gap}
 The optimal solution of the Dual Problem is also called the \textbf{value of the problem}.
 The value of the dual problem is upper bounded by the value of the primal problem:
 \begin{align}
@@ -102,5 +103,36 @@ sup\{\theta(\alpha,\beta): \alpha \geq 0 \} \leq inf \{f(w): g(w) \leq 0, h(w) =
 The difference between the two is called the \textbf{duality gap}. The solution $(w^*, \alpha^*, \beta^*)$ is a saddle point of Lagrangian for the primal problem if and only if its components are optimal solutions of the primal and dual problem and if there's no duality gap. \newline
 Given an optimization problem with convex $f$ and convex domain of $w \in \omega \subseteq \mathbb{R}$ and with $g_i$ and $h_j$ that are affine functions, i.e. $g(w)=Aw-b$ for some matrix $A$ and some vector $b$, then the duality gap is zero. This applies to SVMs.
 \subsection{Hard margin SVMs}
+Lets start again with the two-class classification problem described earlier in the form
+\begin{align}
+y=w^T \phi(x) + w_0
+\end{align}
+where $\phi$ is some transformation applied to the features. We assume for now that the training data $\mathcal{Z} = \{(x_i,y_i) \in \R^d \times \R : 1 \geq i \geq n\}$ is linearly separable in feature space. Additionally to other similar algorithms (e.g. perceptron) the SVM minimizes the generalization error by maximizing the distance from the separating hyperplane to the closest points of both classes (i.e. margin).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/svm_margin.png}
+\caption{Maximum-margin hyperplane and margins for an SVM trained with samples from two classes. Samples on the margin are called the support vectors. \textbf{b} stands for margin.}
+\end{figure}
+The perpendicular distance of a point x from a hyperplane defined by $f(x)=0$ where $f(x)=w^T \phi(x) + w_0$ is given by $\frac{|f(x)|}{\parallel w \parallel}$. Furthermore we're only interested in a solution where all points are correctly classified. Thus the distance of a point $x_i$ to the decision surface becomes
+\begin{align}
+\frac{y_i f(x_i)}{\parallel w \parallel}=\frac{y_i(w^T \psi(x_i) + w_0)}{\parallel w \parallel}
+\end{align}
+The maximum margin solution is given by
+\begin{align}
+\argmax_{w, w_0} \{\frac{1}{\parallel w \parallel} \min_i[y_i (w^T\psi(x_i) + w_0)]\}
+\end{align}
+where we have taken factor $\frac{1}{\parallel w \parallel}$ outside of the optimization because $w$ doesn't depend on $i$. Direct solution of this problem would be very complex, therefore we simplify it. We notice that if we rescale $w \rightarrow \gamma w$ and $w_0 \rightarrow \gamma w_0$ then the distance from any $x_i$ to decision surface given by $frac{y_i f(x_i)}{\parallel w \parallel}$ doesn't change. Therefore
+\begin{align}
+y_i (w^T\psi(x_i) + w_0) = 1
+\end{align}
+for the point that is closest to the surface. In this case all datapoints will satisfy
+\begin{align}
+y_i (w^T\psi(x_i) + w_0) \geq 1
+\end{align}
+This is called the \textbf{canonical representation} of the decision hyperplane. In case of points for which the constraints holds, the constraints are called active. Otherwise they're inactive. The optimization problem therefore requires to maximize $\parallel w \parallel^-1$ which is equivalent to minimizing $\parallel w \parallel^2$. The optimization problem becomes:
+\begin{align}
+\argmin_{w,w_0} \frac{1}{2} \parallel w \parallel^2 \\
+subject \ to \ y_i (w^T\psi(x_i) + w_0) \geq 1 \ \forall_i
+\end{align}
 \subsection{Soft margin SVMs}
 \end{document}

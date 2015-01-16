@@ -6,5 +6,16 @@
 % author:
 
 \section{Nonlinear Support Vector Machines}
-This is the chapter on Nonlinear Support Vector Machines.
+Many linear parametric models (including SVMs) can be  re-cast into an equivalent 'dual representation' in which the predictions are also based on linear combinations of a kernel function evaluated at the training data points. 
+\subsection{Kernels}
+For models which are based on a fixed nonlinear feature space mapping $\psi(x)$, the kernel function is given by the relation
+\begin{align}
+k(x,y)=\psi(x)^T\psi(y)
+\end{align}
+A kernel is a symmetric function of its arguments so that $k(x,y)=k(y,x)$. The simplest example of a kernel function is obtained for $\psi(x)=x$ (i.e. no transformation), in which case $k(x,y)=x^Ty$. This may be called the linear kernel. The concept of a kernel formulated as an inner product in a feature space allows us to build interesting extensions of many well-known algorithms by making use of the \textbf{kernel trick}. The idea is that if the vector x enters only as a scalar product into the training algorithm, then we can replace the scalar product with some other kernel. \newline
+The optimization function of the SVM for linear features is given by 
+\begin{align}
+\tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
+\end{align}
+where $k(x_i, x_j)$ replaces $\{\psi(x_i)^T \psi(x_j)\}$.
 \end{document}

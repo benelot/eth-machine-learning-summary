@@ -10,7 +10,10 @@ This is the chapter on Support Vector Machines.
 \subsection{Lagrangian optimization theory}
 \todo[inline]{Write Lagrangian optimization theory}
 
-\subsection{Support Vector Machines}
+\subsection{Introduction to Support Vector Machines}
+
+Support vector machines (SVMs, also support vector networks[1]) are supervised learning models with associated learning algorithms that analyze data and recognize patterns, used for classification and regression analysis. Given a set of training examples, each marked as belonging to one of two categories, an SVM training algorithm builds a model that assigns new examples into one category or the other, making it a non-probabilistic binary linear classifier. An SVM model is a representation of the examples as points in space, mapped so that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on which side of the gap they fall on. (Source: Wikipedia.org)\\\\
+
 \textbf{Idea:}linear classifier with margin and feature transformation.\\
 \textbf{Transformation} from original feature space to nonlinear feature space.
 \(y_i = \phi(x_i )\) e.g. Polynomial, Radial Basis Function, etc. with \(\phi : R^d \rightarrow R^e\text{ with }d << e\)

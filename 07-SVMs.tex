@@ -113,6 +113,7 @@ where $\phi$ is some transformation applied to the features. We assume for now t
 \includegraphics[width=0.8\linewidth]{figs/svm_margin.png}
 \caption{Maximum-margin hyperplane and margins for an SVM trained with samples from two classes. Samples on the margin are called the support vectors. \textbf{b} stands for margin.}
 \end{figure}
+\paragraph{The Hyperplane}
 The perpendicular distance of a point x from a hyperplane defined by $f(x)=0$ where $f(x)=w^T \phi(x) + w_0$ is given by $\frac{|f(x)|}{\parallel w \parallel}$. Furthermore we're only interested in a solution where all points are correctly classified. Thus the distance of a point $x_i$ to the decision surface becomes
 \begin{align}
 \frac{y_i f(x_i)}{\parallel w \parallel}=\frac{y_i(w^T \psi(x_i) + w_0)}{\parallel w \parallel}
@@ -134,5 +135,93 @@ This is called the \textbf{canonical representation} of the decision hyperplane.
 \argmin_{w,w_0} \frac{1}{2} \parallel w \parallel^2 \\
 subject \ to \ y_i (w^T\psi(x_i) + w_0) \geq 1 \ \forall_i
 \end{align}
+\paragraph{Lagrangian}
+Now we reformulate this problems as a lagrange problem. The condition needs to be turned into the form $g(w) \geq 0$ and we add multipliers:
+\begin{align}
+L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1\}
+\end{align}
+where $\alpha$ is a vector containing the lagrange multipliers for each training sample $i \in \{1, ... ,N\}$. The sign in front of the sum means that we're minimizing with respect to $w$ and $w_0$ and maximizing with respect to $\alpha$. Setting the derivatives of $L(w,w_0,\alpha)$ with respect to $w$ and $w_0$ equal to zero, we obtain the following two conditions:
+\begin{align}
+w = \sum_i \alpha_i y_i \psi(x_i) \\
+0 = \sum_i \alpha_i y_i
+\end{align}
+\paragraph{Dual Problem}
+We can now eliminate $w$ and $w_0$ from $L(w,w_0,\alpha)$ which gives us the dual representation of the maximum margin problem in which we maximize
+\begin{align}
+\tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) \\
+subject \ to \ constraints \ \alpha  \geq 0 \ \forall_i \\
+\sum_i^N \alpha_i y_i = 0
+\end{align}
+Here the kernel function is defined by $k(x, x')=\psi(x)^T \psi(x')$.
+To evaluate new data points we use
+\begin{align}
+f(x)=\sum_i^N \alpha_i y_i k(x, x_i) + w_0
+\end{align}
+Since usually only a small minority of data points are support vectors, most $\alpha_i=0$. For the support vectors holds $y_if(x_i) = 1$. Therefore the evaluation is computationally simple, because the non-support vectors can be discarded after training. \newline
+\paragraph{Evaluating Data Points}
+To calculate $w_0$ we use the fact that for any support vector $y_if(x_i) = 1$. Using $f(x)=\sum_i^N \alpha_i y_i k(x, x_i) + w_0$ we obtain:
+\begin{align}
+y_i(\sum_{j \in \mathcal{S}} \alpha_j y_j k(x_i, x_j) + w_0) = 1
+\end{align}
+where $\mathcal{S}$ is the set of support vectors. Using $y_i^2=1$ we get
+\begin{align}
+w_0=\frac{1}{N_{\mathcal{S}}} \sum_{i \in \mathcal{S}} (y_i - \sum_{j \in \mathcal{S}} \alpha_j y_j k(x_i, x_j))
+\end{align}
+which is numerically more stable and where $N_{\mathcal{S}}$ is the total number of support vectors.
 \subsection{Soft margin SVMs}
+So far we assumed that the data points are linearly separable. Now we consider the case where the classes overlap, which is usually the case in practice. Therefore we introduce a method to allow some data points to be inside the margin or even on the wrong side of the separating hyperplane. To do this we use slack variables $\xi_i \geq 0$ for each data point which gives a measure of the misclassification of data point $i$.these are defined by $\xi_i = 0$ for data points on or inside the correct margin boundary and $\xi_i=|y_i - f(x_i)|$ for other points. Thus points on the separating hyperplane will have $\xi_i=1$ and misclassified datapoints will have $\xi_i > 1$. The exact misclassification constraints are then replaced with 
+\begin{align}
+y_i f(x_i) \geq 1 - \xi_i \ \forall_i
+\end{align}
+These are called sometimes relaxation constraints and an SVM using these is known as a \textbf{Soft margin SVM}. Our goal is now tho maximize the margin while softly penalizing points lying on the wrong side of the margin boundary. We therefore optimize
+\begin{align}
+C \sum_i^N \xi_i + \frac{1}{2} \parallel w \parallel^2
+\end{align}
+where $C>0$ weights the impact of the slack penalties on the final result.
+We turn this into a Lagrangian:
+\begin{align}
+L(w,w_0,\xi,\alpha,\mu)=\frac{1}{2}\parallel w \parallel^2+C \sum_i^N \xi_i-\sum_i^N \xi_i \{y_i f(x_i)-1 + \xi_i\}-\sum_i^N \mu_i \xi_i
+\end{align}
+where $\alpha_i \geq 0$ and $\mu_i \geq 0$ are Lagrange multipliers. The corresponding KKT conditions are given by
+\begin{align}
+\alpha_i \geq 0 \\
+y_i f(x_i)-1+\xi_i \geq 0 \\
+\alpha_i(y_i f(x_i)-1+\xi_i) = 0 \\
+\mu_i \geq 0 \\
+\xi_i \geq 0 \\
+\mu_i \xi_i = 0
+\end{align}
+We now optimize out $w$, $b$ and $\xi$ using $f(x)=w^T\psi(x)+w_0$
+\begin{align}
+\frac{\partial L}{\partial w}=0 \Rightarrow w=\sum_i^N\alpha_i y_i\psi(x_i) \\
+\frac{\partial L}{\partial b}=0 \Rightarrow \sum_i^N\alpha_i y_i = 0 \\
+\frac{\partial L}{\partial \xi_i}=0 \Rightarrow \alpha_i=C-\mu_i
+\end{align}
+using these to eliminate said parameters we obtain the dual Lagrangian in the form
+\begin{align}
+\tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
+\end{align}
+We notice that the Lagrangian looks the same as for the Hard Margin case. The difference lies in the constraints that are somewhat different. We note that $\alpha_i \geq 0$ is required because they're Lagrange multipliers. Furthermore $\alpha_i=C-\mu_i$ together with $\mu_i \geq 0$ implies that $\alpha \leq C$. We therefore maximize with respect to $\alpha$ subject to
+\begin{align}
+0 \leq \alpha_i \leq C \\
+\sum_i^N \alpha_i y_i = 0
+\end{align}
+where the first kind of constraints are known as the box constraints. Prediction of new data points are made like in the Hard Margin SVM. As before a subset of the data points may have $\alpha_i=0$ in which case they don't contribute to the predictions. The remaining data points constitute the support vectors. These have $\alpha_i>0$ and from $\alpha_i(y_i f(x_i)-1+\xi_i) = 0$ must satisfy
+\begin{align}
+y_i f(x_i)=1-\xi_i
+\end{align}
+If $\alpha_i<C$ then $\alpha_i=C-\mu_i$ implies that $\mu_i>0$, which according to $\mu_i \xi_i = 0$ requires $\xi_i=0$ and hence such points lie on the margin. Points with $\alpha = C$ can lie inside the margin and can be either correctly classified if $\xi_i \leq 1$ or misclassified if $\xi_i > 1$. To determine $w_0$ we note that support vectors for which $0<\alpha_i<C$ have $\xi_i=0$ so that $y_i f(x_i)=1$ and hence will satisfy
+\begin{align}
+y_i(\sum_{j \in \mathcal{S}} \alpha_j y_j k(x_i, x_j) + w_0) = 1
+\end{align}
+like in the Hard Margin SVM case. Again, a numerically more stable solution is given by
+\begin{align}
+w_0=\frac{1}{N_{\mathcal{M}}} \sum_{i \in \mathcal{M}} (y_i - \sum_{j \in \mathcal{M}} \alpha_j y_j k(x_i, x_j))
+\end{align}
+where $\mathcal{M}$ is the set of indices of data points satisfying $0<\alpha_i<C$.
+\subsection{Readings}
+\begin{enumerate}
+\item SVM: Bishop, Chapter 7.1
+\item Lagrange multipliers: Bishop, Appendix E
+\end{enumerate}
 \end{document}

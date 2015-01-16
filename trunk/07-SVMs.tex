@@ -148,6 +148,8 @@ w = \sum_i \alpha_i y_i \psi(x_i) \\
 \paragraph{Dual Problem}
 We can now eliminate $w$ and $w_0$ from $L(w,w_0,\alpha)$ which gives us the dual representation of the maximum margin problem in which we maximize
 \begin{align}
+L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1\} \\
+\tilde{L}(\alpha)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i \\
 \tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) \\
 subject \ to \ constraints \ \alpha  \geq 0 \ \forall_i \\
 \sum_i^N \alpha_i y_i = 0
@@ -180,28 +182,32 @@ C \sum_i^N \xi_i + \frac{1}{2} \parallel w \parallel^2
 where $C>0$ weights the impact of the slack penalties on the final result.
 We turn this into a Lagrangian:
 \begin{align}
-L(w,w_0,\xi,\alpha,\mu)=\frac{1}{2}\parallel w \parallel^2+C \sum_i^N \xi_i-\sum_i^N \xi_i \{y_i f(x_i)-1 + \xi_i\}-\sum_i^N \mu_i \xi_i
+L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2}\parallel w \parallel^2+C \sum_i^N \xi_i-\sum_i^N \xi_i \{y_i f(x_i)-1 + \xi_i\}-\sum_i^N \beta_i \xi_i
 \end{align}
-where $\alpha_i \geq 0$ and $\mu_i \geq 0$ are Lagrange multipliers. The corresponding KKT conditions are given by
+where $\alpha_i \geq 0$ and $\beta_i \geq 0$ are Lagrange multipliers. The corresponding KKT conditions are given by
 \begin{align}
 \alpha_i \geq 0 \\
 y_i f(x_i)-1+\xi_i \geq 0 \\
 \alpha_i(y_i f(x_i)-1+\xi_i) = 0 \\
-\mu_i \geq 0 \\
+\beta_i \geq 0 \\
 \xi_i \geq 0 \\
-\mu_i \xi_i = 0
+\beta_i \xi_i = 0
 \end{align}
-We now optimize out $w$, $b$ and $\xi$ using $f(x)=w^T\psi(x)+w_0$
+We now optimize out $w$, $w_0$ and $\xi$ using $f(x)=w^T\psi(x)+w_0$
 \begin{align}
 \frac{\partial L}{\partial w}=0 \Rightarrow w=\sum_i^N\alpha_i y_i\psi(x_i) \\
 \frac{\partial L}{\partial b}=0 \Rightarrow \sum_i^N\alpha_i y_i = 0 \\
-\frac{\partial L}{\partial \xi_i}=0 \Rightarrow \alpha_i=C-\mu_i
+\frac{\partial L}{\partial \xi_i}=0 \Rightarrow \alpha_i=C-\beta_i
 \end{align}
-using these to eliminate said parameters we obtain the dual Lagrangian in the form
+using these to eliminate $w$, $w_0$ and $\xi$ we obtain the dual Lagrangian in the form
 \begin{align}
+L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2}\parallel w \parallel^2 + C \sum_i^N \xi_i - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1 + \xi_i\} - \sum_i^N \beta_i \xi_i \\
+L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + C \sum_i^N \xi_i - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i(1-\xi_i) - \sum_i^N \beta_i \xi_i \\
+L(w,w_0,\xi,\alpha,\beta)= \sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N (C - \alpha_i - \beta_i) \xi_i \\
+ignoring: \ C - \alpha_i - \beta_i = \frac{\partial L}{\partial \xi_i} = 0 \\
 \tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
 \end{align}
-We notice that the Lagrangian looks the same as for the Hard Margin case. The difference lies in the constraints that are somewhat different. We note that $\alpha_i \geq 0$ is required because they're Lagrange multipliers. Furthermore $\alpha_i=C-\mu_i$ together with $\mu_i \geq 0$ implies that $\alpha \leq C$. We therefore maximize with respect to $\alpha$ subject to
+We notice that the Lagrangian looks the same as for the Hard Margin case. The difference lies in the constraints that are somewhat different. We note that $\alpha_i \geq 0$ is required because they're Lagrange multipliers. Furthermore $\alpha_i=C-\beta_i$ together with $\beta_i \geq 0$ implies that $\alpha \leq C$. We therefore maximize with respect to $\alpha$ subject to
 \begin{align}
 0 \leq \alpha_i \leq C \\
 \sum_i^N \alpha_i y_i = 0
@@ -210,7 +216,7 @@ where the first kind of constraints are known as the box constraints. Prediction
 \begin{align}
 y_i f(x_i)=1-\xi_i
 \end{align}
-If $\alpha_i<C$ then $\alpha_i=C-\mu_i$ implies that $\mu_i>0$, which according to $\mu_i \xi_i = 0$ requires $\xi_i=0$ and hence such points lie on the margin. Points with $\alpha = C$ can lie inside the margin and can be either correctly classified if $\xi_i \leq 1$ or misclassified if $\xi_i > 1$. To determine $w_0$ we note that support vectors for which $0<\alpha_i<C$ have $\xi_i=0$ so that $y_i f(x_i)=1$ and hence will satisfy
+If $\alpha_i<C$ then $\alpha_i=C-\beta_i$ implies that $\beta_i>0$, which according to $\beta_i \xi_i = 0$ requires $\xi_i=0$ and hence such points lie on the margin. Points with $\alpha = C$ can lie inside the margin and can be either correctly classified if $\xi_i \leq 1$ or misclassified if $\xi_i > 1$. To determine $w_0$ we note that support vectors for which $0<\alpha_i<C$ have $\xi_i=0$ so that $y_i f(x_i)=1$ and hence will satisfy
 \begin{align}
 y_i(\sum_{j \in \mathcal{S}} \alpha_j y_j k(x_i, x_j) + w_0) = 1
 \end{align}
@@ -223,5 +229,6 @@ where $\mathcal{M}$ is the set of indices of data points satisfying $0<\alpha_i<
 \begin{enumerate}
 \item SVM: Bishop, Chapter 7.1
 \item Lagrange multipliers: Bishop, Appendix E
+\item Slides from Lecture 8
 \end{enumerate}
 \end{document}

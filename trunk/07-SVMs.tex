@@ -2,12 +2,49 @@
 \begin{document}
 
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-% summarizes lecture 
-% author:
+% summarizes lecture 8,9
+% author: Benjamin Ellenberger
 
 \section{Support Vector Machines}
 This is the chapter on Support Vector Machines.
 \subsection{Lagrangian optimization theory}
+\todo[inline]{Write Lagrangian optimization theory}
+
+\subsection{Support Vector Machines}
+\textbf{Idea:}linear classifier with margin and feature transformation.\\
+\textbf{Transformation} from original feature space to nonlinear feature space.
+\(y_i = \phi(x_i )\) e.g. Polynomial, Radial Basis Function, etc. with \(\phi : R^d \rightarrow R^e\text{ with }d << e\)
+
+\[z_i =
+\begin{cases}
++1 & \mbox{if } x_i \text{ in class } 1\\
+-1 & \mbox{if } x_i \text{ in class } 2\\
+\end{cases}
+\]
+
+Training vectors should be linearly separable after mapping!
+Linear discriminant function:
+\[g(y) = w^T y + w_0\]
+\textbf{Goal:} Find hyperplane that maximizes the margin m with
+\[z_i g(y_i ) = z_i (w_T y + w_0 ) \geq m~\text{ for all }y_i \in \mc{Y}\]
+where vectors \(y_i\) with \(z_i g(y i ) = m\) are the support vectors.
+\subsubsection{Maximal Margin Classifier}
+\textbf{Invariance:} assume that the weight vector w is normalized
+\( ||w|| = 1\) since a rescaling\\ \((w, w_0 ) := (\lambda w, \lambda w_0 ), m := \lambda m\) does not change the problem's solution.\\
+\textbf{Condition }(\(\forall i\)):
+\[z_i =
+\begin{cases}
++1 & \mbox{if } x_i \text{ in class } 1 \rightarrow x^Ty_i + w_0 \geq m\\
+-1 & \mbox{if } x_i \text{ in class } 2 \rightarrow x^Ty_i + w_0 \leq -m\\
+\end{cases}
+\]
+
+\textbf{Objective:} Maximize margin m s.t. joint condition \(z_i (w^T y_i + w_0 ) \geq m\) is met.\\
+
+\textbf{Learning problem:} Find w with \(||w|| = 1\), such that the margin m
+is maximized.\\
+Maximize m\\
+subject to \(\forall y_i \in Y : z_i (w^T y_i + w_0 ) \geq m\)
 \subsection{Hard margin SVMs}
 \subsection{Soft margin SVMs}
 \end{document}

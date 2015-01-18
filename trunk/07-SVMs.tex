@@ -116,45 +116,45 @@ where $\phi$ is some transformation applied to the features. We assume for now t
 \paragraph{The Hyperplane}
 The perpendicular distance of a point x from a hyperplane defined by $f(x)=0$ where $f(x)=w^T \phi(x) + w_0$ is given by $\frac{|f(x)|}{\parallel w \parallel}$. Furthermore we're only interested in a solution where all points are correctly classified. Thus the distance of a point $x_i$ to the decision surface becomes
 \begin{align}
-\frac{y_i f(x_i)}{\parallel w \parallel}=\frac{y_i(w^T \psi(x_i) + w_0)}{\parallel w \parallel}
+\frac{y_i f(x_i)}{\parallel w \parallel}=\frac{y_i(w^T \phi(x_i) + w_0)}{\parallel w \parallel}
 \end{align}
 The maximum margin solution is given by
 \begin{align}
-\argmax_{w, w_0} \{\frac{1}{\parallel w \parallel} \min_i[y_i (w^T\psi(x_i) + w_0)]\}
+\argmax_{w, w_0} \{\frac{1}{\parallel w \parallel} \min_i[y_i (w^T\phi(x_i) + w_0)]\}
 \end{align}
 where we have taken factor $\frac{1}{\parallel w \parallel}$ outside of the optimization because $w$ doesn't depend on $i$. Direct solution of this problem would be very complex, therefore we simplify it. We notice that if we rescale $w \rightarrow \gamma w$ and $w_0 \rightarrow \gamma w_0$ then the distance from any $x_i$ to decision surface given by $frac{y_i f(x_i)}{\parallel w \parallel}$ doesn't change. Therefore
 \begin{align}
-y_i (w^T\psi(x_i) + w_0) = 1
+y_i (w^T\phi(x_i) + w_0) = 1
 \end{align}
 for the point that is closest to the surface. In this case all datapoints will satisfy
 \begin{align}
-y_i (w^T\psi(x_i) + w_0) \geq 1
+y_i (w^T\phi(x_i) + w_0) \geq 1
 \end{align}
 This is called the \textbf{canonical representation} of the decision hyperplane. In case of points for which the constraints holds, the constraints are called active. Otherwise they're inactive. The optimization problem therefore requires to maximize $\parallel w \parallel^-1$ which is equivalent to minimizing $\parallel w \parallel^2$. The optimization problem becomes:
 \begin{align}
 \argmin_{w,w_0} \frac{1}{2} \parallel w \parallel^2 \\
-subject \ to \ y_i (w^T\psi(x_i) + w_0) \geq 1 \ \forall_i
+subject \ to \ y_i (w^T\phi(x_i) + w_0) \geq 1 \ \forall_i
 \end{align}
 \paragraph{Lagrangian}
 Now we reformulate this problems as a lagrange problem. The condition needs to be turned into the form $g(w) \geq 0$ and we add multipliers:
 \begin{align}
-L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1\}
+L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1\}
 \end{align}
 where $\alpha$ is a vector containing the lagrange multipliers for each training sample $i \in \{1, ... ,N\}$. The sign in front of the sum means that we're minimizing with respect to $w$ and $w_0$ and maximizing with respect to $\alpha$. Setting the derivatives of $L(w,w_0,\alpha)$ with respect to $w$ and $w_0$ equal to zero, we obtain the following two conditions:
 \begin{align}
-w = \sum_i \alpha_i y_i \psi(x_i) \\
+w = \sum_i \alpha_i y_i \phi(x_i) \\
 0 = \sum_i \alpha_i y_i
 \end{align}
 \paragraph{Dual Problem}
 We can now eliminate $w$ and $w_0$ from $L(w,w_0,\alpha)$ which gives us the dual representation of the maximum margin problem in which we maximize
 \begin{align}
-L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1\} \\
+L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1\} \\
 \tilde{L}(\alpha)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i \\
 \tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) \\
 subject \ to \ constraints \ \alpha  \geq 0 \ \forall_i \\
 \sum_i^N \alpha_i y_i = 0
 \end{align}
-Here the kernel function is defined by $k(x, x')=\psi(x)^T \psi(x')$.
+Here the kernel function is defined by $k(x, x')=\phi(x)^T \phi(x')$.
 To evaluate new data points we use
 \begin{align}
 f(x)=\sum_i^N \alpha_i y_i k(x, x_i) + w_0
@@ -193,15 +193,15 @@ y_i f(x_i)-1+\xi_i \geq 0 \\
 \xi_i \geq 0 \\
 \beta_i \xi_i = 0
 \end{align}
-We now optimize out $w$, $w_0$ and $\xi$ using $f(x)=w^T\psi(x)+w_0$
+We now optimize out $w$, $w_0$ and $\xi$ using $f(x)=w^T\phi(x)+w_0$
 \begin{align}
-\frac{\partial L}{\partial w}=0 \Rightarrow w=\sum_i^N\alpha_i y_i\psi(x_i) \\
+\frac{\partial L}{\partial w}=0 \Rightarrow w=\sum_i^N\alpha_i y_i\phi(x_i) \\
 \frac{\partial L}{\partial b}=0 \Rightarrow \sum_i^N\alpha_i y_i = 0 \\
 \frac{\partial L}{\partial \xi_i}=0 \Rightarrow \alpha_i=C-\beta_i
 \end{align}
 using these to eliminate $w$, $w_0$ and $\xi$ we obtain the dual Lagrangian in the form
 \begin{align}
-L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2}\parallel w \parallel^2 + C \sum_i^N \xi_i - \sum_i^N \alpha_i \{y_i (w^T\psi(x_i) + w_0) - 1 + \xi_i\} - \sum_i^N \beta_i \xi_i \\
+L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2}\parallel w \parallel^2 + C \sum_i^N \xi_i - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1 + \xi_i\} - \sum_i^N \beta_i \xi_i \\
 L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + C \sum_i^N \xi_i - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i(1-\xi_i) - \sum_i^N \beta_i \xi_i \\
 L(w,w_0,\xi,\alpha,\beta)= \sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N (C - \alpha_i - \beta_i) \xi_i \\
 ignoring: \ C - \alpha_i - \beta_i = \frac{\partial L}{\partial \xi_i} = 0 \\

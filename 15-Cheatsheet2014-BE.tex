@@ -6,11 +6,11 @@
 %change spacings according to your preferences (readability vs. content)
 % Syntax : \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
 \titlespacing*{\section}
-{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+{0pt}{0.1pt}{0.1pt}
 \titlespacing*{\subsection}
-{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+{0pt}{0.1pt}{0.1pt}
 \titlespacing*{\subsubsection}
-{0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
+{0pt}{0.1pt}{0.1pt}
 
 
 
@@ -340,6 +340,26 @@ Calculate $\gamma_j^{(t)}(x_i) = \frac{P(c|\theta^j) (x_i|c,\theta^j)}{\sum P(x_
 \mu_j^{(t)} &\leftarrow& \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i)}{\sum_{i=1}^n \gamma^{(t)}(x_i)} \\
 \Sigma^{(t)}_j &\leftarrow& \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i-\mu_j^{(t)})(x_i-\mu_j^{(t)})^\top}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}
 \end{eqnarray}
+
+\subsubsection{EM for non-gaussian mixture}
+\textbf{Problem setting}
+Derive the EM algorithm. The model behind the EM in the form:
+\(p(x) = \sum\limits^n_{j=1}\pi_j Pr_{\text{non-gaussian}}\)
+\textbf{Solution}
+\begin{enumerate}[topsep=0pt,itemsep=-2ex,partopsep=1ex,parsep=1ex]
+\item Write  log likelihood function:
+\[L(X,\{\text{params}Pr_{non-gaussian} u_js\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
+\item Write \(\gamma_j(x_i) = p(z_j = j | x_i)\) (prob. that \(x_i\) was generated from \(j^{th}\) dist. of the mixture).
+\begin{align*}
+(x_i) &= p(z_i = j | x_i) = \frac{p(x_i|z_i = j) p(z_i = j)}{p(x_i)}\\
+&= \frac{p(x_i|z_i = j) p(z_i = j)}{\sum\limits^n_{k=1}p(x_i|z_i = k) p(z_i = k)}
+= \frac{\pi_i L(X,u_js)}{\sum^n_{k=1}\pi_k L(X,u_js)}
+\end{align*}
+\item \textbf{To get optimal }\(\mathbf{u_js}\), derive \(L(x,u_js)\) by each param \(u_j\).
+You get:
+\[\nabla x_j L(X,u_js) = \sum\limits^n_{i=1}\frac{1}{Pr_{non-gaussian}} \cdot (\nabla u_j Pr_{non-gaussian})\](possibly replace by \(\gamma_j(x_i)\) (above and below) leaving back some factor). Solve for the parameter \(u_j\).
+\item \textbf{Estimate the \(\pi\) parameters} by Lagrange optimization on log likelihood function and constraint \(\lambda \left(\sum\limits^k_{j=1}\pi_j -1\right) \). Put the \(\lambda\) into the formula and find the formula for \(\pi_j\).
+\end{enumerate}
 
 {\color{subsubsectionColor}\subsubsection{PCA}}
 (dimensional reduction = regression)

@@ -24,19 +24,15 @@ You are given the model behind the EM in the form:
 \paragraph{Solution}
 \begin{enumerate}
 \item Write down the log likelihood function, which is
-\[L(X,\{\text{parameters of }Pr_{non-gaussian}\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
-Let us assume that the parameters of \(Pr_{non-gaussian}\) are \(\mu,b\).
+\[L(X,\{\text{parameters of }Pr_{non-gaussian} u_js\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
+Let us assume that the parameters of \(Pr_{non-gaussian}\) are \(u_js\).
 \item Write down the \(\gamma_j(x_i) = p(z_j = j | x_i)\) which is the probability that \(x_i\) was generated from \(j^{th}\) distribution of the mixture.
-\[\gamma_j(x_i) = p(z_j = j | x_i) = \frac{p(x_i|z_j = j) p(z_j = j)}{p(x_i)} = \frac{p(x_i|z_j = j) p(z_j = j)}{\sum\limits^n_{k=1}p(x_i|z_k = k) p(z_k = k)} \\
-= \frac{\pi_i L(X,\mu,b)}{\sum^n_{k=1}\pi_k L(X,\mu,b)} \]
-\item Derive the likelihood function \(L(x,\mu, b)\) by \(\mu_j\)
+\[\gamma_j(x_i) = p(z_i = j | x_i) = \frac{p(x_i|z_i = j) p(z_i = j)}{p(x_i)} = \frac{p(x_i|z_i = j) p(z_i = j)}{\sum\limits^n_{k=1}p(x_i|z_i = k) p(z_i = k)} \\
+= \frac{\pi_i L(X,u_js)}{\sum^n_{k=1}\pi_k L(X,u_js)} \]
+\item \textbf{To get optimal }\(\mathbf{u_js}\), derive the likelihood function \(L(x,u_js)\) by each parameter \(u_j\).
 You will find out that it is something like
-\[\nabla m_j L(X,\mu,b) = \sum\limits^n_{i=1}\frac{1}{Pr_{non-gaussian}} \cdot (\nabla \mu_j Pr_{non-gaussian})\] and it should be possible to replace most of it by \(\gamma_j(x_i)\) leaving back some factor around it.
-\item Derive the likelihood function \(L(x,\mu, b)\) by \(b_j\)
-You will find out that it is something like
-\[\nabla b_j L(X,\mu,b) = \sum\limits^n_{i=1}\frac{1}{Pr_{non-gaussian}} \cdot (\nabla b_j Pr_{non-gaussian})\] and it should be possible to replace most of it by \(\gamma_j(x_i)\) leaving back some factor around it.
-\item Set both of them to zero and find the formula of \(\mu_j\) and \(b_j\) from the equations.s
-\item Estimate the \(\pi\) parameters by doing a Lagrange optimization on the log likelihood function and constraining the optimization by \(\lambda \left(\sum\limits^k_{j=1}\pi_j -1\right) \) as \(\sum\limits^k_{j=1}\pi_j = 1\)
+\[\nabla x_j L(X,u_js) = \sum\limits^n_{i=1}\frac{1}{Pr_{non-gaussian}} \cdot (\nabla u_j Pr_{non-gaussian})\](possibly replace by \(\gamma_j(x_i)\) (above and below) leaving back some factor around it). Solve for the parameter \(u_j\).
+\item \textbf{Estimate the \(\pi\) parameters} by doing a Lagrange optimization on the log likelihood function and constraining the optimization by \(\lambda \left(\sum\limits^k_{j=1}\pi_j -1\right) \) as \(\sum\limits^k_{j=1}\pi_j = 1\)
 \item Put the \(\lambda\) into the formula and find the formula for \(\pi_j\).
 \end{enumerate}
 \end{document}

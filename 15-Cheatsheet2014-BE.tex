@@ -12,6 +12,12 @@
 \titlespacing*{\subsubsection}
 {0pt}{0.5ex plus 1ex minus .2ex}{0.3ex plus .2ex}
 
+
+
+%############
+% Cheatsheet setup depending on whether it is compiled on its own or within the whole summary
+%############
+\ifx\cheatsheet\undefined
 %change page definitions to fullpage
 \setlength{\topmargin}{-1.2in} %{20mm} %Topmargin
 \setlength{\headsep}{2mm} %Body starts 55mm from top sheet edge
@@ -24,8 +30,26 @@
 \addtolength{\voffset}{10pt}
 \setlength{\oddsidemargin}{-1in}
 \setlength{\evensidemargin}{-1in}
+\else
+%set these if the cheatsheet is compiled for the whole summary. This might make that it it longer than 2 pages.
 
-
+\setlength{\footskip}{0mm} %{15mm}
+\setlength{\textwidth}{190mm} %{212mm}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\topmargin}{10mm} %{20mm} %Topmargin
+\setlength{\headsep}{2mm} %Body starts 55mm from top sheet edge
+\setlength{\footskip}{0mm} %{15mm}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\textwidth}{190mm} % A4 page width 210
+\setlength{\textheight}{277mm} %Best {140mm}
+\addtolength{\voffset}{-30mm}
+\setlength{\oddsidemargin}{10mm-1in} %{35mm} %Left margin
+\setlength{\evensidemargin}{10mm}
+\fi
 
 \begin{landscape}
 %this removes the section title if the cheat sheet is compiled separately
@@ -34,6 +58,7 @@
 \else
 {\color{sectionColor}\section{Cheat sheet 2014 Benjamin Ellenberger}} %Killing this gives us more space
 \fi
+
 %VISUALIZE LAYOUT AND LAYOUTVALUES:
 %\pagevalues
 %\newpage asd\newpage

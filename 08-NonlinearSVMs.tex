@@ -8,14 +8,55 @@
 \section{Nonlinear Support Vector Machines}
 Many linear parametric models (including SVMs) can be  re-cast into an equivalent 'dual representation' in which the predictions are also based on linear combinations of a kernel function evaluated at the training data points. 
 \subsection{Kernels}
-For models which are based on a fixed nonlinear feature space mapping $\psi(x)$, the kernel function is given by the relation
+For models which are based on a fixed nonlinear feature space mapping $\phi(x)$, the kernel function is given by the relation
 \begin{align}
-k(x,y)=\psi(x)^T\psi(y)
+k(x,y)=\langle \phi(x), \phi(y) \rangle
 \end{align}
-A kernel is a symmetric function of its arguments so that $k(x,y)=k(y,x)$. The simplest example of a kernel function is obtained for $\psi(x)=x$ (i.e. no transformation), in which case $k(x,y)=x^Ty$. This may be called the linear kernel. The concept of a kernel formulated as an inner product in a feature space allows us to build interesting extensions of many well-known algorithms by making use of the \textbf{kernel trick}. The idea is that if the vector x enters only as a scalar product into the training algorithm, then we can replace the scalar product with some other kernel. \newline
-The optimization function of the SVM for linear features is given by 
+A kernel is a symmetric function of its arguments so that $k(x,y)=k(y,x)$. The simplest example of a kernel function is obtained for $\phi(x)=x$ (i.e. no transformation), in which case $k(x,y)=\langle x,y \rangle$. This may be called the linear kernel. The concept of a kernel formulated as an inner product in a feature space allows us to build interesting extensions of many well-known algorithms by making use of the \textbf{kernel trick}. The idea is that if the vector x enters only as a scalar product into the training algorithm, then we can replace the scalar product with some other kernel. 
+\paragraph{Kernelized SVM} The optimization function of the SVM for linear features is given by 
 \begin{align}
 \tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
 \end{align}
-where $k(x_i, x_j)$ replaces $\{\psi(x_i)^T \psi(x_j)\}$.
+where $k(x_i, x_j)$ replaces $\langle \phi(x_i), \phi(x_j)\rangle$.
+\paragraph{Properties}
+Every Kernel is the scalar product of two vectors in some n-dimensional space. Consider the following kernel, taking two 1-dimensional vectors (i.e. scalars) as arguments: 
+\begin{align}
+k(x,y)=\langle log(x), log(y) \rangle
+\end{align}
+What this does is, it transforms the inputs into log space and there calculates the scalar product. If you can transform a function taking to vectors as inputs into the following form $\langle \phi(x_i), \phi(x_j)\rangle$, you have proven that it is a kernel. \textbf{Kernels are symmetric} $\rightarrow k(x,y)=k(y,x)$.
+\subsection{Kernelized Linear Regression}
+Many linear models for regression and classification can be reformulated in a dual representation in which the feature vectors only enter as scalar products or as a \textbf{design matrix} (see below). In this case we can apply the kernel trick.
+Consider the following linear regression model
+\begin{align}
+J(w)=\frac{1}{2} \sum_i^N (w^T \phi(x_i)-y_i)^2 + \frac{\lambda}{2} w^T w
+\end{align}
+where $\lambda \geq 0$. By setting the gradient with respect to w equal to zero,  we see that the solution for w takes the form of linear combination of the vectors $\phi(x_i)$ with coefficients that are functions of w:
+\begin{align}
+w=-\frac{1}{\lambda}\sum_i^N(w^T \phi(x_i)-y_i)\phi(x_i)=\sum_i^N a_i \phi(x_i)=\Phi^T a
+\end{align}
+where $\Phi$ is the design matrix, whose $n^{th}$ row is given by $\phi(x_i)^T$. Here the vector $a=(a_1, ..., a_N)^T$, and we have defined
+\begin{align}
+a_i=-\frac{1}{\lambda}(w^T \phi(x_i)-y_i)
+\end{align}
+Instead of working with parameter vector w, we can now reformulate the leastsquares algorithm in terms of the parameter vector a, giving rise to the \textbf{dual representation}. If we substitute $w=\Phi^T a$ into $J(w)$, we obtain
+\begin{align}
+J(a)=\frac{1}{2}a^T \Phi \Phi^T \Phi \Phi^T a - a^T \Phi \Phi^T y + \frac{1}{2}t^T t + \frac{\lambda}{2} \Phi \Phi^T a
+\end{align}
+where $y=(y_1,...,y_N)^T$. We now define the Gram matrix $G= \Phi \Phi^T$, which is an $N x N$ symmetric matrix with elements
+\begin{align}
+G_{ij} = \phi(x_i)^T \phi(x_j)=k(x_i, x_j)
+\end{align}
+where we have introduced the kernel function k(x, y). In terms of the Gram matrix $G$, the sum-of-squares error function can be written as
+\begin{align}
+J(a)=\frac{1}{2}a^T KKa - a^T Ky + \frac{1}{2}y^T y + \frac{\lambda}{2}a^T Ka
+\end{align}
+Using $w=\Phi^T a$ to eliminate w from $a_i=-\frac{1}{\lambda}(w^T \phi(x_i)-y_i)$ and solving for a we obtain
+\begin{align}
+a=(K + \lambda I_N)^{-1} y
+\end{align}
+Substituting this back into the linear regression model, we obtain the following prediction for a new input x
+\begin{align}
+f(x)=w^T \phi(x)=a^T \Phi \phi(x) = k(x)^T (K+\lambda I_N)^{-1} y
+\end{align}
+where we have defined the vector $k(x)$ with elements $k_n(x) = k(x_n, x)$. 
 \end{document}

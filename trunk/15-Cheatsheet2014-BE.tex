@@ -102,7 +102,8 @@ Requirements: Symmetric ($k(x,y)=k(y,x)$) \\ positive semi-definite $K$.
 \(k(x,y) = a k_1(x,y) + b k_2(x,y)\)\\
 \(k(x,y) = k_1(x,y)k_2(x,y)\)\\
 \(k(x,y) = f(x) f(y)\)\\
-\(k(x,y) = k_3(\phi(x), \phi(y))\)
+\(k(x,y) = k_3(\phi(x), \phi(y))\) \\
+with $a>0,b>0$
 \end{tabular}
 \begin{tabular}{ll}
 Linear & \(k(x,y) = x^\top y\)\\
@@ -116,13 +117,13 @@ Sigmoid & \(k(x,y) = \tanh(k x^\top y - b)\)
 \begin{equation}
 \min_{w} \sum_{i=1}^n (y_i - w^\top x_i)^2
 \end{equation}
-Closed form solution: $w^* = (x^\top x)^{-1} x^\top y$ \\
+Closed form solution: $\beta^* = (X^\top X)^{-1} X^\top Y$ \\
 \textbf{Ridge Regression:}
 \begin{equation}
 \min_{w} \sum_{i=1}^n (y_i - w^\top x_i)^2 + \lambda \|w\|_2^2
 \end{equation}
-Closed form solution: $w^* = (x^\top x + \lambda I)^{-1} x^\top y$ \\
-\textbf{Lasso Regression} (sparse):
+Closed form solution: $\beta^* = (X^\top X + \lambda I)^{-1} X^\top Y$ \\
+\textbf{Lasso Regression} (sparse), requiring $\sum\limits_j^d |\beta_j| < s$:
 \begin{equation}
 \min_{w} \sum_{i=1}^n (y_i - w^\top x_i)^2 + \lambda \|w\|_1
 \end{equation}
@@ -131,7 +132,16 @@ Closed form solution: $w^* = (x^\top x + \lambda I)^{-1} x^\top y$ \\
 \min_{\alpha} \|K\alpha - y \|_2^2 + \lambda \alpha^\top K \alpha
 \end{equation}
 Closed form solution: $\alpha = (K-\lambda I)^{-1} y $ \\
+\textbf{Nonlinear Regression}:
+\begin{equation}
+RSS(f,\lambda) = \sum\limits_{i=1}^n (y_i - f(x_i))^2 + \lambda  \int (f''(x))^2dx
+\end{equation}
+\begin{equation}
+f(x) = \sum\limits_{m=1}^M \beta_m h_m(x) \text{ with } h_m {1,x,(x-\xi_1)^2}
+\end{equation}
+$\xi_1$ are knots, the center of a function.
 
+$f''(x)=0$ is required to have smoothness
 {\color{subsectionColor}\subsection{Classification}}
 \begin{eqnarray}
 \text{0/1 Loss} & w^* =& \argmin_w \sum_{i=1}^n [y_i \neq sign(w^\top x_i)] \\
@@ -159,6 +169,29 @@ Dual to primal: $w^* = \sum_{i=1}^{n} \alpha^*_i y_i x_i$, $\alpha_i > 0$: suppo
 \end{equation}
 Classify: $y = sign(\sum_{i=1}^{n} \alpha_i y_i k(x_i, x))$
 
+{\color{subsubsectionColor}\subsubsection{How to find $a^T$?}}
+$a = \{w_0,w\}$ used along $\widetilde{x} = \{1,x\}$
+
+Gradient Descent: $a(k+1) = a(k) - \eta(k) \nabla J(a(k))$
+
+Newton method: 2nd order Taylor to get $\eta_{opt} = H^{-1}$ with $H=\frac{\partial^2 J}{\partial a_i \partial a_j}$
+
+$J$ is the cost matrix, popular choice is
+
+Perceptron cost: $J_p (a) = \sum(-a^T \widetilde{x})$
+{\color{subsubsectionColor}\subsubsection{Bootstrapping}}
+\begin{eqnarray}
+\bar{S} = \frac{1}{B}\sum S(Z*)\\
+\sigma^2(S) = \frac{1}{B-1} (S(Z^*) - \bar{S})^2\\
+\end{eqnarray}
+Bootstrapping works if for $n \rightarrow \infty$ the error of empirical\&bootstrap is the same as real\&empiricial
+
+Probability for a sample not to appear in set: $(1-\frac{1}{n})^n$. Goes to $\frac{1}{e}$ for $n \rightarrow \infty$
+
+Multiplicity N sample to choose k times with replacement: $  N-1+k \choose k$. In bootstrapping $N=k$
+{\color{subsubsectionColor}\subsubsection{Jackknife}}
+Method for debiasing at the price of variance
+
 {\color{subsectionColor}\subsection{Misc}}
 \textbf{Lagrangian:} $f(x,y) s.t. g(x,y) = c$
 \begin{equation}
@@ -182,7 +215,7 @@ L(w) &= -\log(P(y_1 ... y_n | x_1 ... x_n, w)) \\
 {\color{subsubsectionColor}\subsubsection{MAP}}
 Ridge regression, Gaussian prior on weights
 \begin{align}
-&\argmax_w P(w) \prod_{i}^{n} P(y_i|x_i,w)\\
+&\hat{y}_{MAP} = \argmax_w P(w) \prod_{i}^{n} P(y_i|x_i,w)\\
 &=\argmin_w \frac{1}{2\sigma^2} \sum_{i=1}^{n} (y_i - w^\top x_i) + \frac{1}{2 \beta^2}\sum_{i=1}^{n}w_i^2
 \end{align}
 $P(w)$ or $P(\theta)$ - conjugate prior (beta, Gaussian) (posterior same class as prior) \\
@@ -196,10 +229,14 @@ a^* = \argmin_{a \in A} E_y[C(y,a)|x]
 
 {\color{subsectionColor}\subsection{Ensemble Methods}}
 Use combination of simple hypotheses (weak learners) to create one strong learner.
+
+strong learners: minimum error is below some $\delta < 0.5$
+
+weak learner: maximum error is below $0.5$
 \begin{equation}
 f(x) = \sum_{i=1}^{n} \beta_i h_i(x)
 \end{equation}
-\textbf{Bagging}: train weak learners on random subsamples with equal weights. \\
+\textbf{Bagging}: train weak learners on bootstrapped sets with equal weights. \\
 \textbf{Boosting}: train on all data, but reweigh misclassified samples higher.
 
 {\color{subsubsectionColor}\subsubsection{Decision Trees}}
@@ -219,6 +256,22 @@ Train $m$ weak learners, greedily selecting each one
 \begin{equation}
 (\beta_i, h_i) = \argmin_{\beta,h} \sum_{i=1}^{n} \exp(-y_i (f_{i-1} (x_j) + \beta h(x_j)))
 \end{equation}
+\begin{eqnarray}
+c_b(x) \text { trained with } w_i \\
+\epsilon_b = \sum\limits_i^n \frac{w_i^b}{\sum\limits_i^n w_i^b} I_{c(x_i) \neq y_i} \\
+\alpha_b = log \frac{1-\epsilon_b}{\epsilon_b} \\
+w_i = e^{-\alpha_b I_{y_i \neq c_b(x_i)}}
+\end{eqnarray}
+
+Exponential loss function
+
+Additive logistic regression
+
+Bayesian approached (assumes posteriors)
+
+Newtonlike updates (Gradient Descent)
+
+If previous classifier bad, next has heigh weight
 
 {\color{subsectionColor}\subsection{Generative Methods}}
 \textbf{Discriminative} - estimate $P(y|x)$ - conditional. \\
@@ -236,6 +289,9 @@ f(x) = \log(\frac{P(y=1|x)}{P(y==1|x)}), y=sign(f(x))
 \end{equation}
 
 {\color{subsubsectionColor}\subsubsection{Fischer's Linear Discriminant Analysis (LDA)}}
+Idea: project high dimensional data on one axis.
+
+Complexity: $\mathcal{O}(d^2n$ with $d$ number of classifiers
 \begin{eqnarray}
 && c=2, p=0.5, \hat{\Sigma}_- = \hat{\Sigma}_+ = \hat{\Sigma} \\
 y &=& sign(w^\top x + w_0) \\
@@ -245,6 +301,15 @@ w_0 &=& \frac{1}{2}(\hat{\mu}_-^\top \Sigma^{-1} \hat{\mu}_- - \hat{\mu}_+^\top 
 
 
 {\color{subsectionColor}\subsection{Unsupervised Learning}}
+{\color{subsubsectionColor}\subsubsection{Parzen}}
+\begin{equation}
+\hat{p}_n = \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{V_n} \phi(\frac{x-x_i}{h_n})
+\end{equation}
+where $\int \phi(x)dx = 1$
+{\color{subsubsectionColor}\subsubsection{K-NN}}
+\begin{equation}
+\hat{p}_n = \frac{1}{V_k} \text{ volume with } k \text{ neighbours}
+\end{equation}
 {\color{subsubsectionColor}\subsubsection{K-means}}
 (clustering = classification)
 \begin{equation}
@@ -253,6 +318,11 @@ L(\mu) = \sum_{i=1}^{n} \min_{j\in\{1...k\}} \|x_i - \mu_y \|_2^2
 \textbf{Lloyd's Heuristic}: (1) assign each $x_i$ to closest cluster \\
 (2) recalculate means of clusters.
 
+Iteration over (repeated till stable):
+\begin{eqnarray}
+\text{Step 1: }& \text{argmin}_c ||x-\mu_c||^2 \\
+\text{Step 2: }& \mu_\alpha = \frac{1}{n_\alpha} \sum \vec{x}
+\end{eqnarray}
 {\color{subsubsectionColor}\subsubsection{Gaussian Mixture Modeling}}
 Same as Bayes, but class label $z$ unobserved.
 \begin{equation}
@@ -260,11 +330,13 @@ Same as Bayes, but class label $z$ unobserved.
 \end{equation}
 
 {\color{subsubsectionColor}\subsubsection{EM Algorithm}}
+Problem: sum within log-term of likelihood.
+
 \textbf{E-step}: expectation: pick clusters for points.
-Calculate $\gamma_j^{(t)}(x_i)$ for each $i$ and $j$\\
+Calculate $\gamma_j^{(t)}(x_i) = \frac{P(c|\theta^j) (x_i|c,\theta^j)}{\sum P(x_i|\theta)}$ for each $i$ and $j$\\
 \textbf{M-Step}: maximum likelihood: adjust clusters to best fit points.\\
 \begin{eqnarray}
-\omega^{(t)}_j &\leftarrow& \frac{1}{n}\sum_{i=1}^n \gamma_j^{(t)}(x_i) \\
+\text{prior}_j^{(t)} = \pi^{(t)}_j &\leftarrow& \frac{1}{n}\sum_{i=1}^n \gamma_j^{(t)}(x_i) \\
 \mu_j^{(t)} &\leftarrow& \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i)}{\sum_{i=1}^n \gamma^{(t)}(x_i)} \\
 \Sigma^{(t)}_j &\leftarrow& \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i-\mu_j^{(t)})(x_i-\mu_j^{(t)})^\top}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}
 \end{eqnarray}
@@ -287,7 +359,55 @@ $W$ is orthogonal, $W = (v_1 | ... | v_k)$ and $z_i = w^\top x_i$
 \alpha^{(i)} = \frac{1}{\sqrt{\lambda_i}}\frac{v_i}{\|v_i\|_2}, \;\;
 K = \sum_{i=1}^n \lambda_i v_i v_i^\top
 \end{eqnarray}
+{\color{subsectionColor}\subsection{Hidden-Markov model}}
+State only depends on previous state.
 
+Always given: sequence of symbols $\vec{s} = \{s_1,s_2, \ldots s_n\}$
+{\color{subsubsectionColor}\subsubsection{Evaluation (Forward \& Backward)}}
+Known: $a_{ij}, e_k(s_t)$
+
+Wanted: $P(X = x_i | S = s_t)$
+\begin{eqnarray}
+f_l (s_{t+1}) = e_l(s_{t+1}) \sum f_k(s_t) a_{kl} \\
+b_l(s_t) = e_l(s_t) \sum b_k(s_{t+1}) a_{lk} \\
+P(\vec{s}) = \sum_k f_k(s_n) a_k \cdot \text{ end} \\
+P(x_{l,t} | \vec{s}) = \frac{f_l(s_t) b_l(s_t)}{P(\vec{s})}
+\end{eqnarray}
+Complexity in time: $\mathcal{O}(|S|^2 \cdot T)$
+
+{\color{subsubsectionColor}\subsubsection{Decoding (Viterbi)}}
+Known: $a_{ij}, e_k(s_t)$
+
+Wanted: most likely path $\vec{x} = \{x_1,x_2,\ldots x_n\}$
+\begin{eqnarray}
+v_l(s_{t+1}) = \text{max}_k \{ v_k(s_t) a_{kl} \} \\
+\text{ptr}_t(l) = \text{argmax}_k \{ v_k(s_t) a_{kl} \}
+\end{eqnarray}
+Follow pointers back from end to beginning.
+
+Dynamic, because splittable in sub parts (per time step)
+
+Time: $\mathcal{O}(|S|^2 \cdot T)$
+Space $\mathcal{O}(|S| \cdot T)$
+
+{\color{subsubsectionColor}\subsubsection{Learning (Baum-Welch)}}
+Known: only sequence and sequence space $\Theta$
+
+Wanted: $a_{ij}, e_k(s_t)$ \& most likely path $\vec{x} = \{x_1,x_2,\ldots x_n\}$
+
+\textbf{E-step I:} $f_k(s_t), b_k(s_t)$ by forward \& backward algorithm
+
+\textbf{E-step II:}
+\begin{eqnarray}
+P(X_t = x_k, X_{t+1} = x_l | \vec{s}, \Theta) = \\
+ \frac{1}{P(\vec{s})} f_k(s_t) a_{kl} e_l(s_{t+1}) b_l(s_{t+1}) \\
+A_{kl} = \sum\limits_{j=1}^m \sum\limits_{t=1}^n P(X_t = x_k, X_{t+1} = x_l | \vec{s}, \Theta)
+\end{eqnarray}
+\textbf{M-step :}
+\begin{eqnarray}
+a_{kl} = \frac{A_{kl}}{\sum\limits_i^n A_{ki}} \text{   and   } e_k(b) = \frac{E_k(b)}{\sum_{b'} E_k(b')}
+\end{eqnarray}
+Complexity: $\mathcal{O}(|S|^2)$ in storage (space)
 \end{multicols}
 \end{landscape}
 \end{document}

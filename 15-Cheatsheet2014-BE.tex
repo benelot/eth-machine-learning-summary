@@ -25,10 +25,10 @@
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\setlength{\textwidth}{208mm} % A4 page width 210
-\setlength{\textheight}{295mm} %A4 page height 297
-\addtolength{\voffset}{10pt}
-\setlength{\oddsidemargin}{-1in}
+\setlength{\textwidth}{208mm-4mm} % A4 page width 210
+\setlength{\textheight}{295mm-4mm} %A4 page height 297
+\addtolength{\voffset}{15pt}
+\setlength{\oddsidemargin}{-0.8in}
 \setlength{\evensidemargin}{-1in}
 \else
 
@@ -38,7 +38,7 @@
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\setlength{\topmargin}{10mm} %{20mm} %Topmargin
+\setlength{\topmargin}{15mm} %{20mm} %Topmargin
 \setlength{\headsep}{2mm} %Body starts 55mm from top sheet edge
 \setlength{\footskip}{0mm} %{15mm}
 \setlength{\itemsep}{0pt}
@@ -321,6 +321,26 @@ w &=& \hat{\Sigma}^{-1}(\hat{\mu}_+ - \hat{\mu}_-) \\
 w_0 &=& \frac{1}{2}(\hat{\mu}_-^\top \Sigma^{-1} \hat{\mu}_- - \hat{\mu}_+^\top \Sigma^{-1} \hat{\mu}_+)
 \end{eqnarray}
 
+{\color{subsectionColor}\subsection{Neural Networks}}
+\textbf{Backpropagation algorithm}
+\begin{enumerate}[topsep=0pt,itemsep=0ex,partopsep=1ex,parsep=1ex,leftmargin=*]
+\item  Initialize the weights $W^m_{ij}$ with small random values.
+\item Choose a pattern $x^k_\mu$ and feed it to the input layer (m = 0),
+i.e., $V_k^0 = x_k^{\mu}$ , $\forall k$.
+\item Propagate the activity through the network where
+\[V^m_i = S \left(\sum\limits_j W^m_{ij}V^{m-1}_j\right)\]
+holds for each i and each layer m.
+\item Calculate the weight corrections for the output layer
+\[\delta^M_i = S\sp{\prime}(h^M_i)[y^\mu_i-V^M_i]\]
+by comparing the actual output $V_i^M$ with the desired output \(y^\mu_i\) for pattern $\mu$.
+\item Calculate the weight corrections for the previous layers by sending back the error signal
+\[\delta^{m-1}_i = S\sp{\prime}(h_i^{m-1})\sum\limits_jW^m_{ji}\delta_j^m\]
+for \(m = M, M - 1, \ldots , 2\), until a weight correction has been
+calculated for each unit.
+\item Use \(\Delta W_{ij} = \eta\delta_i^m V_j^{m-1}\) , to adapt all weights according to
+\(W^{new}_{ij} = W^{old}_{ij} + \Delta W_{ij}\)
+\item Goto 2 and repeat the loop for the next pattern.
+\end{enumerate}
 
 {\color{subsectionColor}\subsection{Unsupervised Learning}}
 {\color{subsubsectionColor}\subsubsection{Parzen}}
@@ -368,7 +388,7 @@ Calculate $\gamma_j^{(t)}(x_i) = \frac{P(c|\theta^j) (x_i|c,\theta^j)}{\sum P(x_
 Derive the EM algorithm. The model behind the EM in the form:
 \(p(x) = \sum\limits^n_{j=1}\pi_j Pr_{\text{non-gaussian}}\)
 \textbf{Solution}
-\begin{enumerate}[topsep=0pt,itemsep=-2ex,partopsep=1ex,parsep=1ex,leftmargin=*]
+\begin{enumerate}[topsep=0pt,itemsep=0ex,partopsep=1ex,parsep=1ex,leftmargin=*]
 \item Write  log likelihood function:
 \[L(X,\{\text{params}Pr_{non-gaussian} u_js\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
 \item Write \(\gamma_j(x_i) = p(z_j = j | x_i)\) (prob. that \(x_i\) was generated from \(j^{th}\) dist. of the mixture).

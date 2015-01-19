@@ -78,7 +78,7 @@
 Sum Rule& \(P(X=x_i) = \sum_{j=1}^{J} p(X=x_i,Y=y_i)\)\\
 Product rule& \(P(X, Y) = P(Y|X) P(X)\) \\
 Independence& \(P(X, Y) = P(X)P(Y)\) \\
-Bayes' Rule& \(P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}\) \\
+Bayes' Rule& \(P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)} =  \frac{P(X|Y)P(Y)}{\sum\limits^k_{i=1}P(X|Y_i)P(Y_i)}\)\\
 Conditional independence& \(X\bot Y|Z \)\\
  & \(P(X,Y|Z) = P(X|Z)P(Y|Z)\) \\
  & \(P(X|Z,Y) = P(X|Z)\)
@@ -213,6 +213,11 @@ L(w) &= -\log(P(y_1 ... y_n | x_1 ... x_n, w)) \\
 \argmax_w P(y|x, w) &= \argmin_w L(w) \\
 &= \argmin_w \sum_{i=1}^{n} (y_i-w^\top x_i)^2
 \end{align}
+
+\begin{eqnarray}
+\widehat\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (x_{i} - \bar{x})^2, 
+E \left[ \widehat\sigma^2  \right]= \frac{n-1}{n}\sigma^2
+\end{eqnarray}
 
 {\color{subsubsectionColor}\subsubsection{MAP}}
 Ridge regression, Gaussian prior on weights
@@ -353,7 +358,7 @@ Derive the EM algorithm. The model behind the EM in the form:
 \[L(X,\{\text{params}Pr_{non-gaussian} u_js\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
 \item Write \(\gamma_j(x_i) = p(z_j = j | x_i)\) (prob. that \(x_i\) was generated from \(j^{th}\) dist. of the mixture).
 \begin{align*}
-(x_i) &= p(z_i = j | x_i) = \frac{p(x_i|z_i = j) p(z_i = j)}{p(x_i)}\\
+\gamma_j(x_i) &= p(z_i = j | x_i) = \frac{p(x_i|z_i = j) p(z_i = j)}{p(x_i)}\\
 &= \frac{p(x_i|z_i = j) p(z_i = j)}{\sum\limits^n_{k=1}p(x_i|z_i = k) p(z_i = k)}
 = \frac{\pi_i L(X,u_js)}{\sum^n_{k=1}\pi_k L(X,u_js)}
 \end{align*}

@@ -18,7 +18,7 @@
 % Cheatsheet setup depending on whether it is compiled on its own or within the whole summary
 %############
 \ifx\cheatsheet\undefined
-%change page definitions to fullpage
+%change page definitions to fullpage. Compile this document alone to make it compiled as fullpage.
 \setlength{\topmargin}{-1.2in} %{20mm} %Topmargin
 \setlength{\headsep}{2mm} %Body starts 55mm from top sheet edge
 \setlength{\footskip}{0mm} %{15mm}
@@ -31,8 +31,8 @@
 \setlength{\oddsidemargin}{-1in}
 \setlength{\evensidemargin}{-1in}
 \else
-%set these if the cheatsheet is compiled for the whole summary. This might make that it it longer than 2 pages.
 
+%set these settings if the cheatsheet is compiled for the whole summary. This might make that the cheatsheet is longer than 2 pages.
 \setlength{\footskip}{0mm} %{15mm}
 \setlength{\textwidth}{190mm} %{212mm}
 \setlength{\itemsep}{0pt}
@@ -56,7 +56,7 @@
 \ifx\cheatsheet\undefined
 \addcontentsline{toc}{section}{Cheat sheet 2014}
 \else
-{\color{sectionColor}\section{Cheat sheet 2014 Benjamin Ellenberger}} %Killing this gives us more space
+{\color{sectionColor}\section{Cheat sheet 2014 Benjamin Ellenberger}}
 \fi
 
 %VISUALIZE LAYOUT AND LAYOUTVALUES:
@@ -180,6 +180,7 @@ $J$ is the cost matrix, popular choice is
 
 Perceptron cost: $J_p (a) = \sum(-a^T \widetilde{x})$
 {\color{subsubsectionColor}\subsubsection{Bootstrapping}}
+Sample creation with replacement. Calculate mean and var of it and average.
 \begin{eqnarray}
 \bar{S} = \frac{1}{B}\sum S(Z*)\\
 \sigma^2(S) = \frac{1}{B-1} (S(Z^*) - \bar{S})^2\\
@@ -197,10 +198,11 @@ Method for debiasing at the price of variance \(\printlatex{\bar{\theta}_\mathrm
 \begin{equation}
 \mathcal{L}(x, y, \gamma) = f(x,y) - \gamma ( g(x,y)-c)
 \end{equation}
-\textbf{Parametric learning}: model is parameterized with a finite set of parameters, like linear regression, linear SVM, etc. \\ \\
-\textbf{Nonparametric learning}: models grow in complexity with quantity of data: kernel SVM, k-NN, etc.
+\textbf{Parametric learning}: model is parametrized with a finite set of parameters, like linear regression, linear SVM, etc. \\
+\textbf{Nonparametric learning}: models grow in complexity with quantity of data: kernel SVM, k-NN, etc.\\
+\textbf{Empirical variance}: Look for dense and sparse regions. Regularize so that sparse regions are not contained (decr. variance). Measure by Variance CV of some classifiers.
 
-{\color{subsectionColor}\subsection{Probabilistic Methods:}}
+{\color{subsectionColor}\subsection{Probabilistic Methods}}
 {\color{subsubsectionColor}\subsubsection{MLE}}
 Least Squares, Gaussian Noise
 \begin{align}

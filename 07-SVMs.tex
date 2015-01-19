@@ -122,7 +122,7 @@ The maximum margin solution is given by
 \begin{align}
 \argmax_{w, w_0} \{\frac{1}{\parallel w \parallel} \min_i[y_i (w^T\phi(x_i) + w_0)]\}
 \end{align}
-where we have taken factor $\frac{1}{\parallel w \parallel}$ outside of the optimization because $w$ doesn't depend on $i$. Direct solution of this problem would be very complex, therefore we simplify it. We notice that if we rescale $w \rightarrow \gamma w$ and $w_0 \rightarrow \gamma w_0$ then the distance from any $x_i$ to decision surface given by $frac{y_i f(x_i)}{\parallel w \parallel}$ doesn't change. Therefore
+where we have taken factor $\frac{1}{\parallel w \parallel}$ outside of the optimization because $w$ doesn't depend on $i$. Direct solution of this problem would be very complex, therefore we simplify it. We notice that if we rescale $w \rightarrow \gamma w$ and $w_0 \rightarrow \gamma w_0$ then the distance from any $x_i$ to decision surface given by $\frac{y_i f(x_i)}{\parallel w \parallel}$ doesn't change. Therefore
 \begin{align}
 y_i (w^T\phi(x_i) + w_0) = 1
 \end{align}
@@ -130,13 +130,13 @@ for the point that is closest to the surface. In this case all datapoints will s
 \begin{align}
 y_i (w^T\phi(x_i) + w_0) \geq 1
 \end{align}
-This is called the \textbf{canonical representation} of the decision hyperplane. In case of points for which the constraints holds, the constraints are called active. Otherwise they're inactive. The optimization problem therefore requires to maximize $\parallel w \parallel^-1$ which is equivalent to minimizing $\parallel w \parallel^2$. The optimization problem becomes:
+This is called the \textbf{canonical representation} of the decision hyperplane. In case of points for which the constraints holds, the constraints are called active. Otherwise they're inactive. The optimization problem therefore requires to maximize $\parallel w \parallel^{-1}$ which is equivalent to minimizing $\parallel w \parallel^2$. The optimization problem becomes:
 \begin{align}
 \argmin_{w,w_0} \frac{1}{2} \parallel w \parallel^2 \\
 subject \ to \ y_i (w^T\phi(x_i) + w_0) \geq 1 \ \forall_i
 \end{align}
 \paragraph{Lagrangian}
-Now we reformulate this problems as a lagrange problem. The condition needs to be turned into the form $g(w) \geq 0$ and we add multipliers:
+Now we reformulate this problem as a Lagrange problem. The condition needs to be turned into the form $g(w) \geq 0$ and we add multipliers:
 \begin{align}
 L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1\}
 \end{align}
@@ -148,9 +148,9 @@ w = \sum_i \alpha_i y_i \phi(x_i) \\
 \paragraph{Dual Problem}
 We can now eliminate $w$ and $w_0$ from $L(w,w_0,\alpha)$ which gives us the dual representation of the maximum margin problem in which we maximize
 \begin{align}
-L(w,w_0,\alpha)=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1\} \\
-\tilde{L}(\alpha)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i \\
-\tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) \\
+L(w,w_0,\alpha)&=\frac{1}{2}\parallel w \parallel^2 - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1\} \\
+\tilde{L}(\alpha)&=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i \\
+\tilde{L}(\alpha)&=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) \\
 subject \ to \ constraints \ \alpha  \geq 0 \ \forall_i \\
 \sum_i^N \alpha_i y_i = 0
 \end{align}
@@ -201,11 +201,11 @@ We now optimize out $w$, $w_0$ and $\xi$ using $f(x)=w^T\phi(x)+w_0$
 \end{align}
 using these to eliminate $w$, $w_0$ and $\xi$ we obtain the dual Lagrangian in the form
 \begin{align}
-L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2}\parallel w \parallel^2 + C \sum_i^N \xi_i - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1 + \xi_i\} - \sum_i^N \beta_i \xi_i \\
-L(w,w_0,\xi,\alpha,\beta)=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + C \sum_i^N \xi_i - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i(1-\xi_i) - \sum_i^N \beta_i \xi_i \\
-L(w,w_0,\xi,\alpha,\beta)= \sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N (C - \alpha_i - \beta_i) \xi_i \\
-ignoring: \ C - \alpha_i - \beta_i = \frac{\partial L}{\partial \xi_i} = 0 \\
-\tilde{L}(\alpha)=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
+L(w,w_0,\xi,\alpha,\beta)&=\frac{1}{2}\parallel w \parallel^2 + C \sum_i^N \xi_i - \sum_i^N \alpha_i \{y_i (w^T\phi(x_i) + w_0) - 1 + \xi_i\} - \sum_i^N \beta_i \xi_i \\
+L(w,w_0,\xi,\alpha,\beta)&=\frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + C \sum_i^N \xi_i - \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N \alpha_i(1-\xi_i) - \sum_i^N \beta_i \xi_i \\
+L(w,w_0,\xi,\alpha,\beta)&= \sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j) + \sum_i^N (C - \alpha_i - \beta_i) \xi_i \\
+ignoring:& \ C - \alpha_i - \beta_i = \frac{\partial L}{\partial \xi_i} = 0 \\
+\tilde{L}(\alpha)&=\sum_i^N \alpha_i - \frac{1}{2} \sum_i^N \sum_j^N \alpha_i \alpha_j y_i y_j k(x_i, x_j)
 \end{align}
 We notice that the Lagrangian looks the same as for the Hard Margin case. The difference lies in the constraints that are somewhat different. We note that $\alpha_i \geq 0$ is required because they're Lagrange multipliers. Furthermore $\alpha_i=C-\beta_i$ together with $\beta_i \geq 0$ implies that $\alpha \leq C$. We therefore maximize with respect to $\alpha$ subject to
 \begin{align}

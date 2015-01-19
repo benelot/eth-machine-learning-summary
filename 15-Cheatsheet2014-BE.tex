@@ -92,9 +92,10 @@ Conditional independence& \(X\bot Y|Z \)\\
 \end{tabular}
 
 {\color{subsubsectionColor}\subsubsection{Gaussian}}
-\begin{equation}
-p(X|\mu,\sigma)=\frac{1}{\sigma \sqrt{2\pi}} \exp(-\frac{(x-\mu)^2}{2\sigma^2})
-\end{equation}
+\begin{align}
+p(X|\mu,\sigma)&=\frac{1}{\sigma \sqrt{2\pi}} \exp(-\frac{(x-\mu)^2}{2\sigma^2})\\
+&=\frac{1}{\sqrt{2\pi^k |\Sigma|}} \exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))
+\end{align}
 
 {\color{subsubsectionColor}\subsubsection{Kernels}}
 Requirements: Symmetric ($k(x,y)=k(y,x)$) \\ positive semi-definite $K$.
@@ -141,7 +142,14 @@ f(x) = \sum\limits_{m=1}^M \beta_m h_m(x) \text{ with } h_m {1,x,(x-\xi_1)^2}
 \end{equation}
 $\xi_1$ are knots, the center of a function.
 
-$f''(x)=0$ is required to have smoothness
+$f''(x)=0$ is required to have smoothness\\
+\textbf{Bias vs. Variance}
+\begin{align}
+&\E_D\E_{X,Y}\left(\hat{f}(X)-Y\right)^2 = \E_D\E_X\left(\hat{f}(X) - \E(Y|X)\right)^2 \\
+&+ \E_{X,Y}\left(Y - \E(Y|X)\right)^2\\
+&= \underbrace{\E_X \E_D\left(\hat{f}(X) - \E_D(\hat{f}(X))\right)^2}_{variance} \\
+&+ \underbrace{\E_X\left(\E_D(\hat{f}(X)) - \E(Y|X)\right)^2}_{\text{bias}^2}+ \underbrace{\E_{X,Y}\left(Y - \E(Y|X)\right)^2}_{\text{noise}}
+\end{align}
 {\color{subsectionColor}\subsection{Classification}}
 \begin{eqnarray}
 \text{0/1 Loss} & w^* =& \argmin_w \sum_{i=1}^n [y_i \neq sign(w^\top x_i)] \\
@@ -368,24 +376,6 @@ You get:
 \item \textbf{Estimate the \(\pi\) parameters} by Lagrange optimization on log likelihood function and constraint \(\lambda \left(\sum\limits^k_{j=1}\pi_j -1\right) \). Put the \(\lambda\) into the formula and find the formula for \(\pi_j\).
 \end{enumerate}
 
-{\color{subsubsectionColor}\subsubsection{PCA}}
-(dimensional reduction = regression)
-\begin{eqnarray}
-\Sigma = \frac{1}{n}\sum_{i=1}^n x_i x_j^\top, \;\;
-\mu = \frac{1}{n}\sum_{i=1}^n x_i = 0 \\
-(W, z_1, ..., z_n) = \argmin \sum_{i=1}^n \|Wz_i - x_i\|_2^2
-\end{eqnarray}
-$W$ is orthogonal, $W = (v_1 | ... | v_k)$ and $z_i = w^\top x_i$
-\begin{equation}
-\Sigma = \sum_{i=1}^{d} \lambda_i v_i v_i^\top \;\; \lambda_1 \geq ... \geq \lambda_d \geq 0
-\end{equation}
-
-{\color{subsubsectionColor}\subsubsection{Kernel PCA}}
-\begin{eqnarray}
-\alpha_i^* = \argmax_{\alpha^\top K \alpha = 1} = \alpha^\top K^\top K \alpha \\
-\alpha^{(i)} = \frac{1}{\sqrt{\lambda_i}}\frac{v_i}{\|v_i\|_2}, \;\;
-K = \sum_{i=1}^n \lambda_i v_i v_i^\top
-\end{eqnarray}
 {\color{subsectionColor}\subsection{Hidden-Markov model}}
 State only depends on previous state.
 

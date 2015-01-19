@@ -184,7 +184,10 @@ L(w) &= -\log(P(y_1 ... y_n | x_1 ... x_n, w)) \\
 \argmax_w P(y|x, w) &= \argmin_w L(w) \\
 &= \argmin_w \sum_{i=1}^{n} (y_i-w^\top x_i)^2
 \end{align}
-
+\begin{eqnarray}
+\widehat\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (x_{i} - \bar{x})^2, 
+E \left[ \widehat\sigma^2  \right]= \frac{n-1}{n}\sigma^2
+\end{eqnarray}
 {\color{subsubsectionColor}\subsubsection{MAP}}
 Ridge regression, Gaussian prior on weights
 \begin{align}

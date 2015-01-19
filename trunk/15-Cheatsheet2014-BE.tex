@@ -150,6 +150,13 @@ $f''(x)=0$ is required to have smoothness\\
 &= \underbrace{\E_X \E_D\left(\hat{f}(X) - \E_D(\hat{f}(X))\right)^2}_{variance} \\
 &+ \underbrace{\E_X\left(\E_D(\hat{f}(X)) - \E(Y|X)\right)^2}_{\text{bias}^2}+ \underbrace{\E_{X,Y}\left(Y - \E(Y|X)\right)^2}_{\text{noise}}
 \end{align}
+\textbf{Combining regressions}
+\begin{align}
+bias[f (x)] &= \E_D \hat{f} (x) - \E(Y|x) = \frac{1}{B} \sum\limits_{i=1}^B \E_D\hat{f}_i(x) - \E(Y|x) \\
+&= \frac{1}{B} \sum\limits_{i=1}^B (\E_D\hat{f}_i(x) - \E(Y|x)) = \frac{1}{B} \sum\limits_{i=1}^B bias[f_i(x)]
+\end{align}
+\[\V\{  \hat{f} (x)\} \approx \frac{\sigma^2}{B}\]
+
 {\color{subsectionColor}\subsection{Classification}}
 \begin{eqnarray}
 \text{0/1 Loss} & w^* =& \argmin_w \sum_{i=1}^n [y_i \neq sign(w^\top x_i)] \\
@@ -167,7 +174,7 @@ Primal, unconstrained:
 \end{equation}
 Dual:
 \begin{equation}
-\max_{\alpha} \sum_{i=1}^{n} \alpha_i - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j y_i y_j x_i^\top x_j, \text{ s.t. } 0 \geq \alpha_i \geq C
+\max_{\alpha} \sum_{i=1}^{n} \alpha_i - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j y_i y_j x_i^\top x_j, \text{ s.t. } 0 \leq \alpha_i \leq C
 \end{equation}
 Dual to primal: $w^* = \sum_{i=1}^{n} \alpha^*_i y_i x_i$, $\alpha_i > 0$: support vector.
 
@@ -275,7 +282,7 @@ Train $m$ weak learners, greedily selecting each one
 c_b(x) \text { trained with } w_i \\
 \epsilon_b = \sum\limits_i^n \frac{w_i^b}{\sum\limits_i^n w_i^b} I_{c(x_i) \neq y_i} \\
 \alpha_b = log \frac{1-\epsilon_b}{\epsilon_b} \\
-w_i = e^{-\alpha_b I_{y_i \neq c_b(x_i)}}
+w^{b+1}_i = w^b_i \cdot exp(\alpha_b I_{y_i \neq c_b(x_i)})
 \end{eqnarray}
 
 Exponential loss function
@@ -361,7 +368,7 @@ Calculate $\gamma_j^{(t)}(x_i) = \frac{P(c|\theta^j) (x_i|c,\theta^j)}{\sum P(x_
 Derive the EM algorithm. The model behind the EM in the form:
 \(p(x) = \sum\limits^n_{j=1}\pi_j Pr_{\text{non-gaussian}}\)
 \textbf{Solution}
-\begin{enumerate}[topsep=0pt,itemsep=-2ex,partopsep=1ex,parsep=1ex]
+\begin{enumerate}[topsep=0pt,itemsep=-2ex,partopsep=1ex,parsep=1ex,leftmargin=*]
 \item Write  log likelihood function:
 \[L(X,\{\text{params}Pr_{non-gaussian} u_js\}) = \sum\limits^n_{i=1} \log \left( p(x_i)\right)\]
 \item Write \(\gamma_j(x_i) = p(z_j = j | x_i)\) (prob. that \(x_i\) was generated from \(j^{th}\) dist. of the mixture).

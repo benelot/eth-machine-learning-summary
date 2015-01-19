@@ -152,6 +152,7 @@ $J$ is the cost matrix, popular choice is
 
 Perceptron cost: $J_p (a) = \sum(-a^T \widetilde{x})$
 {\color{subsubsectionColor}\subsubsection{Bootstrapping}}
+Method for reducing variance
 \begin{eqnarray}
 \bar{S} = \frac{1}{B}\sum S(Z*)\\
 \sigma^2(S) = \frac{1}{B-1} (S(Z^*) - \bar{S})^2\\
@@ -219,7 +220,7 @@ h(x) = sign(a x_i - t)
 \textbf{Decision Tree}: recursive tree of stumps, leaves have labels. To train, either label if leaf's data is pure enough, or split data based on score.
 
 
-{\color{subsubsectionColor}\subsubsection{Ada Boost}}
+{\color{subsubsectionColor}\subsubsection{AdaBoost}}
 Effectively minimize exponential loss.
 \begin{equation}
 f^*(x) = \argmin_{f\in F} \sum_{i=1}^{n} \exp(-y_i f(x_i))

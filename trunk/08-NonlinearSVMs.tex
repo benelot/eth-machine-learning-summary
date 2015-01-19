@@ -23,7 +23,7 @@ Every Kernel is the scalar product of two vectors in some n-dimensional space. C
 \begin{align}
 k(x,y)=\langle log(x), log(y) \rangle
 \end{align}
-What this does is, it transforms the inputs into log space and there calculates the scalar product. If you can transform a function taking to vectors as inputs into the following form $\langle \phi(x_i), \phi(x_j)\rangle$, you have proven that it is a kernel. \textbf{Kernels are symmetric} $\rightarrow k(x,y)=k(y,x)$.
+What this does is, it transforms the inputs into log space and there calculates the scalar product. If you can transform a function taking two vectors as inputs into the following form $\langle \phi(x_i), \phi(x_j)\rangle$, you have proven that it is a kernel. \textbf{Kernels are symmetric} $\rightarrow k(x,y)=k(y,x)$.
 \subsection{Kernelized Linear Regression}
 Many linear models for regression and classification can be reformulated in a dual representation in which the feature vectors only enter as scalar products or as a \textbf{design matrix} (see below). In this case we can apply the kernel trick.
 Consider the following linear regression model
@@ -59,4 +59,9 @@ Substituting this back into the linear regression model, we obtain the following
 f(x)=w^T \phi(x)=a^T \Phi \phi(x) = k(x)^T (K+\lambda I_N)^{-1} y
 \end{align}
 where we have defined the vector $k(x)$ with elements $k_n(x) = k(x_n, x)$. 
+
+\subsection{Readings}
+\begin{enumerate}
+\item Add some readings here
+\end{enumerate}
 \end{document}

@@ -3,50 +3,8 @@
 %% Packages
 %% ========
 
-%% LaTeX Font encoding -- DO NOT CHANGE
-\usepackage[OT1]{fontenc}
-
-%% Babel provides support for languages.  'english' uses British
-%% English hyphenation and text snippets like "Figure" and
-%% "Theorem". Use the option 'ngerman' if your document is in German.
-%% Use 'american' for American English.  Note that if you change this,
-%% the next LaTeX run may show spurious errors.  Simply run it again.
-%% If they persist, remove the .aux file and try again.
-\usepackage[english]{babel}
-
-%% Input encoding 'utf8'. In some cases you might need 'utf8x' for
-%% extra symbols. Not all editors, especially on Windrows, are UTF-8
-%% capable, so you may want to use 'latin1' instead.
-\usepackage[utf8]{inputenc}
-
-%% This changes default fonts for both text and math mode to use Herman Zapfs
-%% excellent Palatino font.  Do not change this.
-\usepackage[sc]{mathpazo}
-
-%% The AMS-LaTeX extensions for mathematical typesetting.  Do not
-%% remove.
-\usepackage{amsmath,amssymb,amsfonts,mathrsfs}
-
-%% NTheorem is a reimplementation of the AMS Theorem package. This
-%% will allow us to typeset theorems like examples, proofs and
-%% similar.  Do not remove.
-%% NOTE: Must be loaded AFTER amsmath, or the \qed placement will
-%% break
-\usepackage[amsmath,thmmarks]{ntheorem}
-
-%% LaTeX' own graphics handling
-\usepackage{graphicx}
-
-%% We unfortunately need this for the Rules chapter.  Remove it
-%% afterwards; or at least NEVER use its underlining features.
-\usepackage{soul}
-\usepackage{bm}
-\usepackage{datetime}
-%% To use alternating colors in the glossary
-\usepackage[table]{xcolor}
-%% We use subfiles to separate the file into subfiles which are compilable on their own by copying the preamble from this file.
-\usepackage{subfiles}
-
+%% many common packages
+\input{commonpackages}
 
 %% Some more packages that you may want to use.  Have a look at the
 %% file, and consult the package docs for each.
@@ -62,155 +20,22 @@
 %% Helpful macros.
 \input{macrosetup}
 
-\usepackage{amssymb}
-\input{glyphtounicode}
-  \pdfgentounicode=1
-\usepackage{cmap}
-
-\usepackage{accsupp}
-
-
-%% Make document internal hyperlinks wherever possible. (TOC, references)
-%% This MUST be loaded after varioref, which is loaded in 'extrapackages'
-%% above.  We just load it last to be safe.
-\usepackage[linkcolor=black,colorlinks=true,urlcolor=blue,citecolor=black,filecolor=black]{hyperref}
-
-%% Objects numbering
-\counterwithout{figure}{section}
-\counterwithout{equation}{section}
-
-%math
-\usepackage{array}
-\usepackage{mathtools}
-\usepackage{amsfonts}
-\usepackage{cancel}
-
-%lists
-\usepackage{listings}
-\usepackage{enumerate}
-%different enumerations
-\usepackage{enumitem}
-
-%plain text
-\usepackage{verbatim}
-
-%common
-\usepackage{comment}
-\usepackage{ifthen}
-\usepackage{todonotes}
-\usepackage{titlesec}
-
-% Lengths and indenting
-\setlength{\textwidth}{16.5cm}
-\setlength{\marginparwidth}{1.5cm}
-\setlength{\parindent}{0cm}
-\setlength{\parskip}{0.15cm}
-\setlength{\textheight}{22cm}
-\setlength{\oddsidemargin}{0cm}
-\setlength{\evensidemargin}{\oddsidemargin}
-\setlength{\topmargin}{0cm}
-\setlength{\headheight}{0cm}
-\setlength{\headsep}{0cm}
-
-% lslisting style for python
-\lstset{
-	basicstyle=\ttfamily,
-	breaklines=true,
-	commentstyle=\color{green},
-	keepspaces=true,
-	keywordstyle=\color{blue},
-	language=Python,
-	morekeywords={off},
-	showstringspaces=false,
-	stringstyle=\color{purple},
-	title=\lstname
-}
-
-% lslisting style for matlab
-\lstset{
-	basicstyle=\ttfamily,
-	breaklines=true,
-	commentstyle=\color{green},
-	keepspaces=true,
-	keywordstyle=\color{blue},
-	language=Matlab,
-	morekeywords={off},
-	showstringspaces=false,
-	stringstyle=\color{purple},
-	title=\lstname
-}
-
-%to use subfiles being compilable as well on their own
-\usepackage{subfiles}
-
-\pdfpagewidth=\paperwidth
-\pdfpageheight=\paperheight
-
-\expandafter\def\expandafter\normalsize\expandafter{%
-    \normalsize
-    \setlength\abovedisplayskip{4pt}
-    \setlength\belowdisplayskip{4pt}
-    \setlength\abovedisplayshortskip{4pt}
-    \setlength\belowdisplayshortskip{4pt}
-}
-
-
-
-\DeclareMathOperator*{\xpt}{\textit{E}}
-\newcommand{\argmin}{\arg\!\min}
-\newcommand{\argmax}{\arg\!\max}
-
-%layout
-\usepackage{multicol}
-\setlength{\columnseprule}{0.4pt}
-
-\usepackage{calc}
-\usepackage{layouts}
-\usepackage{layout}
-
- 
-\mathtoolsset{showonlyrefs}  
-
-% Lorem ipsum
-%\usepackage[]{blindtext}
-\usepackage{lipsum}% dummy text
-% include pdfs into the latex document
-\usepackage{pdfpages}
-\usepackage{pdflscape}
-
-
-% Units
-\usepackage{units}
-
-% tables
-\usepackage{array}
-\usepackage{rotating}
-\usepackage{multirow}
-\usepackage{longtable}
-
-%\usepackage{color}
-
-% define colors for cheatsheet
-%https://en.wikibooks.org/wiki/LaTeX/Colors#Predefined_colors
-\definecolor{sectionColor}{HTML}{FF7F00}
-\definecolor{subsectionColor}{HTML}{EE0000}
-\definecolor{subsubsectionColor}{HTML}{EE6600}
-
-%for landscape cheat sheet
-\usepackage{lscape}
-
-\renewcommand{\familydefault}{\sfdefault}
-
-\counterwithout{section}{chapter}
+%%page layout settings and listing templates etc.
+\input{settings}
 
 \title{Machine Learning, Fall Semester 2014}
-\author{Diana Ponce-Morado\\Joachim Ott\\Imanol Studer\\Benjamin Ellenberger}
+\author{
+Diana Ponce-Morado\\
+Joachim Ott\\
+Imanol Studer\\
+Benjamin Ellenberger\\
+\vspace{2em}
+svn repository:\\ \url{https://code.google.com/p/eth-machine-learning-summary/}\\
+Contact \href{mailto:be.ellenberger@gmail.com}{be.ellenberger@gmail.com} for further information.}
 \thesistype{The Cherry-Picking Summary of the lectures in 2014}
 \advisors{Professor:\\ Prof.\ Dr.\ Joachim Maximilian Buhmann}
 \department{Institute of Neuroinformatics}
-\date{\today\\\vspace{1em}
-svn repository: \url{https://code.google.com/p/eth-machine-learning-summary/}\\
-Contact \href{mailto:be.ellenberger@gmail.com}{be.ellenberger@gmail.com} for further information.}
+\date{\today}
 
 \begin{document}
 \frontmatter
@@ -313,41 +138,42 @@ As in Cherry-picking, a term taken from revision control, where it denotes movin
 \subfile{15-Cheatsheet2013.tex}
 \pagebreak
 
+\section{Exams}
 %we include the past exams and give sample solutions.
 \includepdf[pages={1,3-18},nup=2x2,addtotoc={
-1,section,1,Exam 2012,sec:exam2012}]{docs/exams/exam2012.pdf}
+1,subsection,2,Exam 2012,subsec:exam2012}]{docs/exams/exam2012.pdf}
 \pagebreak
 \includepdf[pages={1-10},nup=2x2,addtotoc={
-1,section,1,Exam Solutions 2012,sec:examsol2012},angle=180]{docs/exam-solution-drafts/exam2012.pdf}
+1,subsection,2,Exam Solutions 2012,subsec:examsol2012},angle=180]{docs/exam-solution-drafts/exam2012.pdf}
 \includepdf[pages={1-10},nup=2x2,addtotoc={
-1,section,1,Exam Solutions continued 2012,sec:examsol2012},angle=180]{docs/exam-solution-drafts/exam2012-2.pdf}
+1,subsection,2,Exam Solutions continued 2012,subsec:examsol2012},angle=180]{docs/exam-solution-drafts/exam2012-2.pdf}
 \pagebreak
 \subfile{15-Exam2012-solution.tex}
 \pagebreak
 
 \includepdf[pages={1-19},nup=2x2,addtotoc={
-1,section,1,Exam 2011,sec:exam2011}]{docs/exams/exam2011.pdf}
+1,subsection,2,Exam 2011,subsec:exam2011}]{docs/exams/exam2011.pdf}
 \pagebreak
 \includepdf[pages={1-12},nup=2x2,addtotoc={
-1,section,1,Exam Solutions 2011,sec:examsol2011},angle=180]{docs/exam-solution-drafts/exam2011.pdf}
+1,subsection,2,Exam Solutions 2011,subsec:examsol2011},angle=180]{docs/exam-solution-drafts/exam2011.pdf}
 \pagebreak
 \subfile{15-Exam2011-solution.tex}
 \pagebreak
 
 \includepdf[pages={1,3-5,7-11,13-17,19-23,25-29},nup=2x2,addtotoc={
-1,section,1,Exam 2010,sec:exam2010}]{docs/exams/exam2010.pdf}
+1,subsection,2,Exam 2010,subsec:exam2010}]{docs/exams/exam2010.pdf}
 \pagebreak
 \includepdf[pages={1,3-5,7-11,13-17,19-23,25-29},nup=2x2,addtotoc={
-1,section,1,Exam Solutions 2010,sec:examsol2010},angle=180]{docs/exam-solution-drafts/exam2010.pdf}
+1,subsection,2,Exam Solutions 2010,subsec:examsol2010},angle=180]{docs/exam-solution-drafts/exam2010.pdf}
 \pagebreak
 \subfile{15-Exam2010-solution.tex}
 \pagebreak
 
 \includepdf[pages={1-21},nup=2x2,addtotoc={
-1,section,1,Exam 2009,sec:exam2009}]{docs/exams/exam2009.pdf}
+1,subsection,2,Exam 2009,subsec:exam2009}]{docs/exams/exam2009.pdf}
 \pagebreak
 \includepdf[pages={1-21},nup=2x2,addtotoc={
-1,section,1,Exam Solutions 2009,sec:examsol2009},angle=180]{docs/exam-solution-drafts/exam2009.pdf}
+1,subsection,2,Exam Solutions 2009,subsec:examsol2009},angle=180]{docs/exam-solution-drafts/exam2009.pdf}
 \pagebreak
 \subfile{15-Exam2009-solution.tex}
 \pagebreak

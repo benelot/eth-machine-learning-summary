@@ -84,7 +84,7 @@
 \usepackage{longtable}
 \usepackage{tabu}
 
-%%Table resize
+%% LaTeX' own graphics handling
 \usepackage{graphicx}
 
 %more rows
@@ -93,5 +93,62 @@
 %multiline equations
 \usepackage{amsmath}
 
-%no bulletpoints
+%% The AMS-LaTeX extensions for mathematical typesetting.  Do not
+%% remove.
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs}
+
+%% NTheorem is a reimplementation of the AMS Theorem package. This
+%% will allow us to typeset theorems like examples, proofs and
+%% similar.  Do not remove.
+%% NOTE: Must be loaded AFTER amsmath, or the \qed placement will
+%% break
+\usepackage[amsmath,thmmarks]{ntheorem}
+
+%math
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amssymb}
+
+%different enumerations
 \usepackage{enumitem}
+
+%% Make document internal hyperlinks wherever possible. (TOC, references)
+%% This MUST be loaded after varioref, which is loaded in 'extrapackages'
+%% above.  We just load it last to be safe.
+\usepackage[linkcolor=black,colorlinks=true,urlcolor=blue,citecolor=black,filecolor=black]{hyperref}
+
+\input{glyphtounicode}
+  \pdfgentounicode=1
+\usepackage{cmap}
+
+\usepackage{accsupp}
+\usepackage{calc}
+\usepackage{layouts}
+\usepackage{layout}
+
+ 
+\mathtoolsset{showonlyrefs}  
+
+% Lorem ipsum
+%\usepackage[]{blindtext}
+\usepackage{lipsum}% dummy text
+% include pdfs into the latex document
+\usepackage{pdfpages}
+%for landscape cheatsheet
+\usepackage{pdflscape}
+
+
+% Units
+\usepackage{units}
+
+% tables
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{longtable}
+
+%layout
+\usepackage{multicol}
+\setlength{\columnseprule}{0.4pt}

@@ -1,0 +1,65 @@
+%% Objects numbering
+\counterwithout{figure}{section}
+\counterwithout{equation}{section}
+\counterwithout{section}{chapter}
+
+
+% Lengths and indenting
+\setlength{\textwidth}{16.5cm}
+\setlength{\marginparwidth}{1.5cm}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.15cm}
+\setlength{\textheight}{22cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\topmargin}{0cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+
+% lslisting style for python
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Python,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+% lslisting style for matlab
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Matlab,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize
+    \setlength\abovedisplayskip{4pt}
+    \setlength\belowdisplayskip{4pt}
+    \setlength\abovedisplayshortskip{4pt}
+    \setlength\belowdisplayshortskip{4pt}
+}
+
+% define colors for cheatsheet
+%https://en.wikibooks.org/wiki/LaTeX/Colors#Predefined_colors
+\definecolor{sectionColor}{HTML}{FF7F00}
+\definecolor{subsectionColor}{HTML}{EE0000}
+\definecolor{subsubsectionColor}{HTML}{EE6600}
+
+
+\renewcommand{\familydefault}{\sfdefault}

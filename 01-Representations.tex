@@ -6,33 +6,56 @@
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 % summarizes lecture 1 & 2
 %author: Benjamin Ellenberger
+% This was never tested in the exam before
 
+\subsection{Learning Problem of Pattern Recognition}
 
-\subsection{Measurements and Data}
-How to represent data is a crucial part to successful learning. The concrete choice of representation ('features') Learning methods expect standardized representations of data (e.g. Points in vector spaces, nodes in a graph, similarity matrices ...)
-\subsubsection{Taxonomy of data}
-\textbf{Goal:} We like to represent objects/items of interest and
-characterize them according to their typical patterns for detection, classification, abstraction (compression), $\ldots$.
+\begin{itemize}
+\item \textbf{Representation of objects $\rightarrow$ Data representation}:
+Choosing the wrong data representation can induce inappropriate similarity
+measures!
+\item \textbf{Definition/modelling of structure}: What is a pattern?
+A statistical definition of good and poor structures is mandatory for rational
+pattern recognition!
+\item \textbf{Optimization}: Search for preferred structures multi-scale optimization yields efficient algorithms to detect good structures in
+data.
+\item \textbf{Validation}: Are the structures indeed in the data or are
+they explained by fluctuations? How good are you solving the problem?
+Without validation, any pattern recognition strategy is doomed to fail.
+\end{itemize}
+
+\subsection{Objects, Measurements and Data}
+
+In order to do detection, classification, abstract on objects, we have to measure them to represent them in a data space. How to represent data is a crucial part to successful learning. The concrete choice of representation ('features') learning methods expect standardized representations of data {\color{orange}\emph{(e.g. Points in vector spaces, nodes in a graph, similarity matrices ...)}}
 
 \begin{itemize}
 \item Object space: Design/Configuration/ Object space \(\printlatex{\mathcal{O}}\)
 \item Measurement/Feature: Measurement X maps an object into a domain 
 \(\printlatex{X: \mathcal{O}^{(1)}\ldots\mathcal{O}^{(R)}\rightarrow \K}\) and represents an object in a data space.
-\item Data
+\item Data:
 \begin{itemize}
-\item \textbf{Monadic data} \(\printlatex{\mathcal{O} \rightarrow \R^{d}}\): An indivisible, impenetrable unit of data such as temperature, water depth, pressure, intensity etc..
-\item \textbf{Dyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R}\): Data consisting of two monadic datasets of different object spaces. This can be \(\printlatex{\{users\} \times \{websites\}}\) etc..
+\item \textbf{Monadic data} \(\printlatex{\mathcal{O} \rightarrow \R^{d}}\): An indivisible, impenetrable unit of data such as {\color{orange}\emph{temperature, water depth, pressure, intensity}} etc..
+\item \textbf{Dyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R}\): Data consisting of two monadic datasets of different object spaces. This can be {\color{orange}\emph{\(\printlatex{\{users\} \times \{websites\}}\)}} etc..
 \item \textbf{Polyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R}\): Data consisting of multiple monadic datasets of different object spaces. 
-\item \textbf{Pairwise data} \(\printlatex{\mathcal{O} \times \mathcal{O} \rightarrow \R}\): Data that comes in pairs of the same object space such as \(\printlatex{\{proteins\} \times \{proteins\}}\) comparisons.
+\item \textbf{Pairwise data} \(\printlatex{\mathcal{O} \times \mathcal{O} \rightarrow \R}\): Data that comes in pairs of the same object space such as {\color{orange}\emph{\(\printlatex{\{proteins\} \times \{proteins\}}\)}} comparisons.
 \end{itemize}
 \end{itemize}
 
-The choice of features X is an engineering problem. We must find a tradeoff between underfitting and overfitting the data.
+The choice of features X is an engineering problem. We must find a trade-off between underfitting and overfitting the data.
 \begin{enumerate}
 \item Ideally as informative as possible about label Y
 \item Must consider cost of acquiring / computing them
 \item Poor choice of features \(\printlatex{\rightarrow}\) no luck with learning!
 \end{enumerate}
+
+\subsection{Loss Minimization}
+Given the independent random variable \(X\) the conditional
+expected loss is defined as:
+
+\[\printlatex{R(f, X) = \int \underbrace{Q(Y, f(X))}_{\text{Loss function}}P(Y|X)dY}\]
+
+Since we can not calculate the Conditional Expected Loss directly because we do not know \(\printlatex{P(Y|X)}\), we have to use empirical data to minimize the loss.
+
 \subsection{Data Types, Scale, Transformation invariances}
 \subsubsection{Data Types and Scale}
 \begin{itemize}

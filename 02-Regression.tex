@@ -6,17 +6,19 @@
 % author: Benjamin Ellenberger
 
 \section{Regression}
-In statistics, regression analysis is a statistical process for estimating the relationships among variables (one independent variable Y and one or more independent variable (\(\printlatex{X_1,\ldots,X_d}\))). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or 'criterion variable') changes when any one of the independent variables is varied, while the other independent variables are held fixed. A model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. Various tests are then employed to determine if the model is satisfactory.If the model is deemed satisfactory, the estimated regression equation can be used to predict the value of the dependent variable given values for the independent variables. (Source: Wikipedia and Encyclopedia Britannica on Regression)\\
+In statistics, regression analysis is a \textit{statistical process for estimating the relationships among variables} (one independent variable Y and one or more independent variables (\(\printlatex{X_1,\ldots,X_d}\))). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or 'criterion variable') changes when any one of the independent variables is varied, while the other independent variables are held fixed. A model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. Various tests are then employed to determine if the model is satisfactory. If the model is deemed satisfactory, the estimated regression equation can be used to predict the value of the dependent variable given values for the independent variables. (Source: Wikipedia and Encyclopedia Britannica on Regression)\\
 \begin{itemize}
 \item Object space \(\printlatex{\mathcal{O}}\)
 \item Measurement/Feature space \(\printlatex{\mathcal{F} = \R^d \times \R}\)
-\item Data \(\printlatex{\mathcal{Z} = \{(x_i,y_i) \in \R^d \times \R : 1 \geq i \geq n\}}\)
+\item Data \(\printlatex{\mathcal{Z} = \{(x_i,y_i) \in \R^d \times \R : 1 \leq i \leq n\}}\)
+\item Gaussian noise: \(\epsilon_i \sim \mathbb{N}(0,\sigma^2)\)
 \end{itemize}
 \textbf{The problem of regression}: What is the optimal estimate of a function \(\printlatex{f: \R^d \rightarrow \R}\) based on noisy data \(\printlatex{y_i = f(x_i) + \epsilon_i}\)?\\
 \textbf{Solution:} The regression function: \(\printlatex{y(x) = \E\{y | X=x\} = \int_{\Omega} y p(y|X=x)dy}\)\\
-How many data are required to estimate a model or a regression function given a
-hypothesis class (set of possible regression functions)?
 
+%Why asking a question that is not answered?
+%How many data are required to estimate a model or a regression function given a
+%hypothesis class (set of possible regression functions)?\\
 
 \subsection{Linear Regression}
 Linear regression comes in a closed form solution and delivers an exact solution to the problem.
@@ -27,7 +29,8 @@ Linear regression comes in a closed form solution and delivers an exact solution
 \end{figure}
 Given a vector of inputs \(\printlatex{X^T=(X_1,\ldots,X_d)}\). The output variable (also called response variable) is predicted via the model\\
 \[\printlatex{Y = \beta_0 + \sum^d_{j=1} X_j\beta_j,~~ Y \in \R}\]
-\(\printlatex{\beta_0}\) is called bias(Machine Learning) or intercept (Statistics). We extend the X vector with an \(\printlatex{X_0 = 1}\) and we can include the bias \(\printlatex{\beta_0}\) into the vector of \(\printlatex{\beta}\)s and can write Y in matrix form: \(\printlatex{Y = X^T\beta,~~X,\beta \in \R^{d+1}}\)
+\(\printlatex{\beta_0}\) is called \textit{bias (Machine Learning)} or \textit{intercept (Statistics)}. We extend the \(X\) vector with an \(\printlatex{X_0 = 1}\) and we can include the bias \(\printlatex{\beta_0}\) into the vector of \(\printlatex{\beta}\)s and can write \(Y\) in matrix form:
+\[\printlatex{Y = X^T\beta,~~X,\beta \in \R^{d+1}}\]
 
 
 \subsubsection{Training of the Linear Regressor: Residual Sum of Squares(RSS)}
@@ -36,7 +39,7 @@ Training of an accurate Predictor = Minimize the residual sum of squares between
 We find the minimum RSS by differentiating w.r.t. \(\printlatex{\beta}\)\\ 
 \begin{align}
 &\rightarrow X^T(y-X\beta) = 0\\
-&\rightarrow\hat{\beta} = (X^TX))^{-1}X^Ty~~(\text{Solution for nonsingular} X^TX)
+&\rightarrow\hat{\beta} = (X^TX))^{-1}X^Ty~~(\text{Solution for nonsingular } X^TX)
 \end{align}
 
 

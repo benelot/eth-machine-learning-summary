@@ -30,22 +30,28 @@ In order to do detection, classification, abstract on objects, we have to measur
 
 \begin{itemize}
 \item Object space: Design/Configuration/ Object space \(\printlatex{\mathcal{O}}\)
-\item Measurement/Feature: Measurement X maps an object into a domain 
+\item Measurement/Feature: Measurement \(X\) maps an object into a domain 
 \(\printlatex{X: \mathcal{O}^{(1)}\ldots\mathcal{O}^{(R)}\rightarrow \K}\) and represents an object in a data space.
 \item Data:
 \begin{itemize}
-\item \textbf{Monadic data} \(\printlatex{\mathcal{O} \rightarrow \R^{d}}\): An indivisible, impenetrable unit of data such as {\color{orange}\emph{temperature, water depth, pressure, intensity}} etc..
-\item \textbf{Dyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R}\): Data consisting of two monadic datasets of different object spaces. This can be {\color{orange}\emph{\(\printlatex{\{users\} \times \{websites\}}\)}} etc..
-\item \textbf{Polyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R}\): Data consisting of multiple monadic datasets of different object spaces. 
-\item \textbf{Pairwise data} \(\printlatex{\mathcal{O} \times \mathcal{O} \rightarrow \R}\): Data that comes in pairs of the same object space such as {\color{orange}\emph{\(\printlatex{\{proteins\} \times \{proteins\}}\)}} comparisons.
+\item \textbf{Monadic data} \(\printlatex{\mathcal{O} \rightarrow \R^{d},~~~~ o \rightarrow X_o}\): An indivisible, impenetrable unit of data such as {\color{orange}\emph{temperature, water depth, pressure, intensity}} etc..
+\item \textbf{Dyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \rightarrow \R,~~~~ (o_1,o_2) \rightarrow X_{o_1,o_2}}\): Data consisting of two monadic datasets of different object spaces. This can be {\color{orange}\emph{\(\printlatex{\{users\} \times \{websites\}}\)}} etc..
+\item \textbf{Polyadic data} \(\printlatex{\mathcal{O}^{(1)}\times \mathcal{O}^{(2)} \times \ldots \times \mathcal{O}^{(R)} \rightarrow \R},~~~~ (o_1,o_2,o_3) \rightarrow X_{o_1,o_2,o_3}\): Data consisting of multiple monadic datasets of different object spaces. 
+\item \textbf{Pairwise data} \(\printlatex{\mathcal{O} \times \mathcal{O} \rightarrow \R,~~~~ (o_1,o_2) \rightarrow X_{o_1,o_2}}\): Data that comes in pairs of the same object space such as {\color{orange}\emph{\(\printlatex{\{proteins\} \times \{proteins\}}\)}} comparisons.
 \end{itemize}
 \end{itemize}
 
-The choice of features X is an engineering problem. We must find a trade-off between underfitting and overfitting the data.
+The choice of features \(X\) is an engineering problem. 
 \begin{enumerate}
 \item Ideally as informative as possible about label Y
 \item Must consider cost of acquiring / computing them
 \item Poor choice of features \(\printlatex{\rightarrow}\) no luck with learning!
+\end{enumerate}
+
+In training, we must find a trade-off between \textbf{underfitting} and \textbf{overfitting} the data.
+\begin{enumerate}
+\item Depending on the model, you might get classification areas that are not supported by data.
+\item It is important that you take the nature of the data into account (if they are probabilities and you do not see that in the first place, you will pay it with computation time)
 \end{enumerate}
 
 \subsection{Loss Minimization}
@@ -54,7 +60,23 @@ expected loss is defined as:
 
 \[\printlatex{R(f, X) = \int \underbrace{Q(Y, f(X))}_{\text{Loss function}}P(Y|X)dY}\]
 
-Since we can not calculate the Conditional Expected Loss directly because we do not know \(\printlatex{P(Y|X)}\), we have to use empirical data to minimize the loss.
+Since we can not calculate the Conditional Expected Loss directly because we do not know \(\printlatex{P(Y|X)}\), we have to use empirical data to find it by minimizing the loss between our labeled data and our values estimated by our estimator.
+
+Separate your data into training data \(Z_{train}\) and test data \(Z_{test}\).
+The training data is used to train your estimator with, meaning it learns from that data.
+An additional validation data set \(Z_{validation}\) is usually used to guide estimator selection.
+Test data cannot be used before the final estimator has been selected!
+
+\[\printlatex{Z_{train} = {(X_1 , Y_1 ), . . . , (X_n , Y_n )}}\]
+\[\printlatex{Z_{test} = {(X_{n+1} , Y_{n+1} ), . . . , (X_{n+m} , Y_{n+m} )}}\]
+
+First we find the function \(\hat f\) that minimizes the loss based on your training data.
+\[\printlatex{\hat f \in \underset{f \in \mathbb{H}}{\mathrm{arg min}} \hat R (\hat f,\mathbb{Z^{train}})}\]
+whereas the training error \(R(\hat f,Z_{train})\) for an Empirical Loss Minimizer we can find using our loss function \(Q(y,f(x))\):
+\[\printlatex{\hat R(\hat f,Z^{train}) = \frac{1}{n} \sum\limits^n_{i=1}Q(Y_i,\hat f(X_i))}\]
+
+
+
 
 \subsection{Data Types, Scale, Transformation invariances}
 \subsubsection{Data Types and Scale}

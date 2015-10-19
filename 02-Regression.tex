@@ -45,7 +45,7 @@ We find the minimum RSS by differentiating w.r.t. \(\printlatex{\beta}\)\\
 
 \subsubsection{Prediction via the Trained Linear Regressor}
 \[\printlatex{\hat{y} = X \hat{\beta} = X(X^T X)^{-1} X^T y}\]
-The matrix \(\printlatex{X(X^T X)^{-1} X^T}\) is sometimes called the hat matrix
+The matrix \(\printlatex{X(X^T X)^{-1} X^T}\) is sometimes called \textit{the hat matrix}
 which is an orthogonal projection on the space spanned by the columns of X.
 
 
@@ -91,8 +91,8 @@ Gauss-Markov Theorem proves \(\printlatex{\V(a^T\hat{\beta}) \leq \V(c^Ty)}\) (T
 
 
 \subsection{Ridge Regression}
-Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term depending on the \(\printlatex{\lambda}\) parameter to it to restrict the solution.  The \(\printlatex{\lambda}\) shrinks the regression coefficients by imposing a penalty on their size. This is done via a cost function:
-\[\printlatex{\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{L_2 \text{ norm penalty}}\Big\}}\]
+Ridge regression is a regularized version of the linear regression with the same closed form but adds a penalty term depending on the \(\printlatex{\lambda}\) parameter to it to restrict the solution.  The \(\printlatex{\lambda}\) shrinks the regression coefficients by imposing a penalty on their size. The assumption of the penalty is that the true coefficients are small but non-vanishing. This is done via a cost function:
+\[\printlatex{\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} \beta^2}_{\mathclap{L_2 \text{ norm penalty}}}\Big\}}\]
 \(\printlatex{\lambda \leq 0}\) controls the amount of shrinkage (Weight decay in Neuronal Network Literature). The penalty term is \(\printlatex{\lambda}\) times the \(\printlatex{L_2}\) norm (\hyperref[Norms@Glossary]{Norms@Glossary}), which is the Euclidian length of the \(\printlatex{\beta}\) vector. \\
 \url{https://en.wikipedia.org/wiki/Tikhonov_regularization}
 
@@ -104,38 +104,62 @@ Shift the coordinate system into the center of mass of the data distribution:
 By this, we reduce the system from d+1 to d dimensions (\hyperref[homogeneous-coordinates@Glossary]{homogeneous coordinates@Glossary}) and get:\\
 \[\printlatex{RSS(\beta) = (y-X\beta)^T(y-X\beta)+\lambda\beta^T\beta}\]
 The ridge solution is then:
-\[\printlatex{\hat{\beta}^{ridge} = \underbrace{(X^T X + \lambda I)^{-1}}_{X^T X\text{ is regularized by }\lambda I}X^Ty}\]
-This can also be solved via Singular value decomposition (\hyperref[SVD@Glossary]{SVD@Glossary}).
+\[\printlatex{\hat{\beta}^{ridge} = \underbrace{(X^T X + \lambda I)^{-1}}_{\mathclap{X^T X\text{ is regularized by }\lambda I}}X^Ty}\]
+This can also be solved via Singular value decomposition (\hyperref[SVD@Glossary]{SVD@Glossary}). There we see that the noise is dampened by the regularization term in the ridge regression.
+
+\[\printlatex{X \beta^{ridge} = X(X^T X + \lambda I)^{-1} X^T y = UD(D^2 + \lambda I)^{-1} DU^T y
+= \sum\limits^d_{j=1} u_j \underbrace{\frac{d_j^2}{d_j^2 + \lambda}}_{\mathclap{\text{dampens the small singular values}}} u^T_j y}\]
 
 
 \subsection{The LASSO}
-An alternative regularized version of least squares is LASSO (Least absolute shrinkage and selection operator). It uses the same unconstrained linear regression with the same closed form but adds a penalty term to it to restrict the solution, as it is done in the ridge regression. \[\printlatex{\hat{\beta}^{LASSO} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2\Big\}}\] subject to \[\printlatex{\sum^{d}_{j=1}|\beta_j| \leq s}\] The lower equation is the penalty term, which is different from the ridge regression and is the \(\printlatex{L_1}\) norm penalty, which is the so-called ''Manhattan distance'' (\hyperref[Norms@Glossary]{Norms@Glossary}). The LASSO does not have a closed form anymore and must must be solved numerically by using quadratic programming or more general convex optimization methods.\\
+An alternative regularized version of least squares is LASSO (Least absolute shrinkage and selection operator). It uses the same unconstrained linear regression with the same closed form but adds a penalty term to it to restrict the solution, as it is done in the ridge regression. The assumption of the penalty is that the coefficients are sparse and only some of the coefficients matter. Also it avoids an uninvertible \(X^T X\) Matrix by dropping features that are correlated or if you have more predictors than data (example: genome), which results in rank deficiency of the matrix.
+
+ \[\printlatex{\hat{\beta}^{LASSO} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2\Big\}}\] subject to \[\printlatex{\sum^{d}_{j=1}|\beta_j| \leq s}\] The lower equation is the penalty term, which is different from the ridge regression and is the \(\printlatex{L_1}\) norm penalty, which is the so-called ''Manhattan distance'' (\hyperref[Norms@Glossary]{Norms@Glossary}). The LASSO does not have a closed form anymore and must must be solved numerically by using quadratic programming or more general convex optimization methods.\\
 \url{https://en.wikipedia.org/wiki/Least_squares#Lasso_method}
+
+Example:
+\begin{enumerate}
+\item \begin{align*}
+y_1 &= \beta_1 x_{i,1} + \ldots + \beta_p x_{i,p} \; i = 1, \ldots, n\\
+x^{(k)} &= (x_{ij})_{i=1}\\
+x^{(k)} &\sim c x^{(j)},\,\text{ for c }\neq 0\\
+x^{(j)} &\sim \frac{1}{c} x^{(k)}\\
+\beta_j x^{(j)} + \beta_k x^{(k)} &\sim \beta_j x^{(j)} + \beta_k c x^{(j)}\\
+&= (\beta_j + \beta_k c)x^{(j)} \sim (\frac{\beta_j}{c} + \beta_k)x^{(k)}
+\end{align*}
+The correlation makes the matrix rank deficient.
+\item \begin{align*}
+\beta^*(\Lambda) = argmin ||Y-X\beta|| + \lambda ||\beta||^2,\,\lambda > 0\\
+\text{Differentiate: } \frac{\Delta}{\Delta\beta} \beta^* \overset{!}{=} 0\\
+(X^T X + \lambda I)\hat{\beta}^* = 
+\end{align*}
+\end{enumerate}
+
 
 
 \subsubsection{Ridge vs. LASSO Estimation}
-One of the prime differences between LASSO and ridge regression is that in ridge regression, as the penalty is increased, all parameters are reduced while still remaining non-zero, while in LASSO, increasing the penalty will cause more and more of the parameters to be driven to zero. This is an advantage of LASSO over ridge regression, as driving parameters to zero deselects the features from the regression. Thus, Lasso automatically selects more relevant features and discards the others, whereas Ridge regression never fully discards any features.
+One of the prime differences between LASSO and ridge regression is that in ridge regression, as the penalty is increased, all parameters are reduced while still remaining non-zero, while in LASSO, increasing the penalty will cause more and more of the parameters to be driven to zero. This is an advantage of LASSO over ridge regression, as driving parameters to zero deselects the features from the regression. Thus, Lasso automatically selects more relevant features and discards the others, whereas Ridge regression never fully discards any features, because it just dampens it.
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{figs/LASSO-vs-Ridge}
-\caption{Estimation picture for the LASSO (left) and Ridge regression (right). Shown are contours of the least squares error function (red) and constraint functions \(\protect\printlatex{|\beta_1 | + |\beta_2 | \leq t}\) and \(\protect\printlatex{\beta_1^2 + \beta_2^2 \leq t_2}\) (blue). Therefore LASSO estimates are known to zero-out several coefficients and only keep a few non-zero. The reason is that the LSE error surface often hits the corners of the constraint surface(Source: fig 3.12 of Hastie et al. 2001)}
+\caption{Estimation picture for the LASSO (left) and Ridge regression (right). Shown are contours of the least squares error function (red) with the true \(\hat{\beta}\) (true in sense that it also fits the noise in the data well) in the center and constraint functions \(\protect\printlatex{|\beta_1 | + |\beta_2 | \leq t}\) and \(\protect\printlatex{\beta_1^2 + \beta_2^2 \leq t_2}\) (blue). The \(\hat{\beta}\) values chosen by the optimization have to be in the constraint shape. LASSO estimates are known to zero-out several coefficients and only keep a few non-zero. The reason is that the LSE error surface often hits the corners of the constraint surface (see why by extending the edges of the constraint diamond of the LASSO and you get areas starting from the edges and the corners. As we scale the problem, the area at the corners grows much faster than the one at the edges. Therefore it is much more probable that a \(\hat{\beta}\) hits the corners.) As we get more data, the regularization term loses importance because it is still in order \(d\). Then the LSE curvature gets flatter meaning that it is easier for it to fit the constraint, but with more data we also reduce the noise in the data. (Source: fig 3.12 of Hastie et al. 2001)}
 \end{figure}
 
 
 \subsubsection{Generalized Ridge Regression}
 The generalized ridge regression has known closed forms for certain values of \(\printlatex{p}\).
-\[\printlatex{\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} |\beta|^p}_{L_P \text{ norm penalty}}\Big\}}\]
+\[\printlatex{\hat{\beta}^{ridge} = \argmin_{\beta} \Big\{\sum^{n}_{i=1}(y_i - \beta_0-\sum^d_{j=1}x_{i,j}\beta_j)^2+\underbrace{\lambda \sum^d_{j=1} |\beta|^p}_{\mathclap{L_P \text{ norm penalty}}}\Big\}}\]
 For \(\printlatex{p = 2}\), we get the usual Ridge Regression with the closed form as described above. For \(\printlatex{p = 1}\), we get the LASSO Regression as described above and for all other values we get regression with different strengths of shrinkage as shown below.
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{figs/different-strengths-of-shrinkage}
-\caption{Contours of constraint functions \(\protect\printlatex{\sum_{j}|\beta_j|^p}\) for different values of \(\protect\printlatex{q}\) (Source: HTF'01)}
+\caption{Contours of constraint functions \(\protect\printlatex{\sum_{j}|\beta_j|^p}\) for different values of \(\protect\printlatex{q}\) For \(q > 1\), the constraint gets more and more useless, for \(q < 1\), we get a too sparse solution and for \(q\leq 0.1\) we even get no longer a convex-optimization problem, but a combinatorial problem instead. The sweet spot is generally the \(q =1\) solution. (Source: HTF'01)}
 \end{figure}
 
 
 \subsection{Nonlinear Regression by basis expansion}
 Idea: Transform the variables X nonlinearly and fit a linear model into the resulting (feature) space. Transformation: \(\printlatex{h_m(X) : \R^d \rightarrow \R, 1 \leq m \leq M}\)
 \[\printlatex{f(X) = \sum^M_{m=1} \beta_m h_m(X)}\]
-f is linear in \(\printlatex{\beta}\) but non-linear in X! We use a series of piecewise-cubic polynomials to fit the data, of which the smoothness can be controlled by regularization of the the maximal number of knots.
+f is linear in \(\printlatex{\beta}\) but non-linear in X! We use a series of piecewise-cubic polynomials to fit the data, of which the smoothness can be controlled by regularization of the the maximal number of knots. We can now add constraints on continuity of the curves making our solution more smoothly fitting the data.
 
 
 \subsection{Wavelet regression}
@@ -147,13 +171,13 @@ Regression can also be done with Wavelets. A wavelet is a wave-like oscillation 
 
 
 \subsection{Bias-variance-Tradeoff in Regression}
-We have data \(\printlatex{D = \{(x_i,y_i)\}^n_{i=1},~~x_i \in \R^d,y_i \in \R}\) which contains observations of the random variables \(\printlatex{(X_i,Y_i)}\) which are drawn i.i.d. from the distribution \(\printlatex{P(X,Y)}\). We have the objective to find a regression function \(\printlatex{f \in \mathcal{F}}\)(\(\printlatex{\mathcal{F}}\) is the hypothesis class) such that \(\printlatex{\E(Y - f(X))^2}\) is minimal. We can find the optimum at \(\printlatex{f^*(x) = \E(Y|X = x)}\). So we construct an estimator \(\printlatex{\hat{f}(X)}\) which estimates Y depending on the random variable \(\printlatex{X}\) and on the data \(\printlatex{D}\).\\\\
+We have data \(\printlatex{D = \{(x_i,y_i)\}^n_{i=1},\, x_i \in \R^d,y_i \in \R}\) which contains observations of the random variables \(\printlatex{(X_i,Y_i)}\) which are drawn i.i.d. from the distribution \(\printlatex{P(X,Y)}\). We have the objective to find a regression function \(\printlatex{f \in \mathcal{F}}\)(\(\printlatex{\mathcal{F}}\) is the hypothesis class) such that \(\printlatex{\E(Y - f(X))^2}\) is minimal. We can find the optimum at \(\printlatex{f^*(x) = \E(Y|X = x)}\). So we construct an estimator \(\printlatex{\hat{f}(X)}\) which estimates Y depending on the random variable \(\printlatex{X}\) and on the data \(\printlatex{D}\).\\\\
 \textbf{Problems resulting in the Tradeoff}
 \begin{enumerate}
 \item Finite training set
 \item Complexity of hypothesis class \(\printlatex{\mathcal{F}}\) is unknown
 \end{enumerate}
-So we must find the best balance between a complex \(\printlatex{\mathcal{F}}\) (by overfitting which keeps the variance high) and simple \(\printlatex{\mathcal{F}}\) (by underfitting which keeps the bias high). This can be done by minimizing the error components:\\
+So we must find the {\color{orange}\emph{best balance between a complex \(\printlatex{\mathcal{F}}\) (by overfitting which keeps the variance high but determines the fit to the data) and simple \(\printlatex{\mathcal{F}}\) (by underfitting which keeps the bias high but keeps the solution general).}} This can be done by minimizing the error components:\\
 \begin{align}
 \E_D\E_{X,Y}\left(\hat{f}(X)-Y\right)^2 
 &= \E_D\E_X\left(\hat{f}(X) - \E(Y|X)\right)^2 + \E_{X,Y}\left(Y - \E(Y|X)\right)^2\\
@@ -173,13 +197,13 @@ A set of unbiased estimators that is simply averaged remains unbiased after aver
 \V\{ \hat{f}(x)\} &= \E_D \hat{f}(X) - \E_D \hat{f}(X)
 = \E_D(\frac{1}{B} \sum^B_{i=1} \hat{f}_i(x) - \frac{1}{B} \sum^B_{i=1} \E_D \hat{f}_i(x))^2\\
 &= \E_D(\frac{1}{B} \sum^B_{i=1} (\hat{f}_i(x) - \E_D \hat{f}_i(x)))^2
-= \frac{1}{B^2} \sum^B_{i=1} \V \{\hat{f}_i(x)\} + \frac{1}{B^2} \sum_{i\neq j}\sum \C ov\{\hat{f}_i(x),\hat{f}_j(x)\}
+= \underbrace{\frac{1}{B^2} \sum^B_{i=1} \V \{\hat{f}_i(x)\}}_{\mathclap{\text{Gets smaller by averaging over many estimators}}} + \overbrace{\frac{1}{B^2} \sum_{i\neq j}\sum \C ov\{\hat{f}_i(x),\hat{f}_j(x)\}}^{\mathclap{\text{Small } \C ov \rightarrow \text{ Uncorrelated estimators are better for }\V \text{ reduction by average}}}
 \end{align}
 Assuming that covariances are small \(\printlatex{\C ov\{\hat{f}_i\} \approx 0}\) and variances small as well \(\printlatex{\V\{\hat{f}(x)\} \approx \sigma^2}\) then we can reduce to \(\printlatex{\V\{\hat{f}(x)\} \approx \frac{\sigma^2}{B}}\). So the variance reduces by \(\printlatex{\frac{1}{B}}\) if bias remains the unchanged.
 
 \subsection{Readings}
 \begin{enumerate}
-\item Duda 2nd ed.
+\item Duda, Chapter Y
 \end{enumerate}
 
 \todo[inline]{Write down readings from the books covering the topics of the Regression section.}

@@ -2,13 +2,99 @@
 \begin{document}
 
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-% summarizes lecture 
-% author:
+% summarizes lecture 15
+% author: Vanessa Leite
 
 \section{Learning Time Series}
-This is the chapter on Learning Time Series.
+
 \subsection{Stochastic Processes}
+Stochastic process is a sequence of random variables
+$X_1, . . . , X_n =: (X_t)_t$ with $t \in T$.
+Where:
+\begin{itemize}
+\item $T$ may be finite, countably infinity or continuous
+\item The random variables $X_t$ are not assumed to be iid
+\item All distribution of th $X_t$ share a common domain $Q$, the state space
+\end{itemize}
+
+\subsubsection{Time Series}
+Time series (temporal stochastic process) are a sequences where $T$ representing a time axis.
+Definitions:
+\begin{itemize}
+\item Trajectory: random variables sequentially produce a series of numbers
+$x_t \in Q$. This sequence is the path/trajectory/realization of the process.
+\item Draw sequentially: draw one random variable after another.
+\item Draw from a process: drawing a trajectory at once (simultaneously).
+\item Consequence: stochastic process as a distribution over trajectories.
+\item Powerful model: a trajectory assigns a value $x_t \in Q$ to each $t \in T$.
+It is like a function $f: T \to Q$.
+\item Famous example: white noise - stochastic process where $X_t$ are iid.
+\end{itemize}
+
+\subsubsection{Discrete Stochastic Process}
+Restriction: When $T \in N$ and we have a discrete state space.
+Stationary Process: a process where
+for all $n,k \in N Pr\{X_1 = x_1, . . . , X_n = x_n\} = Pr\{X_1+k = x_1+k, . . . , X_n+k = x_n+k \}$
+Meaning: the joint distribution is invariant to index shifts.
+
 \subsection{Markov Models}
+\subsubsection{Markov Process}
+The outcome of each draw depends only on the previous one (memoryless or Markov Chain).
+$Pr\{X_t = x_t| x_1, . . . , x_n\} = Pr\{X_t = x_t | x_t-1\}$
+
+\subsubsection{Stationary Markov Chains}
+In the stationary sequential distribution the data evolves in time, but the distribution from
+which it is generated remains the same.
+
+Finite state space: Given $Q = \{x_1, . . . , x_n\}$. Then we define:
+$a_ij(t) = Pr\{X_t = x_j | X_t-1 = x_i\}$
+So, $A(t)$ is a $n x n$ matrix for each $t$.
+Meaning: $a_ij$ is the probability to change from state $i$ to state $j$
+Given the matrix multiplication: $A^2 = A * A$, so, $a_{ij}^2 = \sum a_{il} * a_{lk} $ with $1 \leq l \leq n$.
+Meaning: $a_{ij}^2$ is the probability to change from state $i$ to state $j$ in two steps. In general:
+$a_{ij}^k$ is the probability to change from state $i$ to state $j$ in $k$ steps.
+
+\subsubsection{Graph representation}
+$A$ is a $n x n$ matrix with non-negative entries.
+$A = G = (V,E)$ where
+\begin{itemize}
+\item Nodes are states
+\item Edges weights are transition probabilities
+\end{itemize}
+If we include a start state and an end state, we have a finite automaton (finite state machine).
+A finite stationary markov chain is a triplet $(Q, p, A)$, where:
+\begin{itemize}
+\item $Q$ is a finite set of states
+\item $p$ is a vector of initial probabilities (probability of each state be the initial state)
+\item $A$ is a transition matrix
+\end{itemize}
 \subsection{Hidden Markov Models}
+While in the Markov Chain each state has a symbol (and reach a state generates that symbol),
+in the HMM each state can generate different symbols, each one with certain probability.
+Formal definition: HMM is a triplet $M = (\sigma, Q, \theta)$, where:
+\begin{itemize}
+\item $\sigma$ is the alphabet of symbols
+\item $Q$ is a finite set of states
+\item $\theta$ is a set of probabilities, with a transition matrix $A$
+ and a matrix $E$ of emission probability $e_k (b)$ for each $x_k \in Q$ and $b \in \sigma$.
+\end{itemize}
+
+Observed symbols: for each index $t \in T$ we introduce random variables $S_t$,
+with domain $\sigma$ that encode the observed symbol.
+
+Emission probabilities: probability that the symbol $s_t$ is seen when we are in state $x_k$:
+$e_k (s_t) = P(S_t = s_t | X_t = x_k)$
+
+Combining probabilities: Let $x = (x_1, . . . , x_n)$ be a path and $s = (s_1, . . . , s_n)$ be a string of symbols.
+The probability of drawing a path $x$ with $x_0 = B$ and $x_n+1 = \varepsilon$ and generating the string s is:
+$P(s, x) = a_{x0x1} * \prod e_{xt}(s_t) * a_{xtxt+1}$
+
+\subsubsection{Three basic problems for HMM}
+\begin{itemize}
+\item Evaluation: Find the probability that a given sequence $s$ was emitted by the HMM.
+\item Decoding: Find the most likely path $x$ responsible for the given sequence $s$.
+\item Learning: Find the parameters of HMM ($a_{ij}, e_{k}(s_{t})$ and the path $x$)
+\end{itemize}
+
 \subsection{Classifying Animal Behavior with HMM}
 \end{document}

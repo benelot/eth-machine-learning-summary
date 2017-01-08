@@ -9,7 +9,8 @@
 \section{Neural Networks}
 This is the chapter on Neural Networks.
 \subsection{Motivation by Computational Neuroscience}
-Artificial neural networks are inspired by biology. In the human brain we have $10^11$ neurons with on average $10^4$ synapses, hence a extremely complex computational network. The network is made of over 1000 different cell types. Neurons can act onto each other either in an excitatory or inhibitory fashion.
+Artificial neural networks are inspired by biology. In the human brain we have $10^{11}$ neurons with on average $10^{14}$ synapses, hence a extremely complex computational network.
+The network is made of over 1000 different cell types. Neurons can act onto each other either in an excitatory or inhibitory fashion.
 
 \subsection{Multilayer Perceptrons and Backpropagation}
 \todo{Introduction,Layer counting/indexing problem}
@@ -34,10 +35,10 @@ MLP training consists of these steps
 
 
 \subsubsection{Feed Forward}
-The data is fed into layer 0 (also called input layer). 
+The data is fed into layer 0 (also called input layer).
 The sample (with index $\mu$)   has the form:
 \begin{equation}
-(x^{\mu},y^{\mu}),  1 \leq \mu \leq n 
+(x^{\mu},y^{\mu}),  1 \leq \mu \leq n
 \end{equation}
 At each node $V_j$ of the first Layer, all the inputs times the weight are summed up, giving us the activation of that node:
 \begin{equation}
@@ -105,6 +106,10 @@ This leads to the \textbf{General learning rule:}
 \textbf{Remarks}
 \begin{itemize}
 \item \textbf{A perceptron with one inner layer can approximate every continuous function}
+\item The weights should be initialized with small randon values close to zero: random initialization performs symmetry breaking,
+bigger values generates flat spots.
+\item The weights should not be initialized all as the same value: because this make all your activation units compute the same feature and
+then, you network learns nothing.
 \item Backpropagation can be implemented with online or iterative and with batch learning mode \\$\Delta W_{pq}=\eta\delta_{\textnormal{output}}^{\mu}V_{\textnormal{input}}^{\mu}$
 \item Patterns should be presented in random order
 \item Learning is sometimes accelerated by adding noise
@@ -185,7 +190,7 @@ The states of the units/neurons are updated in an asynchronous stochastic way by
 \item asynchronous update rule $x_i^{(t+1)}=\left\{
   \begin{array}{ll}
     1 & \textnormal{if\space}\sum_{j=1}^n w_{ij}x_j^{(t)}\ge \theta_i\\
-    0 & \textnormal{otherwise} 
+    0 & \textnormal{otherwise}
   \end{array}
 \right.$
 
@@ -195,7 +200,7 @@ The states of the units/neurons are updated in an asynchronous stochastic way by
 \textbf{symmetric couplings}
 \begin{itemize}
 \item  $w_{ik} = w_{ik}$ $\Rightarrow$ cost function exists
-\item $w_{ii}=0$\space\space$ \forall i$ (No unit has a connection with itself) 
+\item $w_{ii}=0$\space\space$ \forall i$ (No unit has a connection with itself)
 
 \end{itemize}
 \textbf{costs of the network}
@@ -207,7 +212,7 @@ The cost function $R(\{x^{(t)}_i\})$ is non-increasing under the deterministic a
 x_i^{(t+1)}=\left\{
   \begin{array}{ll}
     1 & \textnormal{if\space}\sum_{j=1}^n w_{ij}x_j^{(t)}\ge \theta_i\\
-    0 & \textnormal{otherwise} 
+    0 & \textnormal{otherwise}
   \end{array}
 \right.
 \end{equation}
@@ -257,7 +262,7 @@ Gibbs or importance sampling is competitive!(The Metropolis sampler is often use
 \Delta w_{ik} = \eta \frac{1}{T} \left[\overline{\mathbb{E}[x_ix_k]}_{\textnormal{clamped}}-\mathbb{E}[x_ix_k]_{\textnormal{free}}\right]
 \end{equation}
 where $\overline{\mathbb{E}[x_ix_k]}$ denotes an average over all patterns.
-\end{itemize} 
+\end{itemize}
 
 
 

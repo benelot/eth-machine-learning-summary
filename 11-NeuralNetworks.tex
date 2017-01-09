@@ -103,9 +103,36 @@ This leads to the \textbf{General learning rule:}
 \item  Use $\Delta W_{ij} = \eta \delta_i^mV_j^{m-1}$, to adapt all weights according to $W_{ij}^{\textnormal{new}}=W_{ij}^{\textnormal{old}}+\Delta W_{ij}$
 \item   Goto 2 and repeat the loop for the next pattern
 \end{enumerate}
+
+\textbf{Variations on Backpropagation}
+\begin{itemize}
+\item Alternative Cost Function
+\begin{itemize}[label={$\circ$}]
+\item $J=\sum_{i,\mu}[y^{\mu}_ilog\frac{y_i^{\mu}}{O_i^{\mu}}+(1-y_i^{\mu})log\frac{1-y_i^{\mu}}{1-O_i^{\mu}}]$
+\item $O_i^{\mu}$ is the probability that the hypothesis represented by a neuron is true
+\item $y_i^{\mu}$ is the probability which is supposed to be learned
+\end{itemize}
+\item Convergence speedup by using momentum value
+\begin{itemize}[label={$\circ$}]
+\item $m \in \mathbb{R}^+$ , e.g. $m = 0.1$
+\item $\delta_i^{\mu}=(S'(\sum_lW_{il}V_l^{\mu})+m)(y_i^{\mu}-O_i^{\mu})$\end{itemize}
+\item Alternative minimization techniques \begin{itemize}[label={$\circ$}]
+\item Conjugate gradient methods
+\item Methods based on the Hessian $\frac{\partial^2J}{\partial W^2_{ik}}$
+\end{itemize}
+\item Regularisation techniques to avoid overfitting
+\begin{itemize}[label={$\circ$}]
+\item Weight decay: rarely used weights decay to zero \\$J=J_0+\gamma\sum_{i,k}\frac{W_{i,k}^2}{1+W_{i,k}^2}$
+\item Connections between neurons that strongly fluctuate during training are selectively eliminated
+\end{itemize}
+\end{itemize}
+
 \textbf{Remarks}
 \begin{itemize}
 \item \textbf{A perceptron with one inner layer can approximate every continuous function}
+\item Use of multiple inner layers: some functions can not be efficiently represented in shallow architectures.
+\item Functions compacted represented for a $k$-layer architecture requires an exponential number of computational elements to be represented
+for a $k-1$-layer network.
 \item The weights should be initialized with small randon values close to zero: random initialization performs symmetry breaking,
 bigger values generates flat spots.
 \item The weights should not be initialized all as the same value: because this make all your activation units compute the same feature and
@@ -120,25 +147,15 @@ then, you network learns nothing.
 
 \end{itemize}
 
-\textbf{Variations on Backpropagation}
+\subsection{Invariances}
+Predictions should remain unchanged under transformations (scale, translation, rotation, etc ) of input variables.
+Approaches:
 \begin{itemize}
-\item Alternative Cost Function \begin{itemize}[label={$\circ$}]
-\item $J=\sum_{i,\mu}[y^{\mu}_ilog\frac{y_i^{\mu}}{O_i^{\mu}}+(1-y_i^{\mu})log\frac{1-y_i^{\mu}}{1-O_i^{\mu}}]$
-\item $O_i^{\mu}$ is the probability that the hypothesis represented by a neuron is true
-\item $y_i^{\mu}$ is the probability which is supposed to be learned
-\end{itemize}
-\item Convergence speedup by using momentum value \begin{itemize}[label={$\circ$}]\item $m \in \mathbb{R}^+$ , e.g. $m = 0.1$ \item
-$\delta_i^{\mu}=(S'(\sum_lW_{il}V_l^{\mu})+m)(y_i^{\mu}-O_i^{\mu})$\end{itemize}
-\item Alternative minimization techniques \begin{itemize}[label={$\circ$}]
-\item Conjugate gradient methods
-\item Methods based on the Hessian $\frac{\partial^2J}{\partial W^2_{ik}}$
-\end{itemize}
-\item Regularisation techniques to avoid overfitting
-\begin{itemize}[label={$\circ$}]
-\item Weight decay: rarely used weights decay to zero \\$J=J_0+\gamma\sum_{i,k}\frac{W_{i,k}^2}{1+W_{i,k}^2}$
-\item Connections between neurons that strongly fluctuate during training are selectively eliminated
-\end{itemize}
-
+\item Augmentation of training set: transform the input data accord with the desired invariance and
+label than as the same of not transformed input.
+\item Regularization term: add regularization term to loss function which penalizes changes in the output when input is transformed.
+\item Pre-process data: build features that are already invariant to the desired transformations.
+\item Build invariance into the structure of the network: in CNNs this is done through a local connectivity between layers and shared weighs.
 \end{itemize}
 
 \subsection{Deep Neural Networks}
@@ -177,7 +194,18 @@ indices $i$, where the associated node has an edge to $j$
 
 
 \subsection{Autoassociation}
-XOR
+Learning a internal representation for data compression purposes. The usual architecture is the 4-2-4 decoder.
+
+The goal is that the output layer reproduce the activation of the input layer.
+
+An autoencoder always consists of two parts: an encoder and a decoder. And the output layer has the same number of nodes as the input layer:
+to reconstruct its own inputs.
+
+\subsubsection{Denoising autoencoders}
+Good representation: Train with a partially corrupted input to predict the original (not corrupted) input.
+
+To train an autoencoder to denoise the data is necessary first corrupt the data and use the corrupted data as input. However, the loss still
+need to be computed using the initial output (not corrupted).
 
 %\subsection{NETtalk and ALVINN} Just Examples
 \subsection{Boltzmann machines}
@@ -196,7 +224,15 @@ The states of the units/neurons are updated in an asynchronous stochastic way by
 
 \end{itemize}
 
-\subsubsection{Network Architecture}
+\subsubsection{Convolutional Neural Networks (CNNs)}
+Consists of multiple:
+\begin{itemize}
+\item Convolutional layers: filters applied to overlapping subregions. Those filters share weights to reduce the number of parameters.
+\item Pooling layers: aggregate several units to decrease the size of the network (and number of parameters).
+\end{itemize}
+Tipically, CNNs contan normalization layers and fully connected layers.
+
+\subsubsection{The Boltzmann Machines - Recurrent Neural Networks (RNN)}
 \textbf{symmetric couplings}
 \begin{itemize}
 \item  $w_{ik} = w_{ik}$ $\Rightarrow$ cost function exists
@@ -263,9 +299,5 @@ Gibbs or importance sampling is competitive!(The Metropolis sampler is often use
 \end{equation}
 where $\overline{\mathbb{E}[x_ix_k]}$ denotes an average over all patterns.
 \end{itemize}
-
-
-
-
 
 \end{document}
